@@ -253,15 +253,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313329948}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50.793476, y: 1.92, z: 40.909534}
+  m_LocalRotation: {x: -0, y: -0.9920857, z: -0, w: 0.1255628}
+  m_LocalPosition: {x: 99.3, y: 1.9200001, z: 66.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 518562561}
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -165.573, z: 0}
 --- !u!114 &313329955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,9 +275,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
-  chargeTime: 1
+  maxCharge: 1
   despawnTime: 10
   arrowAmount: 1
+  defaultBowStrength: 10
 --- !u!1 &518562556
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +380,7 @@ Camera:
   far clip plane: 1000
   field of view: 63.8
   orthographic: 1
-  orthographic size: 3.03
+  orthographic size: 7
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

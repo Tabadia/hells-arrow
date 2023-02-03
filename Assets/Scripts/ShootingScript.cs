@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class ShootingScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // way too many variables
     public int cooldown = 1;
     public float maxCharge = 1f;
     public int despawnTime = 10;
     public int arrowAmount = 1;
-    public float bowStrength = 10f;
+    public float defaultBowStrength = 10f;
     private float timer;
     private bool cooldownActive;
 
@@ -19,17 +19,12 @@ public class ShootingScript : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
         if (Input.GetMouseButtonDown(0))
         {
-            timer = Time.time;
-            if(timer > maxCharge)
-            {
-                if (!cooldownActive) Shoot(timer);
-            }
+            if (!cooldownActive) timer = Time.time;
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -39,7 +34,11 @@ public class ShootingScript : MonoBehaviour
 
     private void Shoot(float chargeTime)
     {
-        print(chargeTime);
+        if (chargeTime > maxCharge)
+        {
+            chargeTime = 1;
+        }
+        float bowStrength = defaultBowStrength;
 
         bowStrength *= chargeTime;
 
@@ -47,6 +46,14 @@ public class ShootingScript : MonoBehaviour
         else if (bowStrength > 10) { bowStrength = 10; }
 
         print("Strength: " + bowStrength);
+
+        Vector3 mousePos = Input.mousePosition;
+        print("Pos: " + mousePos.x + ", " + mousePos.y);
+
+        //SHOOT STUFF
+
+        //create gameobject, send it towards mouse
+        //zoom camera towards cursor pos
 
         StartCoroutine(Cooldown());
     }
