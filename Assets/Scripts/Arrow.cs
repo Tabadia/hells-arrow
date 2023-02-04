@@ -17,7 +17,6 @@ public class Arrow : MonoBehaviour
     void Start()
     {
         // Converts mouse position to world position
-        float distance;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 mouse = Input.mousePosition;
         Ray castPoint = Camera.main.ScreenPointToRay(mouse);

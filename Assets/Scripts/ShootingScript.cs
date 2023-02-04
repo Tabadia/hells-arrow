@@ -6,14 +6,17 @@ using UnityEngine;
 public class ShootingScript : MonoBehaviour
 {
     // way too many variables
-    [SerializeField] private int cooldown = 1;
+    [SerializeField] private float cooldown = .5f;
     [SerializeField] private float maxCharge = 1f;
-    [SerializeField] private int arrowAmount = 1;
-    [SerializeField] private float defaultBowStrength = 10f;
-    [SerializeField] private float defaultArrowSpeed = 200f;
+    //[SerializeField] private int arrowAmount = 1;
+    [SerializeField] private float maxBowStrength = 10f;
+    [SerializeField] private float maxArrowSpeed = 400f;
     [SerializeField] private GameObject prefab;
+
     private float timer;
     private bool cooldownActive;
+
+    public bool isCharging = false;
 
     void Update()
     {
@@ -25,15 +28,20 @@ public class ShootingScript : MonoBehaviour
                 if (!cooldownActive)
                 {
                     timer = Time.time;
-                    // stop movement
+                    isCharging = true;
+                    print("charging...");
                 }
                 else timer = 0;
 
             }
             if (Input.GetMouseButtonUp(0))
             {
-                if (!cooldownActive) Shoot(Time.time - timer);
+                if (!cooldownActive && isCharging)
+                {
+                    Shoot(Time.time - timer);
+                }
                 else timer = 0;
+                isCharging = false;
             }
         }
     }
@@ -44,8 +52,8 @@ public class ShootingScript : MonoBehaviour
         // Sets values to minimum and max incase they get messed with, converts charge time to stats
         if (chargeTime > maxCharge) chargeTime = maxCharge;
 
-        float bowStrength = defaultBowStrength;
-        float arrowSpeed = defaultArrowSpeed;
+        float bowStrength = maxBowStrength;
+        float arrowSpeed = maxArrowSpeed;
 
         arrowSpeed *= chargeTime;
         bowStrength *= chargeTime;

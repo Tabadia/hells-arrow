@@ -394,16 +394,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5392828134925354313, guid: 4f690a04ae9c1a0449d629b0eb1867fe,
+        type: 3}
+      propertyPath: defaultArrowSpeed
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 5392828134925354356, guid: 4f690a04ae9c1a0449d629b0eb1867fe,
         type: 3}
       propertyPath: ppm
       value: 
       objectReference: {fileID: 13400000, guid: 80cbcfa931fdd0d23956ad829ec52148,
         type: 2}
+    - target: {fileID: 5392828134925354356, guid: 4f690a04ae9c1a0449d629b0eb1867fe,
+        type: 3}
+      propertyPath: dashMult
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5392828134925354356, guid: 4f690a04ae9c1a0449d629b0eb1867fe,
+        type: 3}
+      propertyPath: dashTime
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5392828134925354358, guid: 4f690a04ae9c1a0449d629b0eb1867fe,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5392828134987984746, guid: 4f690a04ae9c1a0449d629b0eb1867fe,
+        type: 3}
+      propertyPath: orthographic size
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f690a04ae9c1a0449d629b0eb1867fe, type: 3}
