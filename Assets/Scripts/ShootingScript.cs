@@ -15,13 +15,9 @@ public class ShootingScript : MonoBehaviour
     private float timer;
     private bool cooldownActive;
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
+        // If it can shoot then check for how long it charged (time since charge - time at start of charge)
         if (!cooldownActive)
         {
             if (Input.GetMouseButtonDown(0))
@@ -45,8 +41,9 @@ public class ShootingScript : MonoBehaviour
 
     private void Shoot(float chargeTime)
     {
+        // Sets values to minimum and max incase they get messed with, converts charge time to stats
         if (chargeTime > maxCharge) chargeTime = maxCharge;
-        print(chargeTime);
+
         float bowStrength = defaultBowStrength;
         float arrowSpeed = defaultArrowSpeed;
 
@@ -58,20 +55,18 @@ public class ShootingScript : MonoBehaviour
         if (arrowSpeed < 20) { arrowSpeed = 20; }
         else if (arrowSpeed > 200) { arrowSpeed = 200; }
 
-        print("Strength: " + bowStrength + " Speed: " + arrowSpeed);
-
-        //SHOOT STUFF
-
-        //create gameobject, send it towards mouse
+        // Spawns arrow
         prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed;
         Instantiate(prefab, transform.position, transform.rotation);
-        //zoom camera towards cursor pos
+        //to do: zoom camera towards cursor pos
 
+        // Start cooldown
         StartCoroutine(Cooldown());
     }
 
     IEnumerator Cooldown()
     {
+        // Cooldown stuff
         cooldownActive = true;
         yield return new WaitForSeconds(cooldown);
         cooldownActive = false;
