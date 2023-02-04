@@ -8,8 +8,11 @@ public class ShootingScript : MonoBehaviour
     // way too many variables
     [SerializeField] private float cooldown = .5f;
     [SerializeField] private float maxCharge = 1f;
+
     //[SerializeField] private int arrowAmount = 1;
+    [SerializeField] private float minBowStrength = 1f;
     [SerializeField] private float maxBowStrength = 10f;
+    [SerializeField] private float minArrowSpeed = 50f;
     [SerializeField] private float maxArrowSpeed = 400f;
     [SerializeField] private GameObject prefab;
 
@@ -58,15 +61,15 @@ public class ShootingScript : MonoBehaviour
         arrowSpeed *= chargeTime;
         bowStrength *= chargeTime;
 
-        if (bowStrength < 1) { bowStrength = 1; }
-        else if (bowStrength > 10) { bowStrength = 10; }
-        if (arrowSpeed < 20) { arrowSpeed = 20; }
-        else if (arrowSpeed > 200) { arrowSpeed = 200; }
+        if (bowStrength < minBowStrength) bowStrength = minBowStrength;
+        else if (bowStrength > maxBowStrength) bowStrength = maxBowStrength;
+        if (arrowSpeed < minArrowSpeed) arrowSpeed = minArrowSpeed;
+        else if (arrowSpeed > maxArrowSpeed) arrowSpeed = maxArrowSpeed;
 
         // Spawns arrow
         prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed;
         Instantiate(prefab, transform.position, transform.rotation);
-        //to do: zoom camera towards cursor pos
+        //to do: zoom camera towards cursor pos (maybe)
 
         // Start cooldown
         StartCoroutine(Cooldown());

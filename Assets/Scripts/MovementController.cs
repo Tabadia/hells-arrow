@@ -106,10 +106,14 @@ public class MovementController : MonoBehaviour
         Vector3 tempVert = new Vector3(0.0f, rb.velocity.y + (isGrounded ? 0.0f : vertMove), 0.0f);
         Vector3 tempHoriz = Vector3.zero;
         if (!GetComponent<ShootingScript>().isCharging) // Where isCharging is a public value determining if the player is charging their shot
-                                                        // also, shootingScript is from GetComponent<ShootingScript>();
         {  // Regular Movement
             tempHoriz = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
             tempHoriz = Vector3.ClampMagnitude(tempHoriz + rightMove + upMove, maxSpeed);
+        }
+        else if (GetComponent<Shrines>().inMenu)
+        {
+            tempHoriz = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
+            tempHoriz = Vector3.ClampMagnitude(tempHoriz + rightMove + upMove, 0f);
         }
         else
         {
