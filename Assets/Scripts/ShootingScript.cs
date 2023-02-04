@@ -8,7 +8,6 @@ public class ShootingScript : MonoBehaviour
     // way too many variables
     [SerializeField] private int cooldown = 1;
     [SerializeField] private float maxCharge = 1f;
-    [SerializeField] private int despawnTime = 10;
     [SerializeField] private int arrowAmount = 1;
     [SerializeField] private float defaultBowStrength = 10f;
     [SerializeField] private float defaultArrowSpeed = 200f;
@@ -18,19 +17,21 @@ public class ShootingScript : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void Update()
     {
-        
+
         if (Input.GetMouseButtonDown(0))
         {
             if (!cooldownActive) timer = Time.time;
+            else timer = 0;
         }
         if (Input.GetMouseButtonUp(0))
         {
             if (!cooldownActive) Shoot(Time.time - timer);
+            else timer = 0;
         }
     }
 
