@@ -22,25 +22,31 @@ public class ShootingScript : MonoBehaviour
 
     void Update()
     {
+        if (!cooldownActive)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (!cooldownActive)
+                {
+                    timer = Time.time;
+                    // stop movement
+                }
+                else timer = 0;
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (!cooldownActive) timer = Time.time;
-            else timer = 0;
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            if (!cooldownActive) Shoot(Time.time - timer);
-            else timer = 0;
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                if (!cooldownActive) Shoot(Time.time - timer);
+                else timer = 0;
+            }
         }
     }
 
+
     private void Shoot(float chargeTime)
     {
-        if (chargeTime > maxCharge)
-        {
-            chargeTime = 1;
-        }
+        if (chargeTime > maxCharge) chargeTime = maxCharge;
+        print(chargeTime);
         float bowStrength = defaultBowStrength;
         float arrowSpeed = defaultArrowSpeed;
 
@@ -57,8 +63,8 @@ public class ShootingScript : MonoBehaviour
         //SHOOT STUFF
 
         //create gameobject, send it towards mouse
-        Instantiate(prefab, transform.position, transform.rotation);
         prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed;
+        Instantiate(prefab, transform.position, transform.rotation);
         //zoom camera towards cursor pos
 
         StartCoroutine(Cooldown());

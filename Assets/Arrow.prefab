@@ -97,5 +97,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5392828134925354358, guid: 4f690a04ae9c1a0449d629b0eb1867fe, type: 3}
-  arrowSpeed: 100
-  worldPosition: {x: 0, y: 0, z: 0}
+  despawnTime: 20
+  arrowSpeed: 33.665466

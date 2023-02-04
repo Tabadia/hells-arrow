@@ -6,10 +6,12 @@ public class Arrow : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private int despawnTime = 20;
-    public float arrowSpeed = 50f;
+    public float arrowSpeed;
     private float timer;
     private Vector3 endPos;
-    public Vector3 worldPosition;
+    private Vector3 worldPosition;
+    private Vector3 moveVector;
+    private Vector3 moveDirection;
 
     void Start()
     {
@@ -18,21 +20,15 @@ public class Arrow : MonoBehaviour
         Vector3 mouse = Input.mousePosition;
         Ray castPoint = Camera.main.ScreenPointToRay(mouse);
         RaycastHit hit;
-        if (Physics.Raycast(castPoint, out hit, Mathf.Infinity))
+        if (Physics.Raycast(castPoint, out hit))
         {
             endPos = hit.point;
             endPos.y += 1;
         }
+        moveDirection = (endPos - transform.position).normalized;
         transform.LookAt(endPos);
         timer = Time.time;
-
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            hitPoint = hit.point;
-        }
+        print("Arrow speed: " + arrowSpeed);
     }
 
     void Update()
@@ -41,7 +37,8 @@ public class Arrow : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        float step = arrowSpeed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, endPos, step);
+        transform.position += moveDirection * arrowSpeed * Time.deltaTime;
+
+        // IF HITTING WALL OR ENEMY OR ANYTHING, STOP MOVEMENT (will add when maps are actually made)
     }
 }
