@@ -39,16 +39,16 @@ public class MovementController : MonoBehaviour
     private float horizontalInput;
     private float vertMove;
 
-   void Start()
-   {
-      forward = Camera.main.transform.forward;
-      forward.y = 0;
-      forward = Vector3.Normalize(forward);
-      right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
-      maxDashCooldown = dashCooldown;
-      shootingScript = GetComponent<ShootingScript>();
-      shrineScript = GetComponent<Shrines>();
-   }
+    void Start()
+    {
+        forward = Camera.main.transform.forward;
+        forward.y = 0;
+        forward = Vector3.Normalize(forward);
+        right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
+        maxDashCooldown = dashCooldown;
+        shootingScript = GetComponent<ShootingScript>();
+        shrineScript = GetComponent<Shrines>();
+    }
 
     void Update()
     {
@@ -111,34 +111,28 @@ public class MovementController : MonoBehaviour
 
         Vector3 tempVert = new Vector3(0.0f, rb.velocity.y + (isGrounded ? 0.0f : vertMove), 0.0f);
         Vector3 tempHoriz = Vector3.zero;
-        if (!shootingScript.isCharging) // Where isCharging is a public value determining if the player is charging their shot
+        if (shootingScript.isCharging) // Where isCharging is a public value determining if the player is charging their shot
         {  // Regular Movement
             tempHoriz = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
-            tempHoriz = Vector3.ClampMagnitude(tempHoriz + rightMove + upMove, maxSpeed);
-        }
-        else if (shrineScript.inMenu)
-        {
-            tempHoriz = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
-            tempHoriz = Vector3.ClampMagnitude(tempHoriz + rightMove + upMove, 0f);
-        }
-        else
-        {
-            // Movement when charging - if you want to block ALL movement, just remove this else block
-            tempHoriz = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
             tempHoriz = Vector3.ClampMagnitude(tempHoriz + rightMove + upMove, maxSpeed / chargingSpeedMultiplier);
+        }
+        else if (!shrineScript.inMenu)
+        {
+            tempHoriz = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
+            tempHoriz = Vector3.ClampMagnitude(tempHoriz + rightMove + upMove, maxSpeed);
         }
 
         rb.velocity = tempHoriz + tempVert;
 
-      // Rotation about the Y axis is the cause of sliding along slope normals - this method will cause issues when
-      // we implement facing directions later
-      //
-      // Vector3 look = new Vector3(move.x, 0.0f, move.z);
-      // if (look.magnitude > 0.01)
-      // {
-      //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(look), 0.15F);
-      // }
-   }
+        // Rotation about the Y axis is the cause of sliding along slope normals - this method will cause issues when
+        // we implement facing directions later
+        //
+        // Vector3 look = new Vector3(move.x, 0.0f, move.z);
+        // if (look.magnitude > 0.01)
+        // {
+        //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(look), 0.15F);
+        // }
+    }
 
     void Dash() // investigate charlie clipping through walls, although I did not experience it with brief testing
     {

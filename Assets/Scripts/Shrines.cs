@@ -48,6 +48,7 @@ public class Shrines : MonoBehaviour
                     inMenu = false;
                     powerUpMenu.SetActive(false);
                     powerUps.Add("Multishot");
+                    print("multishot added");
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))

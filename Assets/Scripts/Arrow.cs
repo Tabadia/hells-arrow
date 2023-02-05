@@ -11,10 +11,12 @@ public class Arrow : MonoBehaviour
     public float arrowSpeed;
     public int multiShotArrow;
     private float timer;
+    private bool colliding = false;
     private Vector3 endPos;
     private Vector3 worldPosition;
     private Vector3 moveVector;
     private Vector3 moveDirection;
+    private Vector3 prevPos;
 
     void Start()
     {
@@ -48,14 +50,29 @@ public class Arrow : MonoBehaviour
 
     void Update()
     {
+        prevPos = transform.position;
         // Despawn time
         if (Time.time - timer > despawnTime)
         {
             Destroy(gameObject);
         }
-        // Move to direction
-        transform.position += moveDirection * arrowSpeed * Time.deltaTime;
 
-        // To do: IF HITTING WALL OR ENEMY OR ANYTHING, STOP MOVEMENT (will add when maps are actually made)
+        // Move to direction
+        if (!colliding)
+        {
+            if (!colliding)
+            {
+                transform.position += moveDirection * arrowSpeed * Time.deltaTime;
+
+                // Raycast stuff
+                RaycastHit[] hits = Physics.RaycastAll(new Ray(prevPos, (transform.position - prevPos).normalized), (transform.position - prevPos).magnitude);
+
+                for (int i = 0; i < hits.Length; i++)
+                {
+                    if (hits[i].collider.gameObject.tag != "Player") colliding = true;
+                    // add else if here for piercing arrows
+                }
+            }
+        }
     }
 }
