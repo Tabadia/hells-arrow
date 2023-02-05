@@ -7,13 +7,15 @@ using UnityEngine.UIElements;
 
 public class MovementController : MonoBehaviour
 {
+    // Majority of these are only public so that they can be tweaked on the fly via inspector - should be privatized when dialed in
     [SerializeField] public float moveSpeed = 8.3f;
-    public float Gravity = -9.8f;
-    public float jumpHeight = 5;
+    public float Gravity = -15f;
+    public float jumpHeight = 5f;
     public float maxSpeed = 8.3f;
-    public float dashMult = 3.0f;
-    public float dashTime = 2.0f;
+    public float dashMult = 2.7f;
+    public float dashTime = 0.15f;
     public float dashCooldown = 2.0f;
+    public float chargingSpeedMultiplier = 5.0f;
 
     private Vector3 forward, right;
     private Vector3 lastHeading;
@@ -25,6 +27,8 @@ public class MovementController : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private CapsuleCollider cc;
     [SerializeField] private PhysicMaterial ppm; // Player Physic Material
+    private Shrines shrineScript;
+    private ShootingScript shootingScript;
 
     private bool isGrounded;
     private bool isDashing;
@@ -35,14 +39,16 @@ public class MovementController : MonoBehaviour
     private float horizontalInput;
     private float vertMove;
 
-    void Start()
-    {
-        forward = Camera.main.transform.forward;
-        forward.y = 0;
-        forward = Vector3.Normalize(forward);
-        right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
-        maxDashCooldown = dashCooldown;
-    }
+   void Start()
+   {
+      forward = Camera.main.transform.forward;
+      forward.y = 0;
+      forward = Vector3.Normalize(forward);
+      right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
+      maxDashCooldown = dashCooldown;
+      shootingScript = GetComponent<ShootingScript>();
+      shrineScript = GetComponent<Shrines>();
+   }
 
     void Update()
     {
@@ -105,12 +111,12 @@ public class MovementController : MonoBehaviour
 
         Vector3 tempVert = new Vector3(0.0f, rb.velocity.y + (isGrounded ? 0.0f : vertMove), 0.0f);
         Vector3 tempHoriz = Vector3.zero;
-        if (!GetComponent<ShootingScript>().isCharging) // Where isCharging is a public value determining if the player is charging their shot
+        if (!shootingScript.isCharging) // Where isCharging is a public value determining if the player is charging their shot
         {  // Regular Movement
             tempHoriz = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
             tempHoriz = Vector3.ClampMagnitude(tempHoriz + rightMove + upMove, maxSpeed);
         }
-        else if (GetComponent<Shrines>().inMenu)
+        else if (shrineScript.inMenu)
         {
             tempHoriz = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
             tempHoriz = Vector3.ClampMagnitude(tempHoriz + rightMove + upMove, 0f);
@@ -119,22 +125,22 @@ public class MovementController : MonoBehaviour
         {
             // Movement when charging - if you want to block ALL movement, just remove this else block
             tempHoriz = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
-            tempHoriz = Vector3.ClampMagnitude(tempHoriz + rightMove + upMove, maxSpeed / 10f);
-        } // Above line essentially limits movement to 1/10th regular, although this is very shoddy - dashing would be normal speed and require a similar check
+            tempHoriz = Vector3.ClampMagnitude(tempHoriz + rightMove + upMove, maxSpeed / chargingSpeedMultiplier);
+        }
 
         rb.velocity = tempHoriz + tempVert;
 
-        // Rotation about the Y axis is the cause of sliding along slope normals - this method will cause issues when
-        // we implement facing directions later
-        //
-        // Vector3 look = new Vector3(move.x, 0.0f, move.z);
-        // if (look.magnitude > 0.01)
-        // {
-        //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(look), 0.15F);
-        // }
-    }
+      // Rotation about the Y axis is the cause of sliding along slope normals - this method will cause issues when
+      // we implement facing directions later
+      //
+      // Vector3 look = new Vector3(move.x, 0.0f, move.z);
+      // if (look.magnitude > 0.01)
+      // {
+      //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(look), 0.15F);
+      // }
+   }
 
-    void Dash()
+    void Dash() // investigate charlie clipping through walls, although I did not experience it with brief testing
     {
         if (!IsInvoking(nameof(CancelDash)))
         {
