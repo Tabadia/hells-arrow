@@ -11,6 +11,7 @@ public class Shrines : MonoBehaviour
 
     private GameObject[] shrines;
 
+    public ArrayList powerUps = new ArrayList();
     public bool inMenu = false;
 
     // Start is called before the first frame update
@@ -22,10 +23,6 @@ public class Shrines : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            print("test");
-        }
         GameObject closest = null;
         float distance = Mathf.Infinity;
 
@@ -50,7 +47,7 @@ public class Shrines : MonoBehaviour
                 {
                     inMenu = false;
                     powerUpMenu.SetActive(false);
-                    print("Chose power-up 1");
+                    powerUps.Add("Multishot");
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -59,7 +56,7 @@ public class Shrines : MonoBehaviour
                 {
                     inMenu = false;
                     powerUpMenu.SetActive(false);
-                    print("Chose power-up 2");
+                    powerUps.Add("Piercing");
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -68,7 +65,7 @@ public class Shrines : MonoBehaviour
                 {
                     inMenu = false;
                     powerUpMenu.SetActive(false);
-                    print("Chose power-up 3");
+                    powerUps.Add("Flaming");
                 }
             }
 

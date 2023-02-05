@@ -7,7 +7,9 @@ public class Arrow : MonoBehaviour
     // wayyyy tooooo many variables
     [SerializeField] private GameObject player;
     [SerializeField] private int despawnTime = 20;
+    [SerializeField] private float multishotAngle = 5;
     public float arrowSpeed;
+    public int multiShotArrow;
     private float timer;
     private Vector3 endPos;
     private Vector3 worldPosition;
@@ -29,6 +31,18 @@ public class Arrow : MonoBehaviour
         // Orients arrow towards mouse position and gets direction for it to go
         moveDirection = (endPos - transform.position).normalized;
         transform.LookAt(endPos);
+        if (multiShotArrow == 1)
+        {
+            moveDirection = Quaternion.Euler(0, 0, 0) * moveDirection;
+        }
+        else if (multiShotArrow == 2)
+        {
+            moveDirection = Quaternion.Euler(0, -multishotAngle, 0) * moveDirection;
+        }
+        else if (multiShotArrow == 3)
+        {
+            moveDirection = Quaternion.Euler(0, multishotAngle, 0) * moveDirection;
+        }
         timer = Time.time;
     }
 

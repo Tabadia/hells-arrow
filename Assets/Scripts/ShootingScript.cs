@@ -8,7 +8,6 @@ public class ShootingScript : MonoBehaviour
     // way too many variables
     [SerializeField] private float cooldown = .5f;
     [SerializeField] private float maxCharge = 1f;
-
     //[SerializeField] private int arrowAmount = 1;
     [SerializeField] private float minBowStrength = 1f;
     [SerializeField] private float maxBowStrength = 10f;
@@ -18,12 +17,15 @@ public class ShootingScript : MonoBehaviour
 
     private float timer;
     private bool cooldownActive;
+    private bool multishot = false;
 
     public bool isCharging = false;
 
     void Update()
     {
         // If it can shoot then check for how long it charged (time since charge - time at start of charge)
+        if (GetComponent<Shrines>().powerUps.Contains("Multishot")) multishot = true;
+
         if (!cooldownActive)
         {
             if (Input.GetMouseButtonDown(0))
@@ -32,7 +34,6 @@ public class ShootingScript : MonoBehaviour
                 {
                     timer = Time.time;
                     isCharging = true;
-                    print("charging...");
                 }
                 else timer = 0;
 
@@ -59,16 +60,36 @@ public class ShootingScript : MonoBehaviour
         float arrowSpeed = maxArrowSpeed;
 
         arrowSpeed *= chargeTime;
-        bowStrength *= chargeTime;
 
-        if (bowStrength < minBowStrength) bowStrength = minBowStrength;
-        else if (bowStrength > maxBowStrength) bowStrength = maxBowStrength;
         if (arrowSpeed < minArrowSpeed) arrowSpeed = minArrowSpeed;
         else if (arrowSpeed > maxArrowSpeed) arrowSpeed = maxArrowSpeed;
 
         // Spawns arrow
-        prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed;
-        Instantiate(prefab, transform.position, transform.rotation);
+        if (multishot)
+        {
+            bowStrength *= chargeTime / 2;
+            if (bowStrength < minBowStrength) bowStrength = minBowStrength / 2;
+            else if (bowStrength > maxBowStrength) bowStrength = maxBowStrength / 2;
+
+            prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed;
+            prefab.GetComponent<Arrow>().multiShotArrow = 1;
+            Instantiate(prefab, transform.position, transform.rotation);
+
+            prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed;
+            prefab.GetComponent<Arrow>().multiShotArrow = 2;
+            Instantiate(prefab, transform.position, transform.rotation);
+
+            prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed;
+            prefab.GetComponent<Arrow>().multiShotArrow = 3;
+            Instantiate(prefab, transform.position, transform.rotation);
+        }
+        else
+        {
+            prefab.GetComponent<Arrow>().multiShotArrow = 1;
+            prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed;
+            Instantiate(prefab, transform.position, transform.rotation);
+        }
+
         //to do: zoom camera towards cursor pos (maybe)
 
         // Start cooldown
