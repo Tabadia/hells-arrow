@@ -80,7 +80,6 @@ public class ShootingScript : MonoBehaviour
                 prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed;
                 prefab.GetComponent<Arrow>().bowStrength = bowStrength;
                 Instantiate(prefab, transform.position, transform.rotation);
-                print(spacing);
                 spacing += multishotAngle;
             }
         }
