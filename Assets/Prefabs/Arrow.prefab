@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 5662849671721399587}
   - component: {fileID: -6060917479714705643}
   - component: {fileID: 2516524090771795439}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Arrow
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 28a3ecb0e16f6b24c89e5329e158b3cb, type: 2}
+  - {fileID: 2100000, guid: 064fe45ad6b0d5b47bee945bf28136d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,8 +101,8 @@ MonoBehaviour:
   player: {fileID: 5392828134925354358, guid: 4f690a04ae9c1a0449d629b0eb1867fe, type: 3}
   despawnTime: 20
   multishotAngle: 5
-  arrowSpeed: 60.09903
-  multiShotArrow: 3
+  arrowSpeed: 51.53961
+  multiShotArrow: 1
 --- !u!65 &-6060917479714705643
 BoxCollider:
   m_ObjectHideFlags: 0

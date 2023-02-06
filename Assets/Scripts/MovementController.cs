@@ -136,6 +136,8 @@ public class MovementController : MonoBehaviour
 
     void Dash() // investigate charlie clipping through walls, although I did not experience it with brief testing
     {
+        //if (shootingScript.isCharging) return;
+
         if (!IsInvoking(nameof(CancelDash)))
         {
             dashStartSpeed = rb.velocity;

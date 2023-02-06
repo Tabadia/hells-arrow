@@ -28,7 +28,8 @@ public class Arrow : MonoBehaviour
         if (Physics.Raycast(castPoint, out hit))
         {
             endPos = hit.point;
-            endPos.y += 1;
+            if (endPos.y <= 21) endPos.y = 21;
+            print(endPos.y);
         }
         // Orients arrow towards mouse position and gets direction for it to go
         moveDirection = (endPos - transform.position).normalized;
@@ -60,18 +61,16 @@ public class Arrow : MonoBehaviour
         // Move to direction
         if (!colliding)
         {
-            if (!colliding)
+            transform.position += moveDirection * arrowSpeed * Time.deltaTime;
+
+            // Raycast stuff
+            RaycastHit[] hits = Physics.RaycastAll(new Ray(prevPos, (transform.position - prevPos).normalized), (transform.position - prevPos).magnitude);
+
+            for (int i = 0; i < hits.Length; i++)
             {
-                transform.position += moveDirection * arrowSpeed * Time.deltaTime;
-
-                // Raycast stuff
-                RaycastHit[] hits = Physics.RaycastAll(new Ray(prevPos, (transform.position - prevPos).normalized), (transform.position - prevPos).magnitude);
-
-                for (int i = 0; i < hits.Length; i++)
-                {
-                    if (hits[i].collider.gameObject.tag != "Player") colliding = true;
-                    // add else if here for piercing arrows
-                }
+                if (hits[i].collider.gameObject.tag != "Player") colliding = true;
+                transform.position = hits[i].point;
+                // add else if here for piercing arrows
             }
         }
     }
