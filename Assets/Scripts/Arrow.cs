@@ -7,9 +7,13 @@ public class Arrow : MonoBehaviour
     // wayyyy tooooo many variables
     [SerializeField] private GameObject player;
     [SerializeField] private int despawnTime = 20;
-    [SerializeField] private float multishotAngle = 5;
+
     public float arrowSpeed;
     public int multiShotArrow;
+    public float multishotAngle;
+    public int pierceAmount = 0;
+    public float bowStrength;
+
     private float timer;
     private bool colliding = false;
     private Vector3 endPos;
@@ -17,6 +21,7 @@ public class Arrow : MonoBehaviour
     private Vector3 moveVector;
     private Vector3 moveDirection;
     private Vector3 prevPos;
+    private int pierced;
 
     void Start()
     {
@@ -29,23 +34,11 @@ public class Arrow : MonoBehaviour
         {
             endPos = hit.point;
             if (endPos.y <= 21) endPos.y = 21;
-            print(endPos.y);
         }
         // Orients arrow towards mouse position and gets direction for it to go
         moveDirection = (endPos - transform.position).normalized;
         transform.LookAt(endPos);
-        if (multiShotArrow == 1)
-        {
-            moveDirection = Quaternion.Euler(0, 0, 0) * moveDirection;
-        }
-        else if (multiShotArrow == 2)
-        {
-            moveDirection = Quaternion.Euler(0, -multishotAngle, 0) * moveDirection;
-        }
-        else if (multiShotArrow == 3)
-        {
-            moveDirection = Quaternion.Euler(0, multishotAngle, 0) * moveDirection;
-        }
+        moveDirection = Quaternion.Euler(0, multishotAngle, 0) * moveDirection;
         timer = Time.time;
     }
 
@@ -69,6 +62,16 @@ public class Arrow : MonoBehaviour
             for (int i = 0; i < hits.Length; i++)
             {
                 if (hits[i].collider.gameObject.tag != "Player") colliding = true;
+                else if (hits[i].collider.gameObject.tag == "Enemy")
+                {
+                    print("hit enemy");
+                    if (pierced < pierceAmount)
+                    {
+                        print("pierced");
+                        pierced++;
+                    }
+                    else colliding = true;
+                }
                 transform.position = hits[i].point;
                 // add else if here for piercing arrows
             }

@@ -10,6 +10,7 @@ public class Shrines : MonoBehaviour
     [SerializeField] private GameObject powerUpMenu;
 
     private GameObject[] shrines;
+    ShootingScript shootingScript;
 
     public ArrayList powerUps = new ArrayList();
     public bool inMenu = false;
@@ -18,6 +19,7 @@ public class Shrines : MonoBehaviour
     void Start()
     {
         shrines = GameObject.FindGameObjectsWithTag("Shrine");
+        shootingScript = GetComponent<ShootingScript>();
     }
 
     // Update is called once per frame
@@ -47,6 +49,7 @@ public class Shrines : MonoBehaviour
                 {
                     inMenu = false;
                     powerUpMenu.SetActive(false);
+                    shootingScript.arrowAmount = 3;
                     powerUps.Add("Multishot");
                 }
             }
@@ -56,6 +59,7 @@ public class Shrines : MonoBehaviour
                 {
                     inMenu = false;
                     powerUpMenu.SetActive(false);
+                    shootingScript.pierceAmount = 1;
                     powerUps.Add("Piercing");
                 }
             }
