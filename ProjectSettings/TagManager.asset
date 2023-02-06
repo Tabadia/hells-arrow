@@ -8,6 +8,7 @@ TagManager:
   - Shrine
   - Enemy
   - Arrow
+  - Portal
   layers:
   - Default
   - TransparentFX
