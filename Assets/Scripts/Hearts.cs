@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Hearts : MonoBehaviour
 {
     [SerializeField] private int maxHearts = 3;
@@ -14,44 +14,46 @@ public class Hearts : MonoBehaviour
     private GameObject[] hearts;
 
     private float currentHearts;
-    // Start is called before the first frame update
     void Start()
     {
         currentHearts = maxHearts;
         hearts = new GameObject[maxHearts];
         for (int i = 0; i < maxHearts; i++){
             GameObject heart = Instantiate(heartPrefab, heartContainer.transform);
-            heart.transform.position = new Vector3(heart.transform.position.x + (i * 20), heart.transform.position.y, heart.transform.position.z);
+            heart.transform.position = new Vector3(heart.transform.position.x + (i * 125), heart.transform.position.y, heart.transform.position.z);
             hearts[i] = heart;
             print(i + " " + hearts[i]);
             print(maxHearts);
         }
+        takeDamage(2f);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
     }
 
-    public void takeDamage(float hearts){
-        currentHearts -= hearts;
+    public void takeDamage(float dmg)
+    {
+        currentHearts -= dmg;
 
-        if (currentHearts <= 0){
+        if (currentHearts <= 0) {
+            for (int i = 0; i < maxHearts; i++)
+            {
+                hearts[i].GetComponent<Image>().sprite = emptyHeart;
+            }
             print("You died");
         }
         else {
-            // for (int i = 0; i < maxHearts; i++){
-            //     if (i < currentHearts){
-            //         hearts[i].GetComponent<SpriteRenderer>().sprite = fullHeart;
-            //     }
-            //     else if (i < currentHearts + 0.5f){
-            //         hearts[i].GetComponent<SpriteRenderer>().sprite = halfHeart;
-            //     }
-            //     else {
-            //         hearts[i].GetComponent<SpriteRenderer>().sprite = emptyHeart;
-            //     }
-            // }
+            for (int i = 0; i < maxHearts; i++) {
+                if ((currentHearts - i) >= 1) {
+                    hearts[i].GetComponent<Image>().sprite = fullHeart;
+                }
+                else if ((currentHearts - i) <= 0) {
+                    hearts[i].GetComponent<Image>().sprite = emptyHeart;
+                }
+                else { hearts[i].GetComponent<Image>().sprite = halfHeart; }
+            }
         }
     }
+
 }

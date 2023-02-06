@@ -106,7 +106,7 @@ public class MovementController : MonoBehaviour
         }
         else
         {
-            ppm.dynamicFriction = 0.8f;
+            ppm.dynamicFriction = 1.8f;
         }
 
         Vector3 tempVert = new Vector3(0.0f, rb.velocity.y + (isGrounded ? 0.0f : vertMove), 0.0f);
