@@ -102,9 +102,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 5392828134925354358, guid: 4f690a04ae9c1a0449d629b0eb1867fe, type: 3}
   despawnTime: 20
-  multishotAngle: 5
-  arrowSpeed: 262.31842
+  arrowSpeed: 62.062073
   multiShotArrow: 1
+  multishotAngle: 182.5
+  pierceAmount: 0
+  bowStrength: 0.5
+  pastHits: 
 --- !u!65 &-6060917479714705643
 BoxCollider:
   m_ObjectHideFlags: 0
