@@ -22,10 +22,8 @@ public class Hearts : MonoBehaviour
             GameObject heart = Instantiate(heartPrefab, heartContainer.transform);
             heart.transform.position = new Vector3(heart.transform.position.x + (i * 125), heart.transform.position.y, heart.transform.position.z);
             hearts[i] = heart;
-            print(i + " " + hearts[i]);
-            print(maxHearts);
         }
-        takeDamage(2f);
+        //takeDamage(2f);
     }
 
     void Update()
