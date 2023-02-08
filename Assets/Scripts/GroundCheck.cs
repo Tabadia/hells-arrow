@@ -6,11 +6,12 @@ public class GroundCheck : MonoBehaviour
     [SerializeField, Range(0.1f, 1f)] private float length = 0.2f;
     [SerializeField, Range(1, 50)] private int numProbes = 4;
     [SerializeField, Range(0.05f, 1f)] private float probeOffset = 0.5f;
-    [SerializeField] private LayerMask collisionMask;
+    [SerializeField] public LayerMask collisionMask;
 
     public bool isGrounded;
 
     private CapsuleCollider capsuleCollider;
+    public Vector3[] probePositions;
 
     void Awake()
     {
@@ -19,7 +20,7 @@ public class GroundCheck : MonoBehaviour
 
     void Update()
     {
-        Vector3[] probePositions = new Vector3[numProbes];
+        probePositions = new Vector3[numProbes];
         Vector3 colliderSize = capsuleCollider.bounds.size;
         Vector3 position = transform.position;
         
@@ -63,8 +64,17 @@ public class GroundCheck : MonoBehaviour
             {
                 isGrounded = true;
                 Debug.DrawRay(hit.point, Vector3.up, Color.green);
-                
             }
         }
+    }
+
+    public Vector3[] GetProbeList()
+    {
+        return probePositions;
+    }
+
+    public LayerMask GetLayerMask()
+    {
+        return collisionMask;
     }
 }
