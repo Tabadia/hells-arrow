@@ -67,11 +67,16 @@ public class MovementController : MonoBehaviour
             dashCooldown = Math.Min(maxDashCooldown, dashCooldown);
         }
         
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing && dashCooldown.Equals(maxDashCooldown))
-        {
-            isDashing = true;
-            Dash();
-            dashCooldown = 0f;
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing && dashCooldown.Equals(maxDashCooldown)) {
+        
+            if (!shootingScript.isCharging)
+            {
+                isDashing = true;
+                dashCooldown = 0f;
+                Dash();
+            }
+            else print(shootingScript.isCharging);
+
         }
         
         isMoveDown = !horizontalInput.Equals(0) || !verticalInput.Equals(0);
