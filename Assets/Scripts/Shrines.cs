@@ -69,7 +69,8 @@ public class Shrines : MonoBehaviour
                 {
                     inMenu = false;
                     powerUpMenu.SetActive(false);
-                    powerUps.Add("Flaming");
+                    shootingScript.exploding = true;
+                    powerUps.Add("Exploding");
                 }
             }
 

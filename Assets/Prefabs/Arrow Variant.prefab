@@ -4911,10 +4911,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4560c6e2feacbeb498ae9a1622824c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5392828134925354358, guid: 4f690a04ae9c1a0449d629b0eb1867fe, type: 3}
+  player: {fileID: 899379487398073794, guid: 28b4e2492c50879459aca2e73cfa534b, type: 3}
   despawnTime: 20
-  arrowSpeed: 50
+  explosionRadius: 5
+  explosionPrefab: {fileID: 6122300699768233975, guid: bbe504bd714641e4baef10a577efd0de,
+    type: 3}
+  arrowSpeed: 71.46912
   multiShotArrow: 1
-  multishotAngle: 6.25
+  multishotAngle: 3.125
   pierceAmount: 0
   bowStrength: 0.5
+  exploding: 0
+  pastHits: 

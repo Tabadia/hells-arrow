@@ -8,15 +8,19 @@ public class Arrow : MonoBehaviour
     // wayyyy tooooo many variables
     [SerializeField] private GameObject player;
     [SerializeField] private int despawnTime = 20;
+    [SerializeField] private float explosionRadius = 5f;
+    [SerializeField] private GameObject explosionPrefab;
 
     public float arrowSpeed;
     public int multiShotArrow;
     public float multishotAngle;
     public int pierceAmount = 0;
     public float bowStrength;
+    public bool exploding;
 
     private float timer;
     private bool colliding = false;
+    private bool exploded = false;
     private Vector3 endPos;
     private Vector3 worldPosition;
     private Vector3 moveVector;
@@ -103,5 +107,15 @@ public class Arrow : MonoBehaviour
                 //     }
             }
         }
+        else if (colliding && !exploded && exploding){
+            exploded = true;
+            Explode();
+        }
+    }
+
+    void Explode()
+    {
+        // Explosion stuff
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
     }
 }
