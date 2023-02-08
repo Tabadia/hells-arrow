@@ -38,6 +38,9 @@ public class MovementController : MonoBehaviour
     private float verticalInput;
     private float horizontalInput;
 
+    private RaycastHit lastWallHit;
+    private Vector3 lastWallHitPos;
+
     void Start()
     {
         forward = Camera.main.transform.forward;
@@ -72,6 +75,12 @@ public class MovementController : MonoBehaviour
         }
         
         isMoveDown = !horizontalInput.Equals(0) || !verticalInput.Equals(0);
+        
+        Debug.DrawRay(rb.position, rb.velocity, Color.red);
+        Debug.DrawRay(lastWallHit.point, Vector3.up, Color.green);
+        Debug.DrawRay(lastWallHitPos, (lastWallHit.point - lastWallHitPos).normalized * (lastWallHit.distance - cc.radius*2), Color.blue);
+        
+        
     }
 
     private void FixedUpdate()
@@ -132,9 +141,24 @@ public class MovementController : MonoBehaviour
                 rb.velocity = new Vector3(rb.velocity.x, Gravity, rb.velocity.z);
             }
         }
+        
+        RaycastHit moveHit = MoveCheck();
+        if (moveHit.point != Vector3.zero)
+        {
+            dashStartSpeed = Vector3.zero;
+                
+            lastWallHit = moveHit;
+            lastWallHitPos = rb.position;
+            rb.velocity = Vector3.zero;
+            var distance = moveHit.distance - cc.radius;
+            var dir = (rb.position - moveHit.point);
+            dir.y = 0;
+            
+            transform.position += new Vector3(rb.velocity.x, 0f, rb.velocity.z).normalized * distance;
+        }
     }
 
-    void Dash() // investigate charlie clipping through walls, although I did not experience it with brief testing
+    void Dash()
     {
         if (!IsInvoking(nameof(CancelDash)))
         {
@@ -149,9 +173,22 @@ public class MovementController : MonoBehaviour
     void CancelDash()
     {
         rb.velocity = new Vector3(dashStartSpeed.x, rb.velocity.y, dashStartSpeed.z);
+        // rb.velocity = Vector3.zero;
         dashStartSpeed = Vector3.zero;
         maxSpeed /= dashMult;
         isDashing = false;
+    }
+
+    RaycastHit MoveCheck()
+    {
+        Vector3 velocDirection = new Vector3(rb.velocity.x, 0f, rb.velocity.z).normalized;
+        RaycastHit hit;
+        if (Physics.Raycast(new Ray(transform.position, velocDirection), out hit, rb.velocity.magnitude*Time.deltaTime*1.2f))
+        {
+            return hit;
+        }
+
+        return new RaycastHit();
     }
 }
 
