@@ -23,7 +23,7 @@ public class Hearts : MonoBehaviour
             heart.transform.position = new Vector3(heart.transform.position.x + (i * 46), heart.transform.position.y, heart.transform.position.z);
             hearts[i] = heart;
         }
-        //takeDamage(2f);
+        //takeDamage(1.5f);
     }
 
     void Update()

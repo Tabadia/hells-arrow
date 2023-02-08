@@ -80,31 +80,14 @@ public class Arrow : MonoBehaviour
                             }
                         }
                         else {colliding = true;
-                        transform.position = hits[i].point;
+                        transform.position = hits[i].point + transform.forward;
                         }
                     }
                     else {
                         colliding = true;
-                        transform.position = hits[i].point;
+                        transform.position = hits[i].point + transform.forward;
                     }
                 }
-                // if(!pastHits.Contains(hits[i].collider.gameObject.GetInstanceID())){
-                //     print("hasnt hit yet");
-                //     pastHits[i] = hits[i].collider.gameObject.GetInstanceID();
-                //     print("hit enemy");
-                //     if (timesPierced < pierceAmount){
-                //         print("pierced");
-                //         for (int j = 0; j < pastHits.Length; j++){
-                //             print(pastHits[j]);
-                //         }
-                //         timesPierced++;
-                //     }
-                //     else { print("duplicate");}
-                //     }
-                //     else {
-                //         print("pierce amount: " + pierceAmount + " times pierced: " + timesPierced);
-                //         colliding = true;
-                //     }
             }
         }
         else if (colliding && !exploded && exploding){
@@ -115,7 +98,17 @@ public class Arrow : MonoBehaviour
 
     void Explode()
     {
+        Vector3 center = transform.position + transform.forward * explosionRadius/2;
         // Explosion stuff
+        Collider[] hitColliders = Physics.OverlapBox(center, new Vector3(explosionRadius / 2, explosionRadius / 2, explosionRadius / 2), Quaternion.Euler(transform.forward));
+        foreach(var hitCollider in hitColliders)
+        {
+            if(hitCollider.CompareTag("Enemy"))
+            {
+                //do damage later but
+                Destroy(hitCollider.gameObject);
+            }
+        }
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
     }
 }
