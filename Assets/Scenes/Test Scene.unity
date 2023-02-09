@@ -235,8 +235,9 @@ GameObject:
   - component: {fileID: 56846044}
   - component: {fileID: 56846043}
   - component: {fileID: 56846042}
+  - component: {fileID: 56846046}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Charging Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,7 +277,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 28a3ecb0e16f6b24c89e5329e158b3cb, type: 2}
+  - {fileID: 2100000, guid: d5b5118704325ed439a0061372917570, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -314,13 +315,32 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 56846041}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -32.94136, y: 28.141, z: 18.85764}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -89.6057, y: 32.1628, z: 34.37}
+  m_LocalScale: {x: 8, y: 7, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 84532301}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &56846046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56846041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faeec6a63de043943acb9d7ea33d3c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCharging: 0
+  canCharge: 1
+  sightRange: 200
+  damageDealt: 0
+  dashCooldown: 1
+  speed: 20
+  player: {fileID: 1426392329}
 --- !u!1 &76002692
 GameObject:
   m_ObjectHideFlags: 0
@@ -2244,6 +2264,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1426392329 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 899379487398073794, guid: 28b4e2492c50879459aca2e73cfa534b,
+    type: 3}
+  m_PrefabInstance: {fileID: 899379487153560798}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1432903901
 GameObject:
   m_ObjectHideFlags: 0
@@ -3833,7 +3859,7 @@ PrefabInstance:
     - target: {fileID: 899379487398073852, guid: 28b4e2492c50879459aca2e73cfa534b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 142.25
+      value: 67.1
       objectReference: {fileID: 0}
     - target: {fileID: 899379487398073852, guid: 28b4e2492c50879459aca2e73cfa534b,
         type: 3}
@@ -3843,7 +3869,7 @@ PrefabInstance:
     - target: {fileID: 899379487398073852, guid: 28b4e2492c50879459aca2e73cfa534b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 61.37
+      value: 61.4
       objectReference: {fileID: 0}
     - target: {fileID: 899379487398073852, guid: 28b4e2492c50879459aca2e73cfa534b,
         type: 3}
