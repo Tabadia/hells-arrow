@@ -79,13 +79,16 @@ public class Arrow : MonoBehaviour
                                 timesPierced++;
                             }
                         }
-                        else {colliding = true;
-                        transform.position = hits[i].point + transform.forward;
+                        else {
+                            colliding = true;
+                            transform.position = hits[i].point + transform.forward;
+                            transform.parent = hits[i].transform;
                         }
                     }
                     else {
                         colliding = true;
                         transform.position = hits[i].point + transform.forward;
+                        transform.parent = hits[i].transform;
                     }
                 }
             }

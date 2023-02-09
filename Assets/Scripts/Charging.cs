@@ -4,63 +4,83 @@ using UnityEngine;
 
 public class Charging : MonoBehaviour
 {
-    private Hearts playerHearts; // Getting the players hearts
+    private Hearts playerHearts;
     private bool inRange;
     private Vector3 moveDirection;
     private float distance;
     private Vector3 targetPos;
 
-    // Put [SerializeField] stuff here for cooldowns for charge, radius of looking, and damage dealt on hit
     [SerializeField] private bool isCharging = false;
     [SerializeField] private bool canCharge = true;
     [SerializeField] private float sightRange = 500f;
     [SerializeField] private float damageDealt;
     [SerializeField] private float dashCooldown = 1f;
     [SerializeField] private float speed = 20f;
+    [SerializeField] private float knockback = 5f;
     [SerializeField] private GameObject player;
+    [SerializeField] private CapsuleCollider collider;
+    private CapsuleCollider playerCollider;
+
+    private float startTime;
+    private float totalTime;
     void Start()
     {
         playerHearts = player.GetComponent<Hearts>();
+        playerCollider = player.GetComponent<CapsuleCollider>;
+        canCharge = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // check if player is within radius (u can copy code from shrines.cs where i use radius of 2 objects)
         distance = (transform.position - player.transform.position).sqrMagnitude;
         
 
         if (distance < sightRange) {
             
             if (!isCharging) {
-                transform.LookAt(player.transform.position);
-                targetPos = player.transform.position;
+                targetPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+                transform.LookAt(targetPos);
+                // transform.LookAt(player.transform.position);
+                // targetPos = player.transform.position;
                 moveDirection = (targetPos - transform.position).normalized;
+                float chargeDistance = Vector3.Distance(transform.position, targetPos);
+                totalTime = chargeDistance/speed;
+                startTime = Time.time;
             } 
             if (canCharge) {
                 isCharging = true;
-                transform.position += moveDirection * speed * Time.deltaTime;
+                // Debug.Log(time);
+                float time = (Time.time - startTime) / totalTime;
+                transform.position = Vector3.Slerp(transform.position, targetPos, time);
+                // transform.position += moveDirection * speed * Time.deltaTime;
             }
+            // Debug.Log(Vector3.Distance(transform.position, targetPos));
+            // Debug.Log(transform.position);
+            // Debug.Log(targetPos);
             if (Vector3.Distance(transform.position, targetPos) < 0.5f && isCharging) {
                 StartCoroutine(Cooldown());
                 
             }
         }
-
-
-        // Transform.Rotate the enemy to look at player if within radius
-
-        // Every cooldown (using the cooldown code in Shootingscript.cs) save the direction where the player is and stop updating that direction every frame, and then just charge directly at that last point
-        
-        // if it collides with the player, run the playerHearts.takeDamage(dmg); function
-
-        // For making it not keep aligning, set a boolean for where u have it look at player for if it is charging, adn set it to true when charging, false when not
-
-        // that should be it :)
+        void OnCollisionEnter(Collision col) {
+            if (col.gameObject.tag == "Player"){
+                StartCoroutine(Knockback());
+            }
     }
 
     IEnumerator Cooldown() {
+
+        isCharging = false;
+        canCharge = false;
+        yield return new WaitForSeconds(dashCooldown);   
+        canCharge = true;
+    }
+
+    IEnumerator Knockback() {
         playerHearts.takeDamage(0.5f);
+        //funny knockbACK
+        //KNOCK
+        //BACK
         isCharging = false;
         canCharge = false;
         yield return new WaitForSeconds(dashCooldown);   

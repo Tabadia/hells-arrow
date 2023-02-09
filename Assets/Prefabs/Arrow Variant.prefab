@@ -4916,10 +4916,10 @@ MonoBehaviour:
   explosionRadius: 5
   explosionPrefab: {fileID: 6122300699768233975, guid: bbe504bd714641e4baef10a577efd0de,
     type: 3}
-  arrowSpeed: 71.46912
+  arrowSpeed: 75
   multiShotArrow: 1
-  multishotAngle: 3.125
-  pierceAmount: 0
-  bowStrength: 0.5
+  multishotAngle: 0
+  pierceAmount: 1
+  bowStrength: 10
   exploding: 0
   pastHits: 
