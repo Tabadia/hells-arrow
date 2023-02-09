@@ -38,6 +38,7 @@ public class MovementController : MonoBehaviour
     private float verticalInput;
     private float horizontalInput;
 
+    // these are technically only for debug - allow the Rays for wall collision checks to be drawn
     private RaycastHit lastWallHit;
     private Vector3 lastWallHitPos;
 
@@ -92,7 +93,25 @@ public class MovementController : MonoBehaviour
     {
         if (!isMoveDown && gcScript.isGrounded)
         {
-            ppm.dynamicFriction = 4.8f;
+            bool isIce = false;   
+            foreach (Vector3 probePosition in gcScript.probePositions)
+            {
+                RaycastHit hit;
+                Physics.Raycast(new Ray(probePosition, Vector3.down), out hit, Mathf.Infinity, gcScript.collisionMask);
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ice"))
+                {
+                    isIce = true;
+                }
+            }
+
+            if (isIce)
+            {
+                ppm.dynamicFriction = 1.2f;
+            }
+            else
+            {
+                ppm.dynamicFriction = 4.8f;
+            }
         }
         else
         {

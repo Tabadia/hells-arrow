@@ -26,7 +26,7 @@ public class Charging : MonoBehaviour
     void Start()
     {
         playerHearts = player.GetComponent<Hearts>();
-        playerCollider = player.GetComponent<CapsuleCollider>;
+        playerCollider = player.GetComponent<CapsuleCollider>();
         canCharge = true;
     }
 
@@ -63,7 +63,7 @@ public class Charging : MonoBehaviour
             }
         }
         void OnCollisionEnter(Collision col) {
-            if (col.gameObject.tag == "Player"){
+            if (col.gameObject.CompareTag("Player")){
                 StartCoroutine(Knockback());
             }
         }

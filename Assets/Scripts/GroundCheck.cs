@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
@@ -6,7 +8,8 @@ public class GroundCheck : MonoBehaviour
     [SerializeField, Range(0.1f, 1f)] private float length = 0.2f;
     [SerializeField, Range(1, 50)] private int numProbes = 4;
     [SerializeField, Range(0.05f, 1f)] private float probeOffset = 0.5f;
-    [SerializeField] public LayerMask collisionMask;
+    [SerializeField] private LayerMask[] a = new LayerMask[2];
+    [NonSerialized] public LayerMask collisionMask;
 
     public bool isGrounded;
 
@@ -16,6 +19,10 @@ public class GroundCheck : MonoBehaviour
     void Awake()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
+        foreach (LayerMask layer in a)
+        {
+            collisionMask = collisionMask | layer;
+        }
     }
 
     void Update()
