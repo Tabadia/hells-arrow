@@ -66,6 +66,7 @@ public class Charging : MonoBehaviour
             if (col.gameObject.tag == "Player"){
                 StartCoroutine(Knockback());
             }
+        }
     }
 
     IEnumerator Cooldown() {
