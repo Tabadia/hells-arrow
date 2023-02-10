@@ -11,7 +11,7 @@ public class MovementController : MonoBehaviour
     // Majority of these are only public so that they can be tweaked on the fly via inspector - should be privatized when dialed in
     [SerializeField] public float moveSpeed = 8.3f;
     public float Gravity = -15f;
-    public float maxSpeed = 8.3f;
+    public float maxSpeed = 8.3f; // This needs to remain public
     public float dashMult = 2.7f;
     public float dashTime = 0.15f;
     public float dashCooldown = 2.0f;
@@ -61,11 +61,8 @@ public class MovementController : MonoBehaviour
 
     void Update()
     {
-        horizontalInput = Mathf.Round(Input.GetAxis("Horizontal"));
-        verticalInput = Mathf.Round(Input.GetAxis("Vertical"));
-
-        rightMove = horizontalInput * moveSpeed * right;
-        upMove = verticalInput * moveSpeed * forward;
+        horizontalInput = Input.GetAxis("Horizontal") > 0f ? 1f : Input.GetAxis("Horizontal") < 0f ? -1f : 0f;
+        verticalInput = Input.GetAxis("Vertical") > 0f ? 1f : Input.GetAxis("Vertical") < 0f ? -1f : 0f;
 
         if (dashCooldown < maxDashCooldown)
         {
@@ -100,12 +97,15 @@ public class MovementController : MonoBehaviour
             {
                 RaycastHit hit; // Raycast to see what type of terrain player is on
                 Physics.Raycast(new Ray(probePosition, Vector3.down), out hit, Mathf.Infinity, gcScript.collisionMask); // already known to be grounded so distance doesnt matter, hence infinite distance 
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ice"))
+                if (hit.point != Vector3.zero)
                 {
-                    isIce = true;
+                    if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ice"))
+                    {
+                        isIce = true;
+                    }
                 }
             }
-
+        
             if (isIce)
             {
                 ppm.dynamicFriction = 1.2f;
@@ -120,6 +120,10 @@ public class MovementController : MonoBehaviour
             ppm.dynamicFriction = 0.0f;
         }
 
+        
+        rightMove = horizontalInput * moveSpeed * right;
+        upMove = verticalInput * moveSpeed * forward;
+        
         Vector3 tempHoriz = Vector3.zero;
         if (shootingScript.isCharging)
         {  // Movement when Charging
@@ -144,7 +148,7 @@ public class MovementController : MonoBehaviour
                 Physics.Raycast(new Ray(probePosition, Vector3.down), out hit, Mathf.Infinity, gcScript.collisionMask); // Raycast to the nearest ground object below player
                 rayHits.Add(hit);
             }
-
+        
             float highestDist = 0f; // Logic to make sure we don't clip into the ground on slopes
             int indexHighest = 0; // Basically, if multiple probes hit someething, the one with the highest Y value is used
             for (int i = 0; i < gcScript.probePositions.Length; i++)
@@ -191,7 +195,7 @@ public class MovementController : MonoBehaviour
             Vector3 dashNormalSpeed = dashStartSpeed.normalized;
             maxSpeed *= dashMult;
             rb.velocity = new Vector3((dashNormalSpeed.x) * maxSpeed, rb.velocity.y, (dashNormalSpeed.z) * maxSpeed);
-
+    
             Invoke(nameof(CancelDash), dashTime); // Call the CancelDash() method after (dashTime) seconds
         }
     }
@@ -202,7 +206,7 @@ public class MovementController : MonoBehaviour
         maxSpeed /= dashMult;
         isDashing = false;
     }
-
+    
     RaycastHit MoveCheck()
     {
         Vector3 velocDirection = new Vector3(rb.velocity.x, 0f, rb.velocity.z).normalized;
@@ -211,7 +215,7 @@ public class MovementController : MonoBehaviour
         { // Check for walls within the movement change next frame, times 1.2 basically to account for player size
             return hit;
         }
-
+    
         return new RaycastHit(); // If nothing is hit, return a default hit to (0,0,0)
     }
 }
