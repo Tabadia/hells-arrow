@@ -10,6 +10,7 @@ public class Arrow : MonoBehaviour
     [SerializeField] private int despawnTime = 20;
     [SerializeField] private float explosionRadius = 5f;
     [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private EnemyHealth enemyHealth;
 
     public float arrowSpeed;
     public int multiShotArrow;
@@ -33,6 +34,7 @@ public class Arrow : MonoBehaviour
     void Start()
     {
         // Converts mouse position to world position
+        enemyHealth = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyHealth>();
         pastHits = new int[pierceAmount];
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 mouse = Input.mousePosition;
@@ -80,15 +82,11 @@ public class Arrow : MonoBehaviour
                             }
                         }
                         else {
-                            colliding = true;
-                            transform.position = hits[i].point + transform.forward;
-                            transform.parent = hits[i].transform;
+                            OnHit(hits[i]);
                         }
                     }
                     else {
-                        colliding = true;
-                        transform.position = hits[i].point + transform.forward;
-                        transform.parent = hits[i].transform;
+                        OnHit(hits[i]);
                     }
                 }
             }
@@ -113,5 +111,17 @@ public class Arrow : MonoBehaviour
             }
         }
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+    }
+
+    void OnHit(RaycastHit hit)
+    {
+        colliding = true;
+        transform.position = hit.point + transform.forward;
+        transform.parent = hit.transform;
+        if (hit.collider.gameObject.CompareTag("Enemy"))
+        {
+            
+
+        }
     }
 }

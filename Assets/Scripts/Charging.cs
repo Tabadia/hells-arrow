@@ -9,6 +9,9 @@ public class Charging : MonoBehaviour
     private Vector3 moveDirection;
     private float distance;
     private Vector3 targetPos;
+    private CapsuleCollider playerCollider;
+    private float startTime;
+    private float totalTime;
 
     [SerializeField] private bool isCharging = false;
     [SerializeField] private bool canCharge = true;
@@ -19,10 +22,6 @@ public class Charging : MonoBehaviour
     [SerializeField] private float knockback = 5f;
     [SerializeField] private GameObject player;
     [SerializeField] private CapsuleCollider collider;
-    private CapsuleCollider playerCollider;
-
-    private float startTime;
-    private float totalTime;
     void Start()
     {
         playerHearts = player.GetComponent<Hearts>();
@@ -62,15 +61,18 @@ public class Charging : MonoBehaviour
                 
             }
         }
-        void OnCollisionEnter(Collision col) {
-            if (col.gameObject.CompareTag("Player")){
-                StartCoroutine(Knockback());
-            }
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.CompareTag("Player"))
+        {
+            StartCoroutine(Knockback());
         }
     }
 
     IEnumerator Cooldown() {
-
+        
         isCharging = false;
         canCharge = false;
         yield return new WaitForSeconds(dashCooldown);   
