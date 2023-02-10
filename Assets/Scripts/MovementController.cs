@@ -17,6 +17,8 @@ public class MovementController : MonoBehaviour
     public float dashCooldown = 2.0f;
     public float chargingSpeedMultiplier = 5.0f;
     private Vector3 dashStartSpeed;
+    [SerializeField] private float rockFriction = 4.8f;
+    [SerializeField] private float iceFriction = 1.6f;
 
     // Essential movement variables
     private Vector3 forward, right;
@@ -40,6 +42,7 @@ public class MovementController : MonoBehaviour
     private float maxDashCooldown;
     private float verticalInput;
     private float horizontalInput;
+    [NonSerialized] public bool isKnockedBack = false;
 
     // these are technically only for debug - allow the Rays for wall collision checks to be drawn
     private RaycastHit lastWallHit;
@@ -108,11 +111,11 @@ public class MovementController : MonoBehaviour
         
             if (isIce)
             {
-                ppm.dynamicFriction = 1.2f;
+                ppm.dynamicFriction = iceFriction;
             }
             else
             {
-                ppm.dynamicFriction = 4.8f;
+                ppm.dynamicFriction = rockFriction;
             }
         }
         else
@@ -135,8 +138,15 @@ public class MovementController : MonoBehaviour
             tempHoriz = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
             tempHoriz = Vector3.ClampMagnitude(tempHoriz + rightMove + upMove, maxSpeed);
         }
-        
-        rb.velocity = tempHoriz;
+
+        if (!isKnockedBack)
+        {
+            rb.velocity = tempHoriz;
+        }
+        else
+        {
+            // rb.velocity = tempHoriz * 0.2f;
+        }
 
         if (!gcScript.isGrounded) // Logic code to find nearest ground and stick to it
         {

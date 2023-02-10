@@ -735,7 +735,7 @@ MonoBehaviour:
   damageDealt: 0
   dashCooldown: 5
   speed: 0.1
-  knockback: 5
+  knockback: 25
   player: {fileID: 1426392329}
   collider: {fileID: 540201466}
 --- !u!136 &540201466
@@ -4263,6 +4263,11 @@ PrefabInstance:
         type: 3}
       propertyPath: moveSpeed
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 899379487398073792, guid: 28b4e2492c50879459aca2e73cfa534b,
+        type: 3}
+      propertyPath: rockFriction
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 899379487398073794, guid: 28b4e2492c50879459aca2e73cfa534b,
         type: 3}

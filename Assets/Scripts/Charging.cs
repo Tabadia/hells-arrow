@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Charging : MonoBehaviour
@@ -66,13 +65,12 @@ public class Charging : MonoBehaviour
         } else {
             inSightRange = false;
         }
+        
     }
-
-    void OnCollisionEnter(Collision col)
+    void OnCollisionEnter(Collision col) 
     {
         if (col.gameObject.CompareTag("Player"))
-        {
-            StartCoroutine(Knockback());
+        {    StartCoroutine(Knockback());
         }
     }
 
@@ -86,12 +84,22 @@ public class Charging : MonoBehaviour
 
     IEnumerator Knockback() {
         playerHearts.takeDamage(0.5f);
-        //funny knockbACK
-        //KNOCK
-        //BACK
+        
+        // Player knockback code here
+        Vector3 playerPos = player.transform.position;
+        Vector3 dir = new Vector3((playerPos - transform.position).x, 0f, (playerPos - transform.position).z).normalized;
+        Rigidbody playerRB = player.GetComponent<Rigidbody>();
+        MovementController playerMS = player.GetComponent<MovementController>();
+        playerRB.velocity = dir * knockback;
+        playerMS.maxSpeed *= knockback;
+        playerMS.isKnockedBack = true;
+        
         isCharging = false;
         canCharge = false;
-        yield return new WaitForSeconds(dashCooldown);   
+        yield return new WaitForSeconds(0.25f);   
+        playerMS.maxSpeed /= knockback;
+        playerMS.isKnockedBack = false;
+        yield return new WaitForSeconds(dashCooldown-0.25f>0?dashCooldown-0.25f:0);
         canCharge = true;
     }
 }
