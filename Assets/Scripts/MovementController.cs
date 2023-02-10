@@ -11,19 +11,21 @@ public class MovementController : MonoBehaviour
     // Majority of these are only public so that they can be tweaked on the fly via inspector - should be privatized when dialed in
     [SerializeField] public float moveSpeed = 8.3f;
     public float Gravity = -15f;
-    public float maxSpeed = 8.3f;
+    public float maxSpeed = 8.3f; // This needs to remain public
     public float dashMult = 2.7f;
     public float dashTime = 0.15f;
     public float dashCooldown = 2.0f;
     public float chargingSpeedMultiplier = 5.0f;
+    private Vector3 dashStartSpeed;
 
+    // Essential movement variables
     private Vector3 forward, right;
     private Vector3 lastHeading;
     private Vector3 move;
-    private Vector3 dashStartSpeed;
     private Vector3 rightMove;
     private Vector3 upMove;
 
+    // Scene-related variables
     [SerializeField] private Rigidbody rb;
     [SerializeField] private CapsuleCollider cc;
     [SerializeField] private PhysicMaterial ppm; // Player Physic Material
@@ -31,6 +33,7 @@ public class MovementController : MonoBehaviour
     private Shrines shrineScript;
     private ShootingScript shootingScript;
 
+    // Misc variables / Control related stuff
     private bool isDashing;
     private bool isJumping;
     private bool isMoveDown;
@@ -48,7 +51,9 @@ public class MovementController : MonoBehaviour
         forward.y = 0;
         forward = Vector3.Normalize(forward);
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
+        
         maxDashCooldown = dashCooldown;
+        
         shootingScript = GetComponent<ShootingScript>();
         shrineScript = GetComponent<Shrines>();
         gcScript = GetComponent<GroundCheck>();
@@ -56,11 +61,8 @@ public class MovementController : MonoBehaviour
 
     void Update()
     {
-        horizontalInput = Mathf.Round(Input.GetAxis("Horizontal"));
-        verticalInput = Mathf.Round(Input.GetAxis("Vertical"));
-
-        rightMove = horizontalInput * moveSpeed * right;
-        upMove = verticalInput * moveSpeed * forward;
+        horizontalInput = Input.GetAxis("Horizontal") > 0f ? 1f : Input.GetAxis("Horizontal") < 0f ? -1f : 0f;
+        verticalInput = Input.GetAxis("Vertical") > 0f ? 1f : Input.GetAxis("Vertical") < 0f ? -1f : 0f;
 
         if (dashCooldown < maxDashCooldown)
         {
@@ -69,7 +71,6 @@ public class MovementController : MonoBehaviour
         }
         
         if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing && dashCooldown.Equals(maxDashCooldown)) {
-        
             if (!shootingScript.isCharging)
             {
                 isDashing = true;
@@ -77,33 +78,34 @@ public class MovementController : MonoBehaviour
                 Dash();
             }
             else print(shootingScript.isCharging);
-
         }
         
         isMoveDown = !horizontalInput.Equals(0) || !verticalInput.Equals(0);
         
+        // Debug stuff for movement and wall checks, can be removed anytime but i like having it for now
         Debug.DrawRay(rb.position, rb.velocity, Color.red);
         Debug.DrawRay(lastWallHit.point, Vector3.up, Color.green);
         Debug.DrawRay(lastWallHitPos, (lastWallHit.point - lastWallHitPos).normalized * (lastWallHit.distance - cc.radius*2), Color.blue);
-        
-        
     }
 
     private void FixedUpdate()
     {
-        if (!isMoveDown && gcScript.isGrounded)
+        if (!isMoveDown && gcScript.isGrounded) // Check if the player is not actively adding movement input and is grounded
         {
             bool isIce = false;   
-            foreach (Vector3 probePosition in gcScript.probePositions)
+            foreach (Vector3 probePosition in gcScript.probePositions) // Look through each probe defined in the ground check script
             {
-                RaycastHit hit;
-                Physics.Raycast(new Ray(probePosition, Vector3.down), out hit, Mathf.Infinity, gcScript.collisionMask);
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ice"))
+                RaycastHit hit; // Raycast to see what type of terrain player is on
+                Physics.Raycast(new Ray(probePosition, Vector3.down), out hit, Mathf.Infinity, gcScript.collisionMask); // already known to be grounded so distance doesnt matter, hence infinite distance 
+                if (hit.point != Vector3.zero)
                 {
-                    isIce = true;
+                    if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ice"))
+                    {
+                        isIce = true;
+                    }
                 }
             }
-
+        
             if (isIce)
             {
                 ppm.dynamicFriction = 1.2f;
@@ -118,8 +120,12 @@ public class MovementController : MonoBehaviour
             ppm.dynamicFriction = 0.0f;
         }
 
+        
+        rightMove = horizontalInput * moveSpeed * right;
+        upMove = verticalInput * moveSpeed * forward;
+        
         Vector3 tempHoriz = Vector3.zero;
-        if (shootingScript.isCharging) // Where isCharging is a public value determining if the player is charging their shot
+        if (shootingScript.isCharging)
         {  // Movement when Charging
             tempHoriz = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
             tempHoriz = Vector3.ClampMagnitude(tempHoriz + rightMove + upMove, maxSpeed / chargingSpeedMultiplier);
@@ -132,19 +138,19 @@ public class MovementController : MonoBehaviour
         
         rb.velocity = tempHoriz;
 
-        if (!gcScript.isGrounded)
+        if (!gcScript.isGrounded) // Logic code to find nearest ground and stick to it
         {
             List<RaycastHit> rayHits = new List<RaycastHit>();
-            rayHits.Add(new RaycastHit());
-            foreach (Vector3 probePosition in gcScript.probePositions)
+            rayHits.Add(new RaycastHit()); // Initialize a default raycast to (0,0,0) for when none hit
+            foreach (Vector3 probePosition in gcScript.probePositions) // Iterate through each probe
             {
                 RaycastHit hit;
-                Physics.Raycast(new Ray(probePosition, Vector3.down), out hit, Mathf.Infinity, gcScript.collisionMask);
+                Physics.Raycast(new Ray(probePosition, Vector3.down), out hit, Mathf.Infinity, gcScript.collisionMask); // Raycast to the nearest ground object below player
                 rayHits.Add(hit);
             }
-
-            float highestDist = 0f;
-            int indexHighest = 0;
+        
+            float highestDist = 0f; // Logic to make sure we don't clip into the ground on slopes
+            int indexHighest = 0; // Basically, if multiple probes hit someething, the one with the highest Y value is used
             for (int i = 0; i < gcScript.probePositions.Length; i++)
             {
                 if (rayHits[i].distance > highestDist)
@@ -155,64 +161,62 @@ public class MovementController : MonoBehaviour
             }
             
             RaycastHit highestHit = rayHits[indexHighest];
-            if (highestHit.point != Vector3.zero)
+            if (highestHit.point != Vector3.zero) // Filter out default raycast - triggers when no ground is below the player
             {
-                rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-                rb.MovePosition(new Vector3(rb.position.x, highestHit.point.y+cc.height/2, rb.position.z));
+                rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Reset Y velocity
+                rb.MovePosition(new Vector3(rb.position.x, highestHit.point.y+cc.height/2, rb.position.z)); // Move accounting for the player height
             }
             else
             {
-                rb.velocity = new Vector3(rb.velocity.x, Gravity, rb.velocity.z);
+                rb.velocity = new Vector3(rb.velocity.x, Gravity, rb.velocity.z); // If no ground is below, just apply gravity and pray
             }
         }
         
-        RaycastHit moveHit = MoveCheck();
-        if (moveHit.point != Vector3.zero)
+        RaycastHit moveHit = MoveCheck(); // Check if the player will collide w/ phase through wall next movement
+        if (moveHit.point != Vector3.zero) // Returns default RaycastHit if not, filter those out
         {
-            dashStartSpeed = Vector3.zero;
+            dashStartSpeed = Vector3.zero; // Make sure player doesn't keep going after dash ends
                 
-            lastWallHit = moveHit;
-            lastWallHitPos = rb.position;
-            rb.velocity = Vector3.zero;
-            var distance = moveHit.distance - cc.radius;
-            var dir = (rb.position - moveHit.point);
-            dir.y = 0;
+            lastWallHit = moveHit; // Debug
+            lastWallHitPos = rb.position; // Debug
+            rb.velocity = Vector3.zero; // Stop player movement when colliding with wall
+            var distance = moveHit.distance - cc.radius; // Account for Player Radius
             
             transform.position += new Vector3(rb.velocity.x, 0f, rb.velocity.z).normalized * distance;
+            // Okay so like technically this just teleports you, but dash is so fast that its not worth using Slerp...
         }
     }
 
     void Dash()
     {
-        if (!IsInvoking(nameof(CancelDash)))
+        if (!IsInvoking(nameof(CancelDash))) // Prevent this from being called multiple times
         {
             dashStartSpeed = rb.velocity;
             Vector3 dashNormalSpeed = dashStartSpeed.normalized;
             maxSpeed *= dashMult;
             rb.velocity = new Vector3((dashNormalSpeed.x) * maxSpeed, rb.velocity.y, (dashNormalSpeed.z) * maxSpeed);
-
-            Invoke(nameof(CancelDash), dashTime);
+    
+            Invoke(nameof(CancelDash), dashTime); // Call the CancelDash() method after (dashTime) seconds
         }
     }
     void CancelDash()
     {
         rb.velocity = new Vector3(dashStartSpeed.x, rb.velocity.y, dashStartSpeed.z);
-        // rb.velocity = Vector3.zero;
         dashStartSpeed = Vector3.zero;
         maxSpeed /= dashMult;
         isDashing = false;
     }
-
+    
     RaycastHit MoveCheck()
     {
         Vector3 velocDirection = new Vector3(rb.velocity.x, 0f, rb.velocity.z).normalized;
         RaycastHit hit;
         if (Physics.Raycast(new Ray(transform.position, velocDirection), out hit, rb.velocity.magnitude*Time.deltaTime*1.2f))
-        {
+        { // Check for walls within the movement change next frame, times 1.2 basically to account for player size
             return hit;
         }
-
-        return new RaycastHit();
+    
+        return new RaycastHit(); // If nothing is hit, return a default hit to (0,0,0)
     }
 }
 

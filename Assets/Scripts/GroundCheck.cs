@@ -19,9 +19,10 @@ public class GroundCheck : MonoBehaviour
     void Awake()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
-        foreach (LayerMask layer in a)
+        
+        foreach (LayerMask layer in a) // Combine all the given terrain layers into one Mask
         {
-            collisionMask = collisionMask | layer;
+            collisionMask = collisionMask | layer; // weird ass bit notation
         }
     }
 
@@ -32,13 +33,15 @@ public class GroundCheck : MonoBehaviour
         Vector3 position = transform.position;
         
         
+        // Account 0.05f for the Y so that rays don't start inside the ground and miss
         Vector3 center = new Vector3(position.x, position.y - (colliderSize.y / 2) + 0.05f, position.z);
         
-        if (numProbes == 1)
+        // 1 and 2 probes are special cases, handle separately
+        if (numProbes == 1) // 1 probe in center
         {
-            probePositions[0] = center;
+            probePositions[0] = center; 
         }
-        else if (numProbes == 2)
+        else if (numProbes == 2) // 2 probes 180deg apart
         {
             float distance = Mathf.Sqrt(Mathf.Pow(colliderSize.x / 4, 2) +
                 Mathf.Pow(colliderSize.z / 4, 2)) * probeOffset;
@@ -47,7 +50,7 @@ public class GroundCheck : MonoBehaviour
             probePositions[1] = new Vector3(center.x + distance, center.y,
                 center.z + distance);
         }
-        else
+        else // 1 probe in center; numProbes-1 distributed equally around center
         {
             float step = 2*Mathf.PI / (numProbes-1);
             probePositions[0] = center;
@@ -65,23 +68,13 @@ public class GroundCheck : MonoBehaviour
         isGrounded = false;
         foreach (Vector3 probePosition in probePositions)
         {
-            Debug.DrawRay(probePosition, Vector3.down * length, Color.red);
+            Debug.DrawRay(probePosition, Vector3.down * length, Color.red); // Draw position of each ray
             RaycastHit hit;
             if (Physics.Raycast(new Ray(probePosition, Vector3.down), out hit, length, collisionMask))
             {
                 isGrounded = true;
-                Debug.DrawRay(hit.point, Vector3.up, Color.green);
+                Debug.DrawRay(hit.point, Vector3.up, Color.green); // Draw position of each successful hit
             }
         }
-    }
-
-    public Vector3[] GetProbeList()
-    {
-        return probePositions;
-    }
-
-    public LayerMask GetLayerMask()
-    {
-        return collisionMask;
     }
 }
