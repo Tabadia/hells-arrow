@@ -12,9 +12,11 @@ public class Charging : MonoBehaviour
     private CapsuleCollider playerCollider;
     private float startTime;
     private float totalTime;
+    private bool isCharging = false;
+    private bool canCharge = true;
+    // for patrolling script
+    public bool inSightRange = false;
 
-    [SerializeField] private bool isCharging = false;
-    [SerializeField] private bool canCharge = true;
     [SerializeField] private float sightRange = 500f;
     [SerializeField] private float damageDealt;
     [SerializeField] private float dashCooldown = 1f;
@@ -35,7 +37,8 @@ public class Charging : MonoBehaviour
         
 
         if (distance < sightRange) {
-            
+            inSightRange = true;
+
             if (!isCharging) {
                 targetPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
                 transform.LookAt(targetPos);
@@ -60,6 +63,8 @@ public class Charging : MonoBehaviour
                 StartCoroutine(Cooldown());
                 
             }
+        } else {
+            inSightRange = false;
         }
     }
 
