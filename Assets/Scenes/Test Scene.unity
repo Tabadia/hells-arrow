@@ -733,8 +733,8 @@ MonoBehaviour:
   inSightRange: 0
   sightRange: 500
   damageDealt: 0
-  dashCooldown: 5
-  speed: 0.1
+  dashCooldown: 2.5
+  speed: 0.25
   knockback: 25
   player: {fileID: 1426392329}
   collider: {fileID: 540201466}
@@ -2406,8 +2406,7 @@ MonoBehaviour:
   - {fileID: 529650966}
   - {fileID: 276701654}
   isPatrolling: 1
-  speed: 5
-  enemy: {fileID: 1377338389}
+  speed: 10
 --- !u!114 &1377338396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2421,11 +2420,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inSightRange: 0
-  sightRange: 500
+  sightRange: 200
   damageDealt: 0
-  dashCooldown: 3
-  speed: 20
-  knockback: 5
+  dashCooldown: 2.5
+  speed: 0.3
+  knockback: 2.5
   player: {fileID: 1426392329}
   collider: {fileID: 1377338391}
 --- !u!1 &1399165874

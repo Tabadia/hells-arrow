@@ -34,7 +34,6 @@ public class Arrow : MonoBehaviour
     void Start()
     {
         // Converts mouse position to world position
-        enemyHealth = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyHealth>();
         pastHits = new int[pierceAmount];
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 mouse = Input.mousePosition;
@@ -120,7 +119,8 @@ public class Arrow : MonoBehaviour
         transform.parent = hit.transform;
         if (hit.collider.gameObject.CompareTag("Enemy"))
         {
-            
+            enemyHealth = hit.collider.gameObject.GetComponent<EnemyHealth>();
+            enemyHealth.takeDamage(bowStrength);
 
         }
     }

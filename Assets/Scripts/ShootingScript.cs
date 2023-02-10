@@ -86,6 +86,7 @@ public class ShootingScript : MonoBehaviour
             }
         }
         else {
+            bowStrength *= chargeTime;
             prefab.GetComponent<Arrow>().multishotAngle = 0;
             prefab.GetComponent<Arrow>().pierceAmount = pierceAmount;
             prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed;

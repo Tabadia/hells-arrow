@@ -19,7 +19,7 @@ public class Charging : MonoBehaviour
     [SerializeField] private float sightRange = 500f;
     [SerializeField] private float damageDealt;
     [SerializeField] private float dashCooldown = 1f;
-    [SerializeField] private float speed = 20f;
+    [SerializeField] private float speed = 0.3f;
     [SerializeField] private float knockback = 5f;
     [SerializeField] private GameObject player;
     [SerializeField] private CapsuleCollider collider;
