@@ -46,16 +46,19 @@ public class Charging : MonoBehaviour
                 
                 moveDirection = (targetPos - transform.position).normalized;
 
+                isLookingAtPlayer = false;
                 RaycastHit hit;
-                Physics.Raycast(new Ray(new Vector3(transform.position.x, player.transform.position.y, transform.position.z), transform.forward), out hit, Mathf.Infinity);
-                Debug.DrawRay(new Vector3(transform.position.x, player.transform.position.y, transform.position.z), transform.forward*10f, Color.black);
-                if (hit.point != Vector3.zero)
+                for (float i = -1; i <= 1; i+=0.25f)
                 {
-                    isLookingAtPlayer = hit.collider.gameObject.CompareTag("Player");
-                }
-                else
-                {
-                    isLookingAtPlayer = false;
+                    Debug.DrawRay(new Vector3(transform.position.x, player.transform.position.y, transform.position.z), Quaternion.Euler(new Vector3(0,5f*i,0))*transform.forward*sightRange/2f, Color.black);
+                    Physics.Raycast(
+                        new Ray(new Vector3(transform.position.x, player.transform.position.y, transform.position.z),
+                            Quaternion.Euler(new Vector3(0, 5f*i, 0)) * transform.forward), out hit, sightRange);
+                    if (hit.point != Vector3.zero && hit.collider.gameObject.CompareTag("Player"))
+                    {
+                        isLookingAtPlayer = true;
+                        break;
+                    }
                 }
 
                 
@@ -66,7 +69,7 @@ public class Charging : MonoBehaviour
 
             if (!isLookingAtPlayer)
             {
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDirection, Vector3.up), .15f);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDirection, Vector3.up), .25f);
             }
 
             if (canCharge && isLookingAtPlayer) {
@@ -109,14 +112,17 @@ public class Charging : MonoBehaviour
         Rigidbody playerRB = player.GetComponent<Rigidbody>();
         MovementController playerMS = player.GetComponent<MovementController>();
         playerRB.velocity = dir * knockback;
+
+        playerMS.preKnockbackMaxSpeed = playerMS.maxSpeed;
         playerMS.maxSpeed *= knockback;
         playerMS.isKnockedBack = true;
-        
-        isCharging = false;
-        canCharge = false;
+        playerMS.knockbackTime = Time.time;
         yield return new WaitForSeconds(0.25f);   
         playerMS.maxSpeed /= knockback;
         playerMS.isKnockedBack = false;
+        
+        isCharging = false;
+        canCharge = false;
         yield return new WaitForSeconds(dashCooldown-0.25f>0?dashCooldown-0.25f:0);
         canCharge = true;
     }

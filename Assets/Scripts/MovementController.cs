@@ -43,6 +43,8 @@ public class MovementController : MonoBehaviour
     private float verticalInput;
     private float horizontalInput;
     [NonSerialized] public bool isKnockedBack = false;
+    [NonSerialized] public float preKnockbackMaxSpeed;
+    [NonSerialized] public float knockbackTime;
 
     // these are technically only for debug - allow the Rays for wall collision checks to be drawn
     private RaycastHit lastWallHit;
@@ -144,7 +146,13 @@ public class MovementController : MonoBehaviour
         }
         else
         {
-            // rb.velocity = tempHoriz * 0.2f;
+            Debug.Log(Time.time - knockbackTime);
+            Debug.Log(knockbackTime);
+            if (Time.time - knockbackTime > .5f)
+            {
+                isKnockedBack = false;
+                maxSpeed = preKnockbackMaxSpeed;
+            }
         }
 
         if (!gcScript.isGrounded) // Logic code to find nearest ground and stick to it
