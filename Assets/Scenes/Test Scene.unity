@@ -648,7 +648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859173729cfd6104fb67329e3b6045e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 15
 --- !u!1 &529650965
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,7 +814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859173729cfd6104fb67329e3b6045e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 25
 --- !u!1 &633886962
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,7 +1002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859173729cfd6104fb67329e3b6045e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 15
 --- !u!1 &651835745
 GameObject:
   m_ObjectHideFlags: 0
@@ -1419,8 +1419,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1001517683}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 12.800003, y: -0.49, z: -18.43}
-  m_LocalScale: {x: 14.560753, y: 1, z: 3.0638218}
+  m_LocalPosition: {x: 9.8555, y: -0.49, z: -37.15}
+  m_LocalScale: {x: 14.560753, y: 1, z: 17.374933}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6350590430888131581}
@@ -2274,7 +2274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859173729cfd6104fb67329e3b6045e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 15
 --- !u!1 &1319349254
 GameObject:
   m_ObjectHideFlags: 0
@@ -2456,7 +2456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859173729cfd6104fb67329e3b6045e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 15
 --- !u!114 &1377338395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2783,7 +2783,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1499322875
 GameObject:
@@ -3774,7 +3774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859173729cfd6104fb67329e3b6045e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 15
 --- !u!1 &1835603386
 GameObject:
   m_ObjectHideFlags: 0
@@ -4035,6 +4035,7 @@ MonoBehaviour:
   speed: 3
   mainCam: {fileID: 2042413390}
   secondaryCam: {fileID: 1585998324}
+  shootingScript: {fileID: 0}
 --- !u!20 &2042413390 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 899379487603900382, guid: 28b4e2492c50879459aca2e73cfa534b,
@@ -4574,6 +4575,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 899379487398073792, guid: 28b4e2492c50879459aca2e73cfa534b,
         type: 3}
+      propertyPath: iceFriction
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 899379487398073792, guid: 28b4e2492c50879459aca2e73cfa534b,
+        type: 3}
       propertyPath: rockFriction
       value: 7
       objectReference: {fileID: 0}
@@ -4590,7 +4596,7 @@ PrefabInstance:
     - target: {fileID: 899379487398073852, guid: 28b4e2492c50879459aca2e73cfa534b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 899379487398073852, guid: 28b4e2492c50879459aca2e73cfa534b,
         type: 3}
@@ -4651,6 +4657,11 @@ PrefabInstance:
         type: 3}
       propertyPath: minArrowSpeed
       value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 899379487398073853, guid: 28b4e2492c50879459aca2e73cfa534b,
+        type: 3}
+      propertyPath: minBowStrength
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 899379487398073853, guid: 28b4e2492c50879459aca2e73cfa534b,
         type: 3}

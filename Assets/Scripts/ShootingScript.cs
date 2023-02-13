@@ -57,6 +57,7 @@ public class ShootingScript : MonoBehaviour
         float arrowSpeed = maxArrowSpeed;
 
         arrowSpeed *= chargeTime;
+        bowStrength *= chargeTime;
 
         if (arrowSpeed < minArrowSpeed) arrowSpeed = minArrowSpeed;
         else if (arrowSpeed > maxArrowSpeed) arrowSpeed = maxArrowSpeed;
@@ -66,7 +67,7 @@ public class ShootingScript : MonoBehaviour
         // Spawns arrow
         if (arrowAmount > 1)
         {
-            bowStrength *= chargeTime / 2;
+            bowStrength /= 1.5f;
 
             if (arrowSpeed < minArrowSpeed) arrowSpeed = minArrowSpeed;
             else if (arrowSpeed > maxArrowSpeed) arrowSpeed = maxArrowSpeed;
@@ -86,7 +87,6 @@ public class ShootingScript : MonoBehaviour
             }
         }
         else {
-            bowStrength *= chargeTime;
             prefab.GetComponent<Arrow>().multishotAngle = 0;
             prefab.GetComponent<Arrow>().pierceAmount = pierceAmount;
             prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed;

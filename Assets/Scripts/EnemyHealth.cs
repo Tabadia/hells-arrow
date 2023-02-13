@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private float health = 20f;
+
     void Start()
     {
         
@@ -13,11 +14,14 @@ public class EnemyHealth : MonoBehaviour
 
     void Update()
     {
-        
+        if (health <= 0){
+            Destroy(gameObject);
+        }
     }
     
     public void takeDamage(float bowStrength)
     {
+        health -= bowStrength;
         print(bowStrength);
     }
 }

@@ -23,6 +23,7 @@ public class Charging : MonoBehaviour
     [SerializeField] private float knockback = 5f;
     [SerializeField] private GameObject player;
     [SerializeField] private CapsuleCollider collider;
+    
     void Start()
     {
         playerHearts = player.GetComponent<Hearts>();
