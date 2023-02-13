@@ -64,9 +64,8 @@ public class MovementController : MonoBehaviour
 
     void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal") > 0f ? 1f : Input.GetAxis("Horizontal") < 0f ? -1f : 0f;
-        verticalInput = Input.GetAxis("Vertical") > 0f ? 1f : Input.GetAxis("Vertical") < 0f ? -1f : 0f;
-
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
         if (dashCooldown < maxDashCooldown)
         {
             dashCooldown += Time.deltaTime;

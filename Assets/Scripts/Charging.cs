@@ -15,6 +15,7 @@ public class Charging : MonoBehaviour
     private bool canCharge = true;
     // for patrolling script
     public bool inSightRange = false;
+    private bool isLookingAtPlayer = false;
 
     [SerializeField] private float sightRange = 500f;
     [SerializeField] private float damageDealt;
@@ -39,26 +40,42 @@ public class Charging : MonoBehaviour
         if (distance < sightRange) {
             inSightRange = true;
 
-            if (!isCharging) {
+            if (!isCharging)
+            {
                 targetPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-                transform.LookAt(targetPos);
-                // transform.LookAt(player.transform.position);
-                // targetPos = player.transform.position;
+                
                 moveDirection = (targetPos - transform.position).normalized;
+
+                RaycastHit hit;
+                Physics.Raycast(new Ray(new Vector3(transform.position.x, player.transform.position.y, transform.position.z), transform.forward), out hit, Mathf.Infinity);
+                Debug.DrawRay(new Vector3(transform.position.x, player.transform.position.y, transform.position.z), transform.forward*10f, Color.black);
+                if (hit.point != Vector3.zero)
+                {
+                    isLookingAtPlayer = hit.collider.gameObject.CompareTag("Player");
+                }
+                else
+                {
+                    isLookingAtPlayer = false;
+                }
+
+                
                 float chargeDistance = Vector3.Distance(transform.position, targetPos);
                 totalTime = chargeDistance/speed;
                 startTime = Time.time;
-            } 
-            if (canCharge) {
+            }
+
+            if (!isLookingAtPlayer)
+            {
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDirection, Vector3.up), .15f);
+            }
+
+            if (canCharge && isLookingAtPlayer) {
                 isCharging = true;
                 // Debug.Log(time);
                 float time = (Time.time - startTime) / totalTime;
                 transform.position = Vector3.Slerp(transform.position, targetPos, time);
-                // transform.position += moveDirection * speed * Time.deltaTime;
             }
-            // Debug.Log(Vector3.Distance(transform.position, targetPos));
-            // Debug.Log(transform.position);
-            // Debug.Log(targetPos);
+            
             if (Vector3.Distance(transform.position, targetPos) < 0.5f && isCharging) {
                 StartCoroutine(Cooldown());
                 
