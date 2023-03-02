@@ -42,6 +42,7 @@ public class MovementController : MonoBehaviour
     private float maxDashCooldown;
     private float verticalInput;
     private float horizontalInput;
+    private Quaternion cameraLook;
     [NonSerialized] public bool isKnockedBack = false;
     [NonSerialized] public float preKnockbackMaxSpeed;
     [NonSerialized] public float knockbackTime;
@@ -56,6 +57,7 @@ public class MovementController : MonoBehaviour
         forward.y = 0;
         forward = Vector3.Normalize(forward);
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
+        cameraLook = Camera.main.transform.rotation;
         
         maxDashCooldown = dashCooldown;
         
@@ -85,6 +87,12 @@ public class MovementController : MonoBehaviour
         }
         
         isMoveDown = !horizontalInput.Equals(0) || !verticalInput.Equals(0);
+
+        if (isMoveDown) // Player Rotation Control
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation,
+                    Quaternion.LookRotation(right * horizontalInput + forward * verticalInput, Vector3.up), .25f);
+        }
         
         // Debug stuff for movement and wall checks, can be removed anytime but i like having it for now
         Debug.DrawRay(rb.position, rb.velocity, Color.red);

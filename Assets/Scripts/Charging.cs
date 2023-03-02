@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Charging : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class Charging : MonoBehaviour
     [SerializeField] private float speed = 0.3f;
     [SerializeField] private float knockback = 5f;
     [SerializeField] private GameObject player;
-    [SerializeField] private CapsuleCollider collider;
+    [FormerlySerializedAs("collider")] [SerializeField] private CapsuleCollider Collider;
     
     void Start()
     {
