@@ -5,7 +5,6 @@ using System.Linq;
 
 public class Arrow : MonoBehaviour
 {
-    // wayyyy tooooo many variables
     [SerializeField] private GameObject player;
     [SerializeField] private int despawnTime = 20;
     [SerializeField] private float explosionRadius = 5f;
