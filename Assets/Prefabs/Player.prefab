@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 5092463408584315051}
   - component: {fileID: 5092463408584315048}
   - component: {fileID: 5092463408584315040}
+  - component: {fileID: 1426392342}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -368,6 +369,20 @@ MonoBehaviour:
   fullHeart: {fileID: 21300000, guid: c48ddabbdd2e8054d8666756954ce3ca, type: 3}
   halfHeart: {fileID: 21300000, guid: 41bedc0ddbd5bff41adc976c359a0978, type: 3}
   emptyHeart: {fileID: 21300000, guid: e00cc1abc951881468d1571286ec2c31, type: 3}
+--- !u!114 &1426392342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899379487398073794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e343ce2deb8d8b4891560e1a5e8340b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parryDuration: 1
+  parryCooldown: 5
 --- !u!1 &899379487603899938
 GameObject:
   m_ObjectHideFlags: 0

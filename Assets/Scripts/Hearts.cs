@@ -33,10 +33,8 @@ public class Hearts : MonoBehaviour
 
     public void takeDamage(float dmg)
     {
-        print(currentHearts);
         if (currentHearts <= 0) currentHearts = 0;
         currentHearts -= dmg;
-        print(currentHearts);
 
         if (currentHearts <= 0) {
             for (int i = 0; i < maxHearts; i++)

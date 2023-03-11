@@ -571,6 +571,7 @@ GameObject:
   - component: {fileID: 5392828135217056885}
   - component: {fileID: 5392828135217056886}
   - component: {fileID: 5392828135217056894}
+  - component: {fileID: 5392828135217056895}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -690,7 +691,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313329948}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-  m_LocalPosition: {x: -576.17004, y: 3.630003, z: 213.84001}
+  m_LocalPosition: {x: 120.77, y: 20.99, z: 66.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1118,7 +1119,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 518562556}
   m_LocalRotation: {x: 0.21466626, y: -0.7840032, z: 0.43683663, w: 0.38526767}
-  m_LocalPosition: {x: -565.5, y: 25.9, z: 222.1}
+  m_LocalPosition: {x: 131.44003, y: 43.259995, z: 74.28999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4195,12 +4196,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1833433911}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2c20223f9dd3da43a8981c09f151d5a, type: 3}
+  m_Script: {fileID: 11500000, guid: ee7caf604b922554da6bc18da60f2cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7372176545791993125, guid: 9986f79d03b51d045a13cc54a8ff57f2,
     type: 3}
-  player: {fileID: 899379487398073794, guid: 28b4e2492c50879459aca2e73cfa534b, type: 3}
+  player: {fileID: 313329948}
   shootCooldown: 2
 --- !u!1 &1835603386
 GameObject:
@@ -6428,6 +6429,21 @@ MonoBehaviour:
   fullHeart: {fileID: 21300000, guid: c48ddabbdd2e8054d8666756954ce3ca, type: 3}
   halfHeart: {fileID: 21300000, guid: 41bedc0ddbd5bff41adc976c359a0978, type: 3}
   emptyHeart: {fileID: 21300000, guid: e00cc1abc951881468d1571286ec2c31, type: 3}
+--- !u!114 &5392828135217056895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313329948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e343ce2deb8d8b4891560e1a5e8340b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parryDuration: 1
+  parryCooldown: 3
+  isParrying: 0
 --- !u!4 &5423501828288919155
 Transform:
   m_ObjectHideFlags: 0

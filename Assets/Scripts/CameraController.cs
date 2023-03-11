@@ -45,7 +45,7 @@ public class CameraController : MonoBehaviour
         bool homedCam =
             Vector3.Distance(new Vector3(mainCam.transform.position.x - 10, player.transform.position.y, mainCam.transform.position.z - 10),
             player.transform.position) < 0.1f;
-        Debug.Log(homedCam);
+        //Debug.Log(homedCam);
 
         // Setting the camera's position
         // Move to the focus point when beginning charge - this if-else tree could probably be structured better, but fuk u
@@ -75,7 +75,7 @@ public class CameraController : MonoBehaviour
             case false when !movingCamera: // Check here is needed to make sure camera can leave the player the first time
                 mainCam.transform.position = new Vector3(player.transform.position.x + 10, transform.position.y,
                     player.transform.position.z + 10);
-                Debug.Log("check");
+                //Debug.Log("check");
                 break;
         }
         

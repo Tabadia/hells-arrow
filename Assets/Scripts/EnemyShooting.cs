@@ -16,13 +16,11 @@ public class EnemyShooting : MonoBehaviour
         canShoot = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.LookAt(player.transform);
         if (canShoot)
         {
-            //print("shot");
             StartCoroutine(Shoot());
         }
 
@@ -34,6 +32,5 @@ public class EnemyShooting : MonoBehaviour
         Instantiate(bulletPrefab, transform.position, transform.rotation);
         yield return new WaitForSeconds(shootCooldown);
         canShoot = true;
-        //print("can shoot again");
     }
 }

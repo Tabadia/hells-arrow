@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-    [SerializeField] private float speed = 20f;
-    [SerializeField] private GameObject player;
-
-    private Vector3 prevPos;
+    [SerializeField] private float speed = 50f;
+    
+    private GameObject player;
     private Hearts playerHearts;
-    void Start()
-    {
-        //print("Took damage from bullet.cs");
-        //playerHearts = player.GetComponent<Hearts>();
-        //playerHearts.takeDamage(0.5f);
+    private Parry playerParry;
+    private CapsuleCollider playerCollider;
+    private Vector3 prevPos;
 
+    void Start() {
+        player = GameObject.FindWithTag("Player");
+        playerHearts = player.GetComponent<Hearts>();
+        playerParry = player.GetComponent<Parry>();
+        playerCollider = player.GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
@@ -29,8 +31,13 @@ public class bullet : MonoBehaviour
         {
             if (hits[i].collider.gameObject.tag == "Player")
             {
-                print("Hit player");
-                //playerHearts.takeDamage(0.5f);
+                if (!playerParry.isParrying)
+                {
+                    playerHearts.takeDamage(0.5f);
+                }
+                else {
+                    print("Parried");
+                }
             }
             Destroy(gameObject);
         }
