@@ -11,23 +11,38 @@ public class Hearts : MonoBehaviour
     [SerializeField] private Image effectRenderer;
     [SerializeField] private float effectFadeDuration = 0.2f;
     [SerializeField] private float effectOpacity = 0.54f;
+    [SerializeField] private GameObject deathScreen;
+    [SerializeField] private Button respawnBtn;
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite halfHeart;
     [SerializeField] private Sprite emptyHeart;
 
-    private GameObject[] hearts;
 
+    private GameObject[] hearts;
     private float currentHearts;
+
+    public bool isDead = false;
+
     void Start()
     {
         currentHearts = maxHearts;
-        print(currentHearts);
         hearts = new GameObject[maxHearts];
         for (int i = 0; i < maxHearts; i++){
             GameObject heart = Instantiate(heartPrefab, heartContainer.transform);
             heart.transform.position = new Vector3(heart.transform.position.x + (i * 46), heart.transform.position.y, heart.transform.position.z);
             hearts[i] = heart;
         }
+
+        respawnBtn.onClick.AddListener(() => {
+            deathScreen.SetActive(false);
+            isDead = false;
+            Time.timeScale = 1;
+            for (int i = 0; i < maxHearts; i++)
+            {
+                hearts[i].GetComponent<Image>().sprite = fullHeart;
+            }
+            currentHearts = maxHearts;
+        });
         //takeDamage(1.5f);
     }
 
@@ -46,6 +61,9 @@ public class Hearts : MonoBehaviour
                 hearts[i].GetComponent<Image>().sprite = emptyHeart;
             }
             print("You died");
+            deathScreen.SetActive(true);
+            isDead = true;
+            Time.timeScale = 0;
         }
         else {
             for (int i = 0; i < maxHearts; i++) {
