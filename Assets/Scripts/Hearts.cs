@@ -7,6 +7,10 @@ public class Hearts : MonoBehaviour
     [SerializeField] private int maxHearts = 3;
     [SerializeField] private GameObject heartContainer;
     [SerializeField] private GameObject heartPrefab;
+    [SerializeField] private GameObject damageEffect;
+    [SerializeField] private Image effectRenderer;
+    [SerializeField] private float effectFadeDuration = 0.2f;
+    [SerializeField] private float effectOpacity = 0.54f;
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite halfHeart;
     [SerializeField] private Sprite emptyHeart;
@@ -54,6 +58,33 @@ public class Hearts : MonoBehaviour
                 }
                 else { hearts[i].GetComponent<Image>().sprite = halfHeart; }
             }
+        }
+        StartCoroutine(hitEffect());
+    }
+
+    IEnumerator hitEffect()
+    {
+        effectRenderer.color = new Color(effectRenderer.color.r, effectRenderer.color.g, effectRenderer.color.b, effectOpacity);
+        yield return new WaitForSeconds(0.2f);
+        StartCoroutine(fadeOut(effectRenderer, effectFadeDuration));
+    }
+
+    IEnumerator fadeOut(Image effectRenderer, float duration) {
+        float counter = 0;
+        //Get current color
+        Color spriteColor = effectRenderer.color;
+
+        while (counter < duration)
+        {
+            counter += Time.deltaTime;
+            //Fade from 1 to 0
+            float alpha = Mathf.Lerp(effectOpacity, 0, counter / duration);
+            //Debug.Log(alpha);
+
+            //Change alpha only
+            effectRenderer.color = new Color(spriteColor.r, spriteColor.g, spriteColor.b, alpha);
+            //Wait for a frame
+            yield return null;
         }
     }
 
