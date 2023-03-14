@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class EnemyShooting : MonoBehaviour
 {
-    private CapsuleCollider playerCollider;
-    private bool canShoot = false;
-
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject player;
     [SerializeField] private float shootCooldown = 2f;
+    [SerializeField] private float range = 100f;
+
+    private CapsuleCollider playerCollider;
+    private bool canShoot = false;
+    private float distance;
+
     void Start()
     {
         playerCollider = player.GetComponent<CapsuleCollider>();
@@ -18,8 +21,10 @@ public class EnemyShooting : MonoBehaviour
 
     void Update()
     {
+        distance = (transform.position - player.transform.position).sqrMagnitude;
         transform.LookAt(player.transform);
-        if (canShoot)
+
+        if (canShoot && distance < range)
         {
             StartCoroutine(Shoot());
         }

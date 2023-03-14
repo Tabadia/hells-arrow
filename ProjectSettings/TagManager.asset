@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Arrow
   - Portal
+  - HealthSlider
   layers:
   - Default
   - TransparentFX

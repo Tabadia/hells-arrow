@@ -67,7 +67,6 @@ public class Hearts : MonoBehaviour
         }
         else {
             for (int i = 0; i < maxHearts; i++) {
-                print("i: " + i);
                 if ((currentHearts - i) >= 1) {
                     hearts[i].GetComponent<Image>().sprite = fullHeart;
                 }
@@ -89,19 +88,14 @@ public class Hearts : MonoBehaviour
 
     IEnumerator fadeOut(Image effectRenderer, float duration) {
         float counter = 0;
-        //Get current color
         Color spriteColor = effectRenderer.color;
 
         while (counter < duration)
         {
             counter += Time.deltaTime;
-            //Fade from 1 to 0
             float alpha = Mathf.Lerp(effectOpacity, 0, counter / duration);
-            //Debug.Log(alpha);
 
-            //Change alpha only
             effectRenderer.color = new Color(spriteColor.r, spriteColor.g, spriteColor.b, alpha);
-            //Wait for a frame
             yield return null;
         }
     }
