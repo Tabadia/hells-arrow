@@ -17,14 +17,20 @@ public class ShootingScript : MonoBehaviour
     [SerializeField] private float maxArrowSpeed = 400f;
     [SerializeField] private float multishotAngle = 5;
     [SerializeField] private GameObject prefab;
+    [SerializeField] private ParticleSystem maxChargeParticleSystem;
+    [SerializeField] private Light maxChargeLight;
 
     private float timer;
+    private float fullParticleTimer;
+    private bool spawnedMaxParticle;
     private bool cooldownActive;
 
     public bool isCharging = false;
 
     void Update()
     {
+        var emission = maxChargeParticleSystem.emission;
+
         // If it can shoot then check for how long it charged (time since charge - time at start of charge)
         if (!cooldownActive)
         {
@@ -43,8 +49,21 @@ public class ShootingScript : MonoBehaviour
                 }
                 else timer = 0;
                 isCharging = false;
+
+                spawnedMaxParticle = false;
             }
         }
+
+        // Increment by time.deltatime when charging
+        if (isCharging)
+            fullParticleTimer += Time.deltaTime;
+        else 
+            fullParticleTimer = 0;
+
+        // Spawn a particle if the charge time is more than maxCharge
+        
+        emission.rateOverTime = Mathf.Lerp(0, 20, fullParticleTimer);
+        maxChargeLight.intensity = Mathf.Lerp(0, 10, fullParticleTimer);
     }
 
 
