@@ -2,88 +2,110 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using Random=UnityEngine.Random;
 
-public class Shrines : MonoBehaviour
-{
+public class Shrines : MonoBehaviour {
     [SerializeField] private float maxDistance = 100f;
     [SerializeField] private GameObject shrineText;
-    [SerializeField] private GameObject powerUpMenu;
+    [SerializeField] private GameObject upMenu;
+    [SerializeField] private Button upOption1;
+    [SerializeField] private Button upOption2;
+    [SerializeField] private Button upOption3;
 
     private GameObject[] shrines;
-    ShootingScript shootingScript;
+    private string chosenUpgrade = "";
+    private TextMeshProUGUI optionText1;
+    private TextMeshProUGUI optionText2;
+    private TextMeshProUGUI optionText3;
 
-    public ArrayList powerUps = new ArrayList();
+    private string[,] upgrades = {{"exploding", "0"}, {"multishot", "0"}, {"piercing", "0"}, {"flaming", "0"}};
+    ShootingScript shootingScript;
     public bool inMenu = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         shrines = GameObject.FindGameObjectsWithTag("Shrine");
         shootingScript = GetComponent<ShootingScript>();
+        optionText1 = upOption1.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+        optionText2 = upOption2.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+        optionText3 = upOption3.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+        upOption1.onClick.AddListener(() => {
+            chosenUpgrade = optionText1.text;
+            UpgradeClicked(chosenUpgrade);
+        });
+        upOption2.onClick.AddListener(() => {
+            chosenUpgrade = optionText2.text;
+            UpgradeClicked(chosenUpgrade);
+        });
+        upOption3.onClick.AddListener(() => {
+            chosenUpgrade = optionText3.text;
+            UpgradeClicked(chosenUpgrade);
+        });
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         GameObject closest = null;
         float distance = Mathf.Infinity;
 
         Vector3 position = transform.position;
-        foreach (GameObject s in shrines)
-        {
+        foreach (GameObject s in shrines) {
             Vector3 diff = s.transform.position - position;
             float curDistance = diff.sqrMagnitude;
-            if (curDistance < distance)
-            {
+            if (curDistance < distance) {
                 closest = s;
                 distance = curDistance;
             }
         }
 
         // If close to shrine
-        if (distance < maxDistance)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                if (inMenu)
-                {
-                    inMenu = false;
-                    powerUpMenu.SetActive(false);
-                    shootingScript.arrowAmount = 3;
-                    powerUps.Add("Multishot");
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                if (inMenu)
-                {
-                    inMenu = false;
-                    powerUpMenu.SetActive(false);
-                    shootingScript.pierceAmount = 1;
-                    powerUps.Add("Piercing");
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                if (inMenu)
-                {
-                    inMenu = false;
-                    powerUpMenu.SetActive(false);
-                    shootingScript.exploding = true;
-                    powerUps.Add("Exploding");
-                }
-            }
-
+        if (distance < maxDistance) {
+            //print("near shrine");
             shrineText.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                // show menu
-                inMenu = true;
-                powerUpMenu.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.E)) {
+                List<string> temp = new List<string>(0);
+                for (int i = 0; i < upgrades.GetLength(0); i++){
+                    temp.Add(upgrades[i,0] + " " + upgrades[i,1]);
+                }
+                int rand = 0;
+                
+                rand = Random.Range(0, temp.Count);
+                print(rand + " " + temp.Count);
+                optionText1.text = upgrades[rand, 0] + " " + upgrades[rand, 1];
+                print(upgrades[rand,0]);
+                temp.RemoveAt(rand);
 
+                rand = Random.Range(0, temp.Count);
+                print(rand + " " + temp.Count);
+                optionText2.text = upgrades[rand, 0] + " " + upgrades[rand, 1];
+                print(upgrades[rand,0]);
+                temp.RemoveAt(rand);
+
+                rand = Random.Range(0, temp.Count);
+                print(rand + " " + temp.Count);
+                optionText3.text = upgrades[rand, 0] + " " + upgrades[rand, 1];
+                print(upgrades[rand,0]);
+                temp.RemoveAt(rand);
+
+                print("in menu");
+                inMenu = true;
+                upMenu.SetActive(true);
             }
+
             //print("Closest shrine is " + closest.name + " at " + distance + " units away");
         }
-        else shrineText.SetActive(false);
+        // else {
+        //     shrineText.SetActive(false);
+        // }
+    }
+
+    void UpgradeClicked(string chosenUpgrade){
+        print(chosenUpgrade);
+        for (int i = 0; i < upgrades.GetLength(0); i++){
+            if (upgrades[i,0] == chosenUpgrade){
+                upgrades[i,1] = (int.Parse(upgrades[i,1]) + 1).ToString();
+            }
+        }
+        inMenu = false;
+        upMenu.SetActive(false);
     }
 }

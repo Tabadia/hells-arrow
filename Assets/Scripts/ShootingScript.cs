@@ -20,6 +20,8 @@ public class ShootingScript : MonoBehaviour
     [SerializeField] private ParticleSystem maxChargeParticleSystem;
     [SerializeField] private Light maxChargeLight;
 
+    
+
     private float timer;
     private float fullParticleTimer;
     private bool spawnedMaxParticle;
