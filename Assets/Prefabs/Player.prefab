@@ -282,6 +282,8 @@ MonoBehaviour:
   maxArrowSpeed: 400
   multishotAngle: 2.5
   prefab: {fileID: 1312195910709522531, guid: e2418a284399a1a479d71d917c54d99b, type: 3}
+  maxChargeParticleSystem: {fileID: 0}
+  maxChargeLight: {fileID: 0}
   isCharging: 0
 --- !u!114 &5092463408584315058
 MonoBehaviour:
@@ -366,9 +368,16 @@ MonoBehaviour:
   heartContainer: {fileID: 0}
   heartPrefab: {fileID: 4322689079855696241, guid: e65707565d0830440ac302333e9a8266,
     type: 3}
+  damageEffect: {fileID: 0}
+  effectRenderer: {fileID: 0}
+  effectFadeDuration: 0.2
+  effectOpacity: 0.54
+  deathScreen: {fileID: 0}
+  respawnBtn: {fileID: 0}
   fullHeart: {fileID: 21300000, guid: c48ddabbdd2e8054d8666756954ce3ca, type: 3}
   halfHeart: {fileID: 21300000, guid: 41bedc0ddbd5bff41adc976c359a0978, type: 3}
   emptyHeart: {fileID: 21300000, guid: e00cc1abc951881468d1571286ec2c31, type: 3}
+  isDead: 0
 --- !u!114 &1426392342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,6 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parryDuration: 1
   parryCooldown: 5
+  isParrying: 0
 --- !u!1 &899379487603899938
 GameObject:
   m_ObjectHideFlags: 0
