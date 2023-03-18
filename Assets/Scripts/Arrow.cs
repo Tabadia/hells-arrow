@@ -74,6 +74,7 @@ public class Arrow : MonoBehaviour
                             }
                             else {
                                 print("pierced");
+                                OnHit(hits[i]);
                                 colliding = false;
                                 pastHits[i] = hits[i].collider.gameObject.GetInstanceID();
                                 timesPierced++;
@@ -95,24 +96,21 @@ public class Arrow : MonoBehaviour
         }
     }
 
-    void Explode()
-    {
+    void Explode() {
         Vector3 center = transform.position + transform.forward * explosionRadius/2;
         // Explosion stuff
         Collider[] hitColliders = Physics.OverlapBox(center, new Vector3(explosionRadius / 2, explosionRadius / 2, explosionRadius / 2), Quaternion.Euler(transform.forward));
         foreach(var hitCollider in hitColliders)
         {
-            if(hitCollider.CompareTag("Enemy"))
-            {
-                //do damage later but
-                Destroy(hitCollider.gameObject);
+            if(hitCollider.CompareTag("Enemy")) {
+                enemyHealth = hitCollider.gameObject.GetComponent<EnemyHealth>();
+                enemyHealth.takeDamage(bowStrength);
             }
         }
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
     }
 
-    void OnHit(RaycastHit hit)
-    {
+    void OnHit(RaycastHit hit) {
         colliding = true;
         transform.position = hit.point + transform.forward;
         transform.parent = hit.transform;
@@ -120,7 +118,6 @@ public class Arrow : MonoBehaviour
         {
             enemyHealth = hit.collider.gameObject.GetComponent<EnemyHealth>();
             enemyHealth.takeDamage(bowStrength);
-
         }
     }
 }

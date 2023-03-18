@@ -19,7 +19,7 @@ public class Shrines : MonoBehaviour {
     private TextMeshProUGUI optionText2;
     private TextMeshProUGUI optionText3;
 
-    private string[,] upgrades = {{"exploding", "0"}, {"multishot", "0"}, {"piercing", "0"}, {"flaming", "0"}};
+    public string[,] upgrades = {{"Exploding", "0"}, {"Multishot", "0"}, {"Piercing", "0"}, {"Flaming", "0"}, {"Arrow Speed", "0"}};
     ShootingScript shootingScript;
     public bool inMenu = false;
 
@@ -69,21 +69,15 @@ public class Shrines : MonoBehaviour {
                 int rand = 0;
                 
                 rand = Random.Range(0, temp.Count);
-                print(rand + " " + temp.Count);
-                optionText1.text = upgrades[rand, 0] + " " + upgrades[rand, 1];
-                print(upgrades[rand,0]);
+                optionText1.text = temp[rand];
                 temp.RemoveAt(rand);
 
                 rand = Random.Range(0, temp.Count);
-                print(rand + " " + temp.Count);
-                optionText2.text = upgrades[rand, 0] + " " + upgrades[rand, 1];
-                print(upgrades[rand,0]);
+                optionText2.text = temp[rand];
                 temp.RemoveAt(rand);
 
                 rand = Random.Range(0, temp.Count);
-                print(rand + " " + temp.Count);
-                optionText3.text = upgrades[rand, 0] + " " + upgrades[rand, 1];
-                print(upgrades[rand,0]);
+                optionText3.text = temp[rand];
                 temp.RemoveAt(rand);
 
                 print("in menu");
@@ -93,15 +87,15 @@ public class Shrines : MonoBehaviour {
 
             //print("Closest shrine is " + closest.name + " at " + distance + " units away");
         }
-        // else {
-        //     shrineText.SetActive(false);
-        // }
+        else {
+            shrineText.SetActive(false);
+        }
     }
 
     void UpgradeClicked(string chosenUpgrade){
         print(chosenUpgrade);
         for (int i = 0; i < upgrades.GetLength(0); i++){
-            if (upgrades[i,0] == chosenUpgrade){
+            if ((upgrades[i,0] + " " + upgrades[i,1]) == chosenUpgrade){
                 upgrades[i,1] = (int.Parse(upgrades[i,1]) + 1).ToString();
             }
         }

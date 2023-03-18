@@ -11,6 +11,8 @@ public class ShootingScript : MonoBehaviour
     [SerializeField] public int arrowAmount = 1;
     [SerializeField] public int pierceAmount = 0;
     [SerializeField] public bool exploding = false;
+    [SerializeField] public bool flame = false;
+    [SerializeField] private float flameLength = 0;
     [SerializeField] private float minBowStrength = 1f;
     [SerializeField] private float maxBowStrength = 10f;
     [SerializeField] private float minArrowSpeed = 50f;
@@ -20,17 +22,21 @@ public class ShootingScript : MonoBehaviour
     [SerializeField] private ParticleSystem maxChargeParticleSystem;
     [SerializeField] private Light maxChargeLight;
 
-    
-
     private float timer;
     private float fullParticleTimer;
     private bool spawnedMaxParticle;
     private bool cooldownActive;
+    private Shrines shrineScript;
+    private string[,] upgrades;
 
     public bool isCharging = false;
 
-    void Update()
-    {
+    void Start() {
+        shrineScript = GetComponent<Shrines>();
+        upgrades = shrineScript.upgrades;
+    }
+
+    void Update() {
         var emission = maxChargeParticleSystem.emission;
 
         // If it can shoot then check for how long it charged (time since charge - time at start of charge)
@@ -69,13 +75,14 @@ public class ShootingScript : MonoBehaviour
     }
 
 
-    private void Shoot(float chargeTime)
-    {
+    private void Shoot(float chargeTime) {
+
         // Sets values to minimum and max incase they get messed with, converts charge time to stats
         if (chargeTime > maxCharge) chargeTime = maxCharge;
 
         float bowStrength = maxBowStrength;
         float arrowSpeed = maxArrowSpeed;
+        float speedMult = 1;
 
         arrowSpeed *= chargeTime;
         bowStrength *= chargeTime;
@@ -84,6 +91,31 @@ public class ShootingScript : MonoBehaviour
         else if (arrowSpeed > maxArrowSpeed) arrowSpeed = maxArrowSpeed;
         if (bowStrength < minBowStrength) bowStrength = minBowStrength;
         else if (bowStrength > maxBowStrength) bowStrength = maxBowStrength;
+
+        // Get all upgrades
+        upgrades = shrineScript.upgrades;
+
+        for (int i = 0; i < upgrades.GetLength(0); i++){
+            if(upgrades[i, 0] == "Exploding" && int.Parse(upgrades[i, 1]) > 0) {
+                exploding = true;
+                bowStrength *= (1.1f * float.Parse(upgrades[i, 1]));
+            }
+            else if(upgrades[i, 0] == "Multishot" && int.Parse(upgrades[i, 1]) > 0) {
+                arrowAmount = int.Parse(upgrades[i, 1]) + 1;
+                bowStrength /= 1.5f;
+            }
+            else if(upgrades[i, 0] == "Piercing" && int.Parse(upgrades[i, 1]) > 0) {
+                pierceAmount += int.Parse(upgrades[i, 1]);
+            }
+            else if(upgrades[i, 0] == "Flaming" && int.Parse(upgrades[i, 1]) > 0){
+                flame = true;
+                flameLength = 3 + int.Parse(upgrades[i, 1]);
+            }
+            else if(upgrades[i,0] == "Arrow Speed" && int.Parse(upgrades[i, 1]) > 0){
+                speedMult = 1.5f * float.Parse(upgrades[i, 1]);
+            }
+
+        }
 
         // Spawns arrow
         if (arrowAmount > 1)
@@ -100,7 +132,7 @@ public class ShootingScript : MonoBehaviour
             {
                 prefab.GetComponent<Arrow>().multishotAngle = spacing;
                 prefab.GetComponent<Arrow>().pierceAmount = pierceAmount;
-                prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed;
+                prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed * speedMult;
                 prefab.GetComponent<Arrow>().bowStrength = bowStrength;
                 prefab.GetComponent<Arrow>().exploding = exploding;
                 Instantiate(prefab, transform.position, transform.rotation);
@@ -110,7 +142,7 @@ public class ShootingScript : MonoBehaviour
         else {
             prefab.GetComponent<Arrow>().multishotAngle = 0;
             prefab.GetComponent<Arrow>().pierceAmount = pierceAmount;
-            prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed;
+            prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed * speedMult;
             prefab.GetComponent<Arrow>().bowStrength = bowStrength;
             prefab.GetComponent<Arrow>().exploding = exploding;
             Instantiate(prefab, transform.position, transform.rotation);
