@@ -7,7 +7,6 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 20f;
     [SerializeField] private float health = 20f;
-    [SerializeField] private GameObject enemyDrop; //just spawning a thingy for now
 
     private Slider healthBar;
 
@@ -22,7 +21,6 @@ public class EnemyHealth : MonoBehaviour
     {
         healthBar.value = CalculateHealth();
         if (health <= 0){
-            Instantiate(enemyDrop, transform.position, transform.rotation);
             Destroy(gameObject);
         }
         if (health > maxHealth){
