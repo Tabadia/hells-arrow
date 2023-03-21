@@ -64,7 +64,8 @@ public class Shrines : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.E)) {
                 List<string> temp = new List<string>(0);
                 for (int i = 0; i < upgrades.GetLength(0); i++){
-                    temp.Add(upgrades[i,0] + " " + upgrades[i,1]);
+                    print((int.Parse(upgrades[i,1]) + 1).ToString());
+                    temp.Add(upgrades[i,0] + " " + (int.Parse(upgrades[i,1]) + 1));
                 }
                 int rand = 0;
                 
@@ -95,7 +96,7 @@ public class Shrines : MonoBehaviour {
     void UpgradeClicked(string chosenUpgrade){
         print(chosenUpgrade);
         for (int i = 0; i < upgrades.GetLength(0); i++){
-            if ((upgrades[i,0] + " " + upgrades[i,1]) == chosenUpgrade){
+            if ((upgrades[i,0] + " " + (int.Parse(upgrades[i,1]) + 1)) == chosenUpgrade){
                 upgrades[i,1] = (int.Parse(upgrades[i,1]) + 1).ToString();
             }
         }
