@@ -9,7 +9,8 @@ public class Arrow : MonoBehaviour
     [SerializeField] private int despawnTime = 20;
     [SerializeField] private float explosionRadius = 5f;
     [SerializeField] private GameObject explosionPrefab;
-    [SerializeField] private EnemyHealth enemyHealth;
+    [SerializeField] private AudioSource hitSFX;
+    [SerializeField] private AudioSource shootSFX;
 
     public float arrowSpeed;
     public int multiShotArrow;
@@ -17,7 +18,7 @@ public class Arrow : MonoBehaviour
     public int pierceAmount = 0;
     public float bowStrength;
     public bool exploding;
-
+    private EnemyHealth enemyHealth;
     private float timer;
     private bool colliding = false;
     private bool exploded = false;
@@ -117,6 +118,7 @@ public class Arrow : MonoBehaviour
         if (hit.collider.gameObject.CompareTag("Enemy"))
         {
             enemyHealth = hit.collider.gameObject.GetComponent<EnemyHealth>();
+            if(!shootSFX.isPlaying) hitSFX.Play();
             enemyHealth.takeDamage(bowStrength);
         }
     }

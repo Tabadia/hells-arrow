@@ -21,6 +21,8 @@ public class ShootingScript : MonoBehaviour
     [SerializeField] private GameObject prefab;
     [SerializeField] private ParticleSystem maxChargeParticleSystem;
     [SerializeField] private Light maxChargeLight;
+    [SerializeField] private AudioSource chargeSFX;
+    [SerializeField] private AudioSource shootSFX;
 
     private float timer;
     private float fullParticleTimer;
@@ -46,6 +48,7 @@ public class ShootingScript : MonoBehaviour
                 if (!cooldownActive) {
                     timer = Time.time;
                     isCharging = true;
+                    chargeSFX.Play();
                 }
                 else timer = 0;
 
@@ -54,6 +57,8 @@ public class ShootingScript : MonoBehaviour
             {
                 if (!cooldownActive && isCharging) {
                     Shoot(Time.time - timer);
+                    chargeSFX.Stop();
+                    shootSFX.Play();
                 }
                 else timer = 0;
                 isCharging = false;

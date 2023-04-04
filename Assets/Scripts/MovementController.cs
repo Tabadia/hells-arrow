@@ -46,6 +46,8 @@ public class MovementController : MonoBehaviour
     [NonSerialized] public bool isKnockedBack = false;
     [NonSerialized] public float preKnockbackMaxSpeed;
     [NonSerialized] public float knockbackTime;
+    [SerializeField] private AudioSource runSFX;
+    [SerializeField] private AudioSource dashSFX;
 
     // these are technically only for debug - allow the Rays for wall collision checks to be drawn
     private RaycastHit lastWallHit;
@@ -98,6 +100,12 @@ public class MovementController : MonoBehaviour
         Debug.DrawRay(rb.position, rb.velocity, Color.red);
         Debug.DrawRay(lastWallHit.point, Vector3.up, Color.green);
         Debug.DrawRay(lastWallHitPos, (lastWallHit.point - lastWallHitPos).normalized * (lastWallHit.distance - cc.radius*2), Color.blue);
+        if(rb.velocity.magnitude <= 0.01 || shootingScript.isCharging){
+            runSFX.Stop();
+        }
+        else {
+            if (!runSFX.isPlaying) { runSFX.Play(); }
+        }
     }
 
     private void FixedUpdate()
