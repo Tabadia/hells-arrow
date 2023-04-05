@@ -31,6 +31,7 @@ public class MovementController : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private CapsuleCollider cc;
     [SerializeField] private PhysicMaterial ppm; // Player Physic Material
+    [SerializeField] private ParticleSystem dashParticleSystem;
     private GroundCheck gcScript;
     private Shrines shrineScript;
     private ShootingScript shootingScript;
@@ -225,11 +226,13 @@ public class MovementController : MonoBehaviour
         if (!IsInvoking(nameof(CancelDash))) // Prevent this from being called multiple times
         {
             dashSFX.Play();
+            // Emitting particles at the prev location of the player
+            dashParticleSystem.Emit(UnityEngine.Random.Range(10, 20));
             dashStartSpeed = rb.velocity;
             Vector3 dashNormalSpeed = dashStartSpeed.normalized;
             maxSpeed *= dashMult;
             rb.velocity = new Vector3((dashNormalSpeed.x) * maxSpeed, rb.velocity.y, (dashNormalSpeed.z) * maxSpeed);
-    
+
             Invoke(nameof(CancelDash), dashTime); // Call the CancelDash() method after (dashTime) seconds
         }
     }
