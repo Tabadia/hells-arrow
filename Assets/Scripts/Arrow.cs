@@ -18,6 +18,8 @@ public class Arrow : MonoBehaviour
     public int pierceAmount = 0;
     public float bowStrength;
     public bool exploding;
+    public bool flame;
+    public int flameLength;
     private EnemyHealth enemyHealth;
     private float timer;
     private bool colliding = false;
@@ -120,6 +122,19 @@ public class Arrow : MonoBehaviour
             enemyHealth = hit.collider.gameObject.GetComponent<EnemyHealth>();
             if(!shootSFX.isPlaying) hitSFX.Play();
             enemyHealth.takeDamage(bowStrength);
+            if(flame) {
+                StartCoroutine(FireDmg(enemyHealth));
+            }
         }
+    }
+
+    IEnumerator FireDmg(EnemyHealth enemyHealth)
+    {
+        for (int i = 0; i < flameLength; i++)
+        {
+            enemyHealth.takeDamage(1);
+            yield return new WaitForSeconds(1f);
+        }
+        
     }
 }

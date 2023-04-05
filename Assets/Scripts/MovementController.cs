@@ -224,6 +224,7 @@ public class MovementController : MonoBehaviour
     {
         if (!IsInvoking(nameof(CancelDash))) // Prevent this from being called multiple times
         {
+            dashSFX.Play();
             dashStartSpeed = rb.velocity;
             Vector3 dashNormalSpeed = dashStartSpeed.normalized;
             maxSpeed *= dashMult;

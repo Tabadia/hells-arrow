@@ -12,7 +12,7 @@ public class ShootingScript : MonoBehaviour
     [SerializeField] public int pierceAmount = 0;
     [SerializeField] public bool exploding = false;
     [SerializeField] public bool flame = false;
-    [SerializeField] private float flameLength = 0;
+    [SerializeField] private int flameLength = 0;
     [SerializeField] private float minBowStrength = 1f;
     [SerializeField] private float maxBowStrength = 10f;
     [SerializeField] private float minArrowSpeed = 50f;
@@ -140,6 +140,8 @@ public class ShootingScript : MonoBehaviour
                 prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed * speedMult;
                 prefab.GetComponent<Arrow>().bowStrength = bowStrength;
                 prefab.GetComponent<Arrow>().exploding = exploding;
+                prefab.GetComponent<Arrow>().flame = flame;
+                prefab.GetComponent<Arrow>().flameLength = flameLength;
                 Instantiate(prefab, transform.position, transform.rotation);
                 spacing += multishotAngle;
             }
@@ -150,6 +152,8 @@ public class ShootingScript : MonoBehaviour
             prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed * speedMult;
             prefab.GetComponent<Arrow>().bowStrength = bowStrength;
             prefab.GetComponent<Arrow>().exploding = exploding;
+            prefab.GetComponent<Arrow>().flame = flame;
+            prefab.GetComponent<Arrow>().flameLength = flameLength;
             Instantiate(prefab, transform.position, transform.rotation);
         }
 

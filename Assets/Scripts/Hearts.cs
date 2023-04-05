@@ -17,10 +17,9 @@ public class Hearts : MonoBehaviour
     [SerializeField] private Sprite halfHeart;
     [SerializeField] private Sprite emptyHeart;
 
-
     private GameObject[] hearts;
     private float currentHearts;
-
+    private AudioSource[] allAudioSources;
     public bool isDead = false;
 
     void Start()
@@ -62,6 +61,7 @@ public class Hearts : MonoBehaviour
             }
             print("You died");
             deathScreen.SetActive(true);
+            StopAudio();
             isDead = true;
             Time.timeScale = 0;
         }
@@ -97,6 +97,13 @@ public class Hearts : MonoBehaviour
 
             effectRenderer.color = new Color(spriteColor.r, spriteColor.g, spriteColor.b, alpha);
             yield return null;
+        }
+    }
+
+    void StopAudio(){
+        allAudioSources = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
+        foreach(AudioSource audioS in allAudioSources){
+            audioS.Stop();
         }
     }
 
