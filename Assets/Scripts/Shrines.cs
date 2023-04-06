@@ -19,6 +19,8 @@ public class Shrines : MonoBehaviour {
     private TextMeshProUGUI optionText2;
     private TextMeshProUGUI optionText3;
 
+    public float upgradePoints = 0;
+    
     public string[,] upgrades = {{"Exploding", "0"}, {"Multishot", "0"}, {"Piercing", "0"}, {"Flaming", "0"}, {"Arrow Speed", "0"}};
     ShootingScript shootingScript;
     public bool inMenu = false;
@@ -93,14 +95,22 @@ public class Shrines : MonoBehaviour {
         }
     }
 
-    void UpgradeClicked(string chosenUpgrade){
-        print(chosenUpgrade);
-        for (int i = 0; i < upgrades.GetLength(0); i++){
-            if ((upgrades[i,0] + " " + (int.Parse(upgrades[i,1]) + 1)) == chosenUpgrade){
-                upgrades[i,1] = (int.Parse(upgrades[i,1]) + 1).ToString();
+    void UpgradeClicked(string chosenUpgrade)
+    {
+        if (upgradePoints >= 1f) {
+            print(chosenUpgrade);
+            for (int i = 0; i < upgrades.GetLength(0); i++)
+            {
+                if ((upgrades[i, 0] + " " + (int.Parse(upgrades[i, 1]) + 1)) == chosenUpgrade)
+                {
+                    upgrades[i, 1] = (int.Parse(upgrades[i, 1]) + 1).ToString();
+                }
             }
-        }
-        inMenu = false;
-        upMenu.SetActive(false);
+
+            inMenu = false;
+            upMenu.SetActive(false);
+
+            upgradePoints -= 1f;
+        }   
     }
 }

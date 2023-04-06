@@ -6044,6 +6044,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 20
   health: 20
+  difficulty: 1
+  enemyDrop: {fileID: 4094036990376496550, guid: a78cfafb30b220c93a55b0224cde3892,
+    type: 3}
 --- !u!1 &466515595
 GameObject:
   m_ObjectHideFlags: 0
@@ -6428,6 +6431,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 40
   health: 40
+  difficulty: 3
+  enemyDrop: {fileID: 4094036990376496550, guid: a78cfafb30b220c93a55b0224cde3892,
+    type: 3}
 --- !u!224 &562382824 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1848640898890154911, guid: 130cd5831006d1c4abe90cf5ffe8735d,
@@ -8732,6 +8738,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 25
   health: 25
+  difficulty: 1
+  enemyDrop: {fileID: 4094036990376496550, guid: a78cfafb30b220c93a55b0224cde3892,
+    type: 3}
 --- !u!1 &1432903901
 GameObject:
   m_ObjectHideFlags: 0
@@ -10179,6 +10188,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 20
   health: 20
+  difficulty: 1.5
+  enemyDrop: {fileID: 4094036990376496550, guid: a78cfafb30b220c93a55b0224cde3892,
+    type: 3}
 --- !u!1001 &1878394687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17837,6 +17849,7 @@ MonoBehaviour:
   upOption1: {fileID: 1127348401}
   upOption2: {fileID: 2060062669}
   upOption3: {fileID: 900414060}
+  upgradePoints: 0
   inMenu: 0
 --- !u!114 &5392828135217056877
 MonoBehaviour:

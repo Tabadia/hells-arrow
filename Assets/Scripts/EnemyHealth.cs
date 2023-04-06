@@ -7,6 +7,8 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 20f;
     [SerializeField] private float health = 20f;
+    [SerializeField] public float difficulty = 1f; // 1 for basic enemy, 3(?) for bosses
+    [SerializeField] private GameObject enemyDrop;
 
     private Slider healthBar;
 
@@ -21,6 +23,8 @@ public class EnemyHealth : MonoBehaviour
     {
         healthBar.value = CalculateHealth();
         if (health <= 0){
+            enemyDrop.GetComponent<ExperienceScript>().parentDifficulty = difficulty;
+            Instantiate(enemyDrop, transform.position+(new Vector3(0,0.5f,0)), transform.rotation);
             Destroy(gameObject);
         }
         if (health > maxHealth){
