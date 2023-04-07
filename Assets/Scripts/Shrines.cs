@@ -12,14 +12,13 @@ public class Shrines : MonoBehaviour {
     [SerializeField] private Button upOption1;
     [SerializeField] private Button upOption2;
     [SerializeField] private Button upOption3;
+    [SerializeField] public float upgradePoints = 0;
 
     private GameObject[] shrines;
     private string chosenUpgrade = "";
     private TextMeshProUGUI optionText1;
     private TextMeshProUGUI optionText2;
     private TextMeshProUGUI optionText3;
-
-    public float upgradePoints = 0;
     
     public string[,] upgrades = {{"Exploding", "0"}, {"Multishot", "0"}, {"Piercing", "0"}, {"Flaming", "0"}, {"Arrow Speed", "0"}};
     ShootingScript shootingScript;

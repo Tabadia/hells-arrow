@@ -16,6 +16,7 @@ public class Hearts : MonoBehaviour
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite halfHeart;
     [SerializeField] private Sprite emptyHeart;
+    [SerializeField] private AudioSource hurtSFX;
 
     private GameObject[] hearts;
     private float currentHearts;
@@ -51,6 +52,7 @@ public class Hearts : MonoBehaviour
 
     public void takeDamage(float dmg)
     {
+        hurtSFX.Play();
         if (currentHearts <= 0) currentHearts = 0;
         currentHearts -= dmg;
 

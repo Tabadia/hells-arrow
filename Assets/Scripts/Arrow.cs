@@ -120,7 +120,7 @@ public class Arrow : MonoBehaviour
         if (hit.collider.gameObject.CompareTag("Enemy"))
         {
             enemyHealth = hit.collider.gameObject.GetComponent<EnemyHealth>();
-            if(!shootSFX.isPlaying) hitSFX.Play();
+            /*if(!shootSFX.isPlaying)*/ hitSFX.Play();
             enemyHealth.takeDamage(bowStrength);
             if(flame) {
                 StartCoroutine(FireDmg(enemyHealth));

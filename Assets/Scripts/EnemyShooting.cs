@@ -8,6 +8,7 @@ public class EnemyShooting : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private float shootCooldown = 2f;
     [SerializeField] private float range = 100f;
+    [SerializeField] private AudioSource shootSFX;
 
     private CapsuleCollider playerCollider;
     private bool canShoot = false;
@@ -35,6 +36,7 @@ public class EnemyShooting : MonoBehaviour
     {
         canShoot = false;
         Instantiate(bulletPrefab, transform.position, transform.rotation);
+        shootSFX.Play();
         yield return new WaitForSeconds(shootCooldown);
         canShoot = true;
     }

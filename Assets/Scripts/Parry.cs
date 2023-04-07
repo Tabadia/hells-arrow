@@ -6,6 +6,7 @@ public class Parry : MonoBehaviour
 {
     [SerializeField] private float parryDuration = 1f;
     [SerializeField] private float parryCooldown = 5f;
+    [SerializeField] private AudioSource parrySFX;
 
     private bool canParry = true;
     public bool isParrying = false;
@@ -31,6 +32,7 @@ public class Parry : MonoBehaviour
         canParry = false;
         isParrying = true;
         // START ANIMATION
+        parrySFX.Play();
         print("Parrying");
         yield return new WaitForSeconds(parryDuration);
         print("Not parrying");
