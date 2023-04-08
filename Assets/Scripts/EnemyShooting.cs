@@ -14,14 +14,11 @@ public class EnemyShooting : MonoBehaviour
     private bool canShoot = false;
     private float distance;
 
-    void Start()
-    {
+    void Start() {
         playerCollider = player.GetComponent<CapsuleCollider>();
-        canShoot = true;
     }
 
-    void Update()
-    {
+    void Update() {
         distance = (transform.position - player.transform.position).sqrMagnitude;
         transform.LookAt(player.transform);
 

@@ -14,19 +14,11 @@ public class PauseManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if (pauseMenu.activeSelf)
-            {
-                pauseMenu.SetActive(false);
-                Time.timeScale = 1;
+            if (pauseMenu.activeSelf) {
+                Unpause();
             }
-            else
-            {
-                pauseMenu.SetActive(true);
-                Time.timeScale = 0;
-                allAudioSources = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
-                foreach(AudioSource audioS in allAudioSources){
-                    audioS.Stop();
-                }
+            else {
+                Pause();
             }
         }    
     }
@@ -34,5 +26,12 @@ public class PauseManager : MonoBehaviour
     public void Unpause() {
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
+        AudioListener.pause = false;
+    }
+
+    public void Pause() {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0;
+        AudioListener.pause = true;
     }
 }

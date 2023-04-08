@@ -163,8 +163,8 @@ public class MovementController : MonoBehaviour
         }
         else
         {
-            Debug.Log(Time.time - knockbackTime);
-            Debug.Log(knockbackTime);
+            //Debug.Log(Time.time - knockbackTime);
+            //Debug.Log(knockbackTime);
             if (Time.time - knockbackTime > .5f)
             {
                 isKnockedBack = false;

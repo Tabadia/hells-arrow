@@ -29,7 +29,7 @@ public class Hearts : MonoBehaviour
         hearts = new GameObject[maxHearts];
         for (int i = 0; i < maxHearts; i++){
             GameObject heart = Instantiate(heartPrefab, heartContainer.transform);
-            heart.transform.position = new Vector3(heart.transform.position.x + (i * 46), heart.transform.position.y, heart.transform.position.z);
+            heart.transform.position = new Vector3(heart.transform.position.x + (i * 45), heart.transform.position.y, heart.transform.position.z);
             hearts[i] = heart;
         }
 
@@ -37,11 +37,13 @@ public class Hearts : MonoBehaviour
             deathScreen.SetActive(false);
             isDead = false;
             Time.timeScale = 1;
+            AudioListener.pause = false;
             for (int i = 0; i < maxHearts; i++)
             {
                 hearts[i].GetComponent<Image>().sprite = fullHeart;
             }
             currentHearts = maxHearts;
+            gameObject.transform.position = new Vector3(120.77f, 20.99f, 66.03f);
         });
         //takeDamage(1.5f);
     }
@@ -63,7 +65,7 @@ public class Hearts : MonoBehaviour
             }
             print("You died");
             deathScreen.SetActive(true);
-            StopAudio();
+            AudioListener.pause = true;
             isDead = true;
             Time.timeScale = 0;
         }
@@ -99,13 +101,6 @@ public class Hearts : MonoBehaviour
 
             effectRenderer.color = new Color(spriteColor.r, spriteColor.g, spriteColor.b, alpha);
             yield return null;
-        }
-    }
-
-    void StopAudio(){
-        allAudioSources = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
-        foreach(AudioSource audioS in allAudioSources){
-            audioS.Stop();
         }
     }
 
