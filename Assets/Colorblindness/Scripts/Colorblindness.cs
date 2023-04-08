@@ -41,7 +41,7 @@ public class Colorblindness : MonoBehaviour
 
     // StartCoroutine(ApplyFilter());
     private IEnumerator ApplyFilter(int _currentType) {
-        print("Applying filter");
+        //print("Applying filter");
         PlayerPrefs.SetInt("Accessibility.ColorblindType", _currentType);
         ResourceRequest loadRequest = Resources.LoadAsync<VolumeProfile>($"Colorblind/{(ColorblindTypes)_currentType}");
 

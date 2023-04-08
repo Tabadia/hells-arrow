@@ -15,6 +15,7 @@ public class EnemyShooting : MonoBehaviour
     private float distance;
 
     void Start() {
+        canShoot = true;
         playerCollider = player.GetComponent<CapsuleCollider>();
     }
 
@@ -22,8 +23,7 @@ public class EnemyShooting : MonoBehaviour
         distance = (transform.position - player.transform.position).sqrMagnitude;
         transform.LookAt(player.transform);
 
-        if (canShoot && distance < range)
-        {
+        if (canShoot && distance < range) {
             StartCoroutine(Shoot());
         }
 
