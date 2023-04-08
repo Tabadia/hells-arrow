@@ -41,4 +41,9 @@ public class SettingsController : MonoBehaviour
         Resolution resolution = Screen.resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
+
+    public void SetQuality(int qualityInt)
+    {
+        QualitySettings.SetQualityLevel(qualityInt);
+    }
 }
