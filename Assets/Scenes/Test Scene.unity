@@ -8017,21 +8017,21 @@ MonoBehaviour:
   m_Placeholder: {fileID: 0}
   m_ItemText: {fileID: 1962851559}
   m_ItemImage: {fileID: 0}
-  m_Value: 0
+  m_Value: 2
   m_Options:
     m_Options:
-    - m_Text: Normal
+    - m_Text: 600 x 400
       m_Image: {fileID: 0}
-    - m_Text: Protanopia
+    - m_Text: 1024 x 800
       m_Image: {fileID: 0}
-    - m_Text: Deuteranopia
+    - m_Text: 1420 x 960
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541180634}
-        m_TargetAssemblyTypeName: Colorblindness, Colorblind
-        m_MethodName: SetFilter
+      - m_Target: {fileID: 1981792260}
+        m_TargetAssemblyTypeName: SettingsController, Assembly-CSharp
+        m_MethodName: SetResolution
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13205,7 +13205,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Normal
+  m_text: 1420 x 960
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -16353,6 +16353,7 @@ MonoBehaviour:
   settingsMenu: {fileID: 1338559966}
   exitButton: {fileID: 901135393}
   audioMixer: {fileID: 24100000, guid: 1cb04262c2a7dc1449dd05c0ea2beefa, type: 2}
+  resolutionDropdown: {fileID: 695496035}
 --- !u!114 &1981792261
 MonoBehaviour:
   m_ObjectHideFlags: 0
