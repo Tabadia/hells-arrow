@@ -5,7 +5,6 @@ using System.Linq;
 
 public class Arrow : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
     [SerializeField] private int despawnTime = 20;
     [SerializeField] private float explosionRadius = 5f;
     [SerializeField] private GameObject explosionPrefab;
@@ -30,11 +29,13 @@ public class Arrow : MonoBehaviour
     private Vector3 moveDirection;
     private Vector3 prevPos;
     private int timesPierced;
+    private GameObject player;
 
     public int[] pastHits;
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         // Converts mouse position to world position
         pastHits = new int[pierceAmount];
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -44,7 +45,7 @@ public class Arrow : MonoBehaviour
         if (Physics.Raycast(castPoint, out hit))
         {
             endPos = hit.point;
-            if (endPos.y <= 21) endPos.y = 21;
+            if (endPos.y <= player.transform.position.y) endPos.y = player.transform.position.y;
         }
         // Orients arrow towards mouse position and gets direction for it to go
         moveDirection = (endPos - transform.position).normalized;
