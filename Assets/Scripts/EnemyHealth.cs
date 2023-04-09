@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyHealth : MonoBehaviour
-{
+public class EnemyHealth : MonoBehaviour {
     [SerializeField] private float maxHealth = 20f;
     [SerializeField] private float health = 20f;
     [SerializeField] public float difficulty = 1f; // 1 for basic enemy, 3(?) for bosses
@@ -12,15 +11,13 @@ public class EnemyHealth : MonoBehaviour
 
     private Slider healthBar;
 
-    void Start()
-    {
+    void Start() {
         healthBar = GetComponentInChildren<Slider>();
         health = maxHealth;
         healthBar.value = CalculateHealth();
     }
 
-    void Update()
-    {
+    void Update() {
         healthBar.value = CalculateHealth();
         if (health <= 0){
             enemyDrop.GetComponent<ExperienceScript>().parentDifficulty = difficulty;
@@ -36,14 +33,13 @@ public class EnemyHealth : MonoBehaviour
         healthBar.transform.LookAt(healthBar.transform.position + camera.transform.rotation * Vector3.back, camera.transform.rotation * Vector3.up);
     }
     
-    public void takeDamage(float bowStrength)
-    {
+    public void takeDamage(float bowStrength) {
         health -= bowStrength;
-        //print(bowStrength);
+        if(gameObject.name.Contains("Red Panda"))
+            gameObject.GetComponent<Animator>().SetTrigger("Hurt");
     }
 
-    private float CalculateHealth()
-    {
+    private float CalculateHealth() {
         return health / maxHealth;
     }
 }

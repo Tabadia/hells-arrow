@@ -26,8 +26,6 @@ public class RedPanda : MonoBehaviour
 
     void Update() {
         distance = (transform.position - player.transform.position).sqrMagnitude;
-        transform.LookAt(player.transform);
-        print(healthBar.transform.position);
         if (canShoot && distance < shootRange) {
             animator.SetTrigger("Shoot");
             healthBar.transform.position = new Vector3(transform.position.x, healthPos.y+1, transform.position.z);
@@ -40,7 +38,8 @@ public class RedPanda : MonoBehaviour
         canShoot = false;
         yield return new WaitForSeconds(1f);
         shootSFX.Play();
-        Instantiate(fireballPrefab, transform.position, transform.rotation);
+        Quaternion rotation = Quaternion.LookRotation((player.transform.position - transform.position).normalized);
+        Instantiate(fireballPrefab, transform.position, rotation);
         healthBar.transform.position = new Vector3(transform.position.x, healthPos.y, transform.position.z);
         yield return new WaitForSeconds(shootCooldown);
         canShoot = true;
