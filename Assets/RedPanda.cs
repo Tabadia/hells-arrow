@@ -7,47 +7,43 @@ public class RedPanda : MonoBehaviour
     [SerializeField] private GameObject fireballPrefab;
     [SerializeField] private GameObject player;
     [SerializeField] private float shootCooldown = 5f;
-    [SerializeField] private float shootRange = 300f;
-    [SerializeField] private float followRange = 200f;
+    [SerializeField] private float shootRange = 225f;
     [SerializeField] private AudioSource shootSFX;
+    [SerializeField] private GameObject healthBar;
 
     private CapsuleCollider playerCollider;
     private bool canShoot = false;
     private float distance;
+    private Animator animator;
+    private Vector3 healthPos;
 
     void Start() {
         playerCollider = player.GetComponent<CapsuleCollider>();
         canShoot = true;
+        animator = GetComponent<Animator>();
+        healthPos = healthBar.transform.position;
     }
 
     void Update() {
         distance = (transform.position - player.transform.position).sqrMagnitude;
         transform.LookAt(player.transform);
-
-        if (canShoot && distance < shootRange && distance > followRange) {
-            StartCoroutine(Wait(2f));
+        print(healthBar.transform.position);
+        if (canShoot && distance < shootRange) {
+            animator.SetTrigger("Shoot");
+            healthBar.transform.position = new Vector3(transform.position.x, healthPos.y+1, transform.position.z);
             StartCoroutine(Shoot());
-            StartCoroutine(Wait(2f));
         }
-        else if (distance < followRange) {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 0.05f);
-        }
-
     }
 
-    IEnumerator Shoot()
-    {
+    IEnumerator Shoot() {
         print("Shoot");
         canShoot = false;
-        Instantiate(fireballPrefab, transform.position, transform.rotation);
+        yield return new WaitForSeconds(1f);
         shootSFX.Play();
+        Instantiate(fireballPrefab, transform.position, transform.rotation);
+        healthBar.transform.position = new Vector3(transform.position.x, healthPos.y, transform.position.z);
         yield return new WaitForSeconds(shootCooldown);
         canShoot = true;
-    }
-
-    IEnumerator Wait(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
     }
 }
 
