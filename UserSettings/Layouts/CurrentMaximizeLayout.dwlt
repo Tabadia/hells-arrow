@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 16203
+  controlID: 27338
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 16165
+  controlID: 27290
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 16166
+  controlID: 27267
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -228,7 +228,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 36fbffffb4680000d46800000e690000226900003269000046690000586900006c690000ac690000b4690000be690000e06900004e6a0000686a0000b66a0000cc6a00000a6b0000346b0000686b00009a6b0000c06b0000ce6b00001a6c00001e6c0000
+      m_ExpandedIDs: 36fbffffd46800000e6900003269000046690000586900006c690000b4690000be690000e0690000086a0000686a0000b66a0000c86a0000cc6a00000a6b0000346b0000686b00009a6b0000c06b00001a6c00001e6c0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -506,9 +506,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 521.8674, y: 345.25333, z: -209.29283}
+    m_Target: {x: 439.5982, y: 328.20316, z: -474.1057}
     speed: 2
-    m_Value: {x: 521.8674, y: 345.25333, z: -209.29283}
+    m_Value: {x: 439.5982, y: 328.20316, z: -474.1057}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -555,13 +555,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.0437965, y: -0.0036317979, z: 0.0001361708, w: 0.99909997}
+    m_Target: {x: 0.028605696, y: -0.117322944, z: 0.0033903911, w: 0.99274707}
     speed: 2
-    m_Value: {x: 0.043793608, y: -0.003631558, z: 0.0001361618, w: 0.999034}
+    m_Value: {x: 0.028603677, y: -0.11731467, z: 0.0033901518, w: 0.99267703}
   m_Size:
-    m_Target: 0.8660254
+    m_Target: 1.8628573
     speed: 2
-    m_Value: 0.8660254
+    m_Value: 1.8628573
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -689,8 +689,8 @@ MonoBehaviour:
     y: 561
     width: 1277
     height: 386
-  m_MinSize: {x: 230, y: 250}
-  m_MaxSize: {x: 10000, y: 10000}
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
   m_ActualView: {fileID: 11}
   m_Panes:
   - {fileID: 11}
@@ -739,21 +739,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/UI
+    - Assets/Prefabs
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/UI
+  - Assets/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: E:\Code\- Unity\samurai-kills-god
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 59}
-    m_SelectedIDs: 3a790000
-    m_LastClickedID: 31034
+    m_SelectedIDs: 22790000
+    m_LastClickedID: 31010
     m_ExpandedIDs: 00000000187700001a7700001c7700001e77000020770000227700002477000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -807,9 +807,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 326a00003c6900004a6b0000
-    m_LastClickedInstanceID: 27186
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: bc680000
+    m_LastClickedInstanceID: 26812
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000321d0100361d0100bc7e00009079000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -886,8 +886,8 @@ MonoBehaviour:
     y: 0
     width: 643
     height: 947
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -929,8 +929,8 @@ MonoBehaviour:
     m_CachedPref: 160
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 26940
-  m_LastVerticalScrollValue: 0
+  m_LastInspectedObjectInstanceID: 26812
+  m_LastVerticalScrollValue: 581
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
@@ -967,4 +967,4 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 27614
+  m_LastSelectedObjectID: -220290

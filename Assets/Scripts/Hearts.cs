@@ -28,8 +28,7 @@ public class Hearts : MonoBehaviour
         currentHearts = maxHearts;
         hearts = new GameObject[maxHearts];
         for (int i = 0; i < maxHearts; i++){
-            GameObject heart = Instantiate(heartPrefab, heartContainer.transform);
-            heart.transform.position = new Vector3(heart.transform.position.x + (i * 45), heart.transform.position.y, heart.transform.position.z);
+            GameObject heart = heartContainer.transform.GetChild(i).gameObject;
             hearts[i] = heart;
         }
 
@@ -38,18 +37,13 @@ public class Hearts : MonoBehaviour
             isDead = false;
             Time.timeScale = 1;
             AudioListener.pause = false;
-            for (int i = 0; i < maxHearts; i++)
-            {
+            for (int i = 0; i < maxHearts; i++) {
                 hearts[i].GetComponent<Image>().sprite = fullHeart;
             }
             currentHearts = maxHearts;
             gameObject.transform.position = new Vector3(120.77f, 20.99f, 66.03f);
         });
         //takeDamage(1.5f);
-    }
-
-    void Update()
-    {
     }
 
     public void takeDamage(float dmg)
