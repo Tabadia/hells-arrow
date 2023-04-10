@@ -8,6 +8,8 @@ public class EnemyHealth : MonoBehaviour {
     [SerializeField] private float health = 20f;
     [SerializeField] public float difficulty = 1f; // 1 for basic enemy, 3(?) for bosses
     [SerializeField] private GameObject enemyDrop;
+    [SerializeField] private bool isGiantPanda;
+    [SerializeField] private bool isRedPanda;
 
     private Slider healthBar;
 
@@ -35,8 +37,13 @@ public class EnemyHealth : MonoBehaviour {
     
     public void takeDamage(float bowStrength) {
         health -= bowStrength;
-        if(gameObject.name.Contains("Red Panda"))
-            gameObject.GetComponent<Animator>().SetTrigger("Hurt");
+        if(isRedPanda)
+            gameObject.transform.GetChild(1).GetComponent<Animator>().SetTrigger("Hurt");
+        if (isGiantPanda)
+        {
+            gameObject.transform.GetChild(1).GetComponent<Animator>().Play("GiantPandaHit", 0);
+            print("giant panda hurt!");
+        }
     }
 
     private float CalculateHealth() {

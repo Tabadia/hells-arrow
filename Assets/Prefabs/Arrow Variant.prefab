@@ -834,7 +834,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.2
+      value: 0.002
       mode: 0
       spread: 0
       speed:
@@ -5007,19 +5007,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4560c6e2feacbeb498ae9a1622824c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 899379487398073794, guid: 28b4e2492c50879459aca2e73cfa534b, type: 3}
   despawnTime: 20
   explosionRadius: 5
   explosionPrefab: {fileID: 6122300699768233975, guid: bbe504bd714641e4baef10a577efd0de,
     type: 3}
   hitSFX: {fileID: 2654166349925226766}
   shootSFX: {fileID: 0}
-  arrowSpeed: 400
+  arrowSpeed: 75
   multiShotArrow: 1
   multishotAngle: 0
   pierceAmount: 0
-  bowStrength: 11
-  exploding: 1
+  bowStrength: 5
+  exploding: 0
   flame: 0
   flameLength: 0
   pastHits: 

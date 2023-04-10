@@ -10,17 +10,16 @@ public class RedPanda : MonoBehaviour
     [SerializeField] private float shootRange = 225f;
     [SerializeField] private AudioSource shootSFX;
     [SerializeField] private GameObject healthBar;
+    [SerializeField] private Animator animator;
 
     private CapsuleCollider playerCollider;
     private bool canShoot = false;
     private float distance;
-    private Animator animator;
     private Vector3 healthPos;
 
     void Start() {
         playerCollider = player.GetComponent<CapsuleCollider>();
         canShoot = true;
-        animator = GetComponent<Animator>();
         healthPos = healthBar.transform.position;
     }
 
