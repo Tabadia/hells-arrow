@@ -7,11 +7,15 @@ public class PauseManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private AudioSource[] audioSourcesToIgnore;
 
-    private AudioSource[] allAudioSources;
+    void Start() {
+        foreach(AudioSource audioSource in audioSourcesToIgnore) {
+            audioSource.ignoreListenerPause = true;
+        }
+    }
 
-    void Update()
-    {
+    void Update() {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             if (pauseMenu.activeSelf) {
