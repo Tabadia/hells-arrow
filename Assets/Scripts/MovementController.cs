@@ -32,8 +32,9 @@ public class MovementController : MonoBehaviour
     [SerializeField] private CapsuleCollider cc;
     [SerializeField] private PhysicMaterial ppm; // Player Physic Material
     [SerializeField] private ParticleSystem dashParticleSystem;
+    [SerializeField] private GameObject shrinesObject;
     private GroundCheck gcScript;
-    private Shrines shrineScript;
+    private ShrineManager shrineScript;
     private ShootingScript shootingScript;
 
     // Misc variables / Control related stuff
@@ -65,7 +66,7 @@ public class MovementController : MonoBehaviour
         maxDashCooldown = dashCooldown;
         
         shootingScript = GetComponent<ShootingScript>();
-        shrineScript = GetComponent<Shrines>();
+        shrineScript = shrinesObject.GetComponent<ShrineManager>();
         gcScript = GetComponent<GroundCheck>();
     }
 

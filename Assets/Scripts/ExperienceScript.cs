@@ -5,7 +5,7 @@ using UnityEngine;
 public class ExperienceScript : MonoBehaviour
 {
     public float parentDifficulty = 1f;
-    private Shrines shrines;
+    private ShrineManager shrines;
     [SerializeField] private float baseExpPoints = 15f;
     [SerializeField] private float baseShrinePoints = 0.2f; // 5 easy kills to get an upgrade
     private GameObject player;
@@ -15,7 +15,7 @@ public class ExperienceScript : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player");
-        shrines = player.GetComponent<Shrines>();
+        shrines = GameObject.FindWithTag("ShrineManager").GetComponent<ShrineManager>();
         playerCollider = player.GetComponent<CapsuleCollider>();
         mesh = GetComponent<MeshFilter>().mesh;
     }
@@ -27,7 +27,6 @@ public class ExperienceScript : MonoBehaviour
             Debug.Log("EXP PICKUP");
             shrines.upgradePoints += baseShrinePoints*parentDifficulty;
             // NotImplemented experienceCounter += baseExpPoints * parentDifficulty
-            
             Destroy(gameObject);
         }
     }

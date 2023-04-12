@@ -23,18 +23,19 @@ public class ShootingScript : MonoBehaviour
     [SerializeField] private Light maxChargeLight;
     [SerializeField] private AudioSource chargeSFX;
     [SerializeField] private AudioSource shootSFX;
+    [SerializeField] private GameObject shrinesObject;
 
     private float timer;
     private float fullParticleTimer;
     private bool spawnedMaxParticle;
     private bool cooldownActive;
-    private Shrines shrineScript;
+    private ShrineManager shrineScript;
     private string[,] upgrades;
 
     public bool isCharging = false;
 
     void Start() {
-        shrineScript = GetComponent<Shrines>();
+        shrineScript = shrinesObject.GetComponent<ShrineManager>();
         upgrades = shrineScript.upgrades;
     }
 
