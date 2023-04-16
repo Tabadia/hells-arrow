@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 using Random=UnityEngine.Random;
 
@@ -28,20 +29,6 @@ public class ShrineManager : MonoBehaviour {
         shrines = GameObject.FindGameObjectsWithTag("Shrine");
         shootingScript = GetComponent<ShootingScript>();
         shrineScript = GetComponent<Shrines>();
-
-        upOptions[0].onClick.AddListener(() => {
-            chosenUpgrade = optionText[0].text;
-            UpgradeClicked(chosenUpgrade);
-        });
-        upOptions[1].onClick.AddListener(() => {
-            chosenUpgrade = optionText[1].text;
-            UpgradeClicked(chosenUpgrade);
-        });
-        upOptions[2].onClick.AddListener(() => {
-            chosenUpgrade = optionText[2].text;
-            UpgradeClicked(chosenUpgrade);
-        });
-
     }
 
     void Update() {
@@ -59,14 +46,16 @@ public class ShrineManager : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.E)) {
                 Time.timeScale = 0;
                 AudioListener.pause = true;
-                List<string> temp = new List<string>(0);
-                for (int i = 0; i < upgrades.GetLength(0); i++){
-                    temp.Add(upgrades[i,0] + " " + (int.Parse(upgrades[i,1]) + 1));
+                for (int i = 0; i < upgrades.GetLength(0); i++) {
+                    for (int j = 0; j < closest.GetComponent<Shrines>().upgrades.GetLength(0); j++) {
+                        if (upgrades[i, 0] == closest.GetComponent<Shrines>().upgrades[j, 0]) {
+                            closest.GetComponent<Shrines>().upgrades[j, 1] = upgrades[i, 1];
+                        }
+                    }
                 }
-                for (int i = 0; i < upOptions.Length; i++){
+                for (int i = 0; i < upOptions.Length; i++) {
                     optionText[i].text = closest.GetComponent<Shrines>().upgrades[i,0] + " " + (int.Parse(closest.GetComponent<Shrines>().upgrades[i,1]) + 1);
                 }
-
                 inMenu = true;
                 upMenu.SetActive(true);
             }
@@ -76,9 +65,9 @@ public class ShrineManager : MonoBehaviour {
         }
     }
 
-    void UpgradeClicked(string chosenUpgrade) {
+    public void UpgradeClicked() {
+        chosenUpgrade = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TextMeshProUGUI>().text;
         if (upgradePoints >= 1f) {
-            print(chosenUpgrade);
             for (int i = 0; i < upgrades.GetLength(0); i++) {
                 if ((upgrades[i, 0] + " " + (int.Parse(upgrades[i, 1]) + 1)) == chosenUpgrade) {
                     upgrades[i, 1] = (int.Parse(upgrades[i, 1]) + 1).ToString(); 
