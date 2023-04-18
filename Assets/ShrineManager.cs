@@ -18,8 +18,11 @@ public class ShrineManager : MonoBehaviour {
     private GameObject[] shrines;
     private string chosenUpgrade = "";
     private GameObject closest;
+    private GameObject player;
+    private MovementController movementScript;
     
-    public string[,] upgrades = {{"Exploding", "0"}, {"Multishot", "0"}, {"Piercing", "0"}, {"Flaming", "0"}, {"Arrow Speed", "0"}};
+    public string[,] upgrades = {{"Exploding", "0"}, {"Multishot", "0"}, {"Piercing", "0"}, {"Flaming", "0"}, {"Arrow Speed", "0"}, {"Movement Speed", "0"}, {"Damage", "0"}}; 
+    // {"Upgrade Name", "Upgrade Level"}
     public bool inMenu = false;
 
     ShootingScript shootingScript;
@@ -29,6 +32,8 @@ public class ShrineManager : MonoBehaviour {
         shrines = GameObject.FindGameObjectsWithTag("Shrine");
         shootingScript = GetComponent<ShootingScript>();
         shrineScript = GetComponent<Shrines>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        movementScript = player.GetComponent<MovementController>();
     }
 
     void Update() {
@@ -71,6 +76,10 @@ public class ShrineManager : MonoBehaviour {
             for (int i = 0; i < upgrades.GetLength(0); i++) {
                 if ((upgrades[i, 0] + " " + (int.Parse(upgrades[i, 1]) + 1)) == chosenUpgrade) {
                     upgrades[i, 1] = (int.Parse(upgrades[i, 1]) + 1).ToString(); 
+                    if (upgrades[i, 0] == "Movement Speed"){
+                        movementScript.moveSpeed += 0.05f;
+                        movementScript.maxSpeed += 0.05f;
+                    }
                 }
             }
 

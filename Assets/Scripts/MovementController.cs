@@ -9,9 +9,9 @@ using UnityEngine.UIElements;
 public class MovementController : MonoBehaviour
 {
     // Majority of these are only public so that they can be tweaked on the fly via inspector - should be privatized when dialed in
-    [SerializeField] public float moveSpeed = 8.3f;
+    [SerializeField] public float moveSpeed = 4;
     public float Gravity = -15f;
-    public float maxSpeed = 8.3f; // This needs to remain public
+    public float maxSpeed = 16; // This needs to remain public
     public float dashMult = 2.7f;
     public float dashTime = 0.15f;
     public float dashCooldown = 2.0f;
