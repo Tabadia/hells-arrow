@@ -50,6 +50,7 @@ public class MovementController : MonoBehaviour
     [NonSerialized] public float knockbackTime;
     [SerializeField] private AudioSource runSFX;
     [SerializeField] private AudioSource dashSFX;
+    [SerializeField] private Animator samuraiAnimator;
 
     // these are technically only for debug - allow the Rays for wall collision checks to be drawn
     private RaycastHit lastWallHit;
@@ -96,6 +97,12 @@ public class MovementController : MonoBehaviour
         {
             transform.rotation = Quaternion.Lerp(transform.rotation,
                     Quaternion.LookRotation(right * horizontalInput + forward * verticalInput, Vector3.up), .25f);
+
+            samuraiAnimator.SetBool("IsRunning", true);
+        }
+        else
+        {
+            samuraiAnimator.SetBool("IsRunning", false);
         }
         
         // Debug stuff for movement and wall checks, can be removed anytime but i like having it for now
