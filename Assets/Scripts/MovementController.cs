@@ -51,6 +51,7 @@ public class MovementController : MonoBehaviour
     [SerializeField] private AudioSource runSFX;
     [SerializeField] private AudioSource dashSFX;
     [SerializeField] private Animator samuraiAnimator;
+    [SerializeField] private GameObject samuraiGameObject;
 
     // these are technically only for debug - allow the Rays for wall collision checks to be drawn
     private RaycastHit lastWallHit;

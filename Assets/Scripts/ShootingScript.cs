@@ -24,6 +24,7 @@ public class ShootingScript : MonoBehaviour
     [SerializeField] private AudioSource chargeSFX;
     [SerializeField] private AudioSource shootSFX;
     [SerializeField] private GameObject shrinesObject;
+    [SerializeField] private Animator samuraiAnimator;
 
     private float timer;
     private float fullParticleTimer;
@@ -70,12 +71,18 @@ public class ShootingScript : MonoBehaviour
 
         // Increment by time.deltatime when charging
         if (isCharging)
+        {
             fullParticleTimer += Time.deltaTime;
-        else 
+            samuraiAnimator.SetBool("IsCharging", true);
+        }
+        else
+        {
             fullParticleTimer = 0;
+            samuraiAnimator.SetBool("IsCharging", false);
+        }
 
         // Spawn a particle if the charge time is more than maxCharge
-        
+
         emission.rateOverTime = Mathf.Lerp(0, 20, fullParticleTimer);
         maxChargeLight.intensity = Mathf.Lerp(0, 10, fullParticleTimer);
     }

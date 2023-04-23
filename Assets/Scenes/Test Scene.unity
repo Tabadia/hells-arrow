@@ -5852,6 +5852,7 @@ MonoBehaviour:
   runSFX: {fileID: 5392828135217056899}
   dashSFX: {fileID: 5392828135217056900}
   samuraiAnimator: {fileID: 1105646186}
+  samuraiGameObject: {fileID: 1105646185}
 --- !u!136 &313329951
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5965,6 +5966,7 @@ MonoBehaviour:
   chargeSFX: {fileID: 5392828135217056896}
   shootSFX: {fileID: 5392828135217056897}
   shrinesObject: {fileID: 1696286018}
+  samuraiAnimator: {fileID: 1105646186}
   isCharging: 0
 --- !u!1 &332019670
 GameObject:
