@@ -96,7 +96,6 @@ public class ShrineManager : MonoBehaviour {
             Time.timeScale = 1;
             AudioListener.pause = false;
             upMenu.SetActive(false);
-
             upgradePoints -= 1f;
         }   
     }
