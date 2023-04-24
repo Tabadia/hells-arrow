@@ -2,9 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using Unity.VisualScripting.FullSerializer.Internal;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 public class MovementController : MonoBehaviour
 {
@@ -36,6 +40,7 @@ public class MovementController : MonoBehaviour
     private GroundCheck gcScript;
     private ShrineManager shrineScript;
     private ShootingScript shootingScript;
+    private Camera cameraMain;
 
     // Misc variables / Control related stuff
     private bool isDashing;
@@ -59,7 +64,8 @@ public class MovementController : MonoBehaviour
 
     void Start()
     {
-        forward = Camera.main.transform.forward;
+        cameraMain = Camera.main;
+        forward = cameraMain.transform.forward;
         forward.y = 0;
         forward = Vector3.Normalize(forward);
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
@@ -94,10 +100,34 @@ public class MovementController : MonoBehaviour
         
         isMoveDown = !horizontalInput.Equals(0) || !verticalInput.Equals(0);
 
+        // Debug.Log(shootingScript.isCharging);
+        if (shootingScript.isCharging)
+        {
+            var mousePosition = Input.mousePosition;
+            var screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0);
+            var mouseDelta = (mousePosition - screenCenter);
+            var mouseDeltaNormalized =
+                new Vector3(mouseDelta.x/(Screen.width / 2f), mouseDelta.y/(Screen.height / 2f), 0);
+            transform.rotation = Quaternion.Lerp(transform.rotation, 
+            Quaternion.LookRotation(right * mouseDelta.x + forward * mouseDelta.y, Vector3.up), 0.25f);
+            // Quaternion.LookRotation(mouse.)
+
+            // RaycastHit hit;
+            // Ray castPoint = cameraMain.ScreenPointToRay(Input.mousePosition);
+            // Debug.Log(castPoint.GetPoint(10f));
+            // if (Physics.Raycast(castPoint, out hit, 1000))
+            // {
+            //     transform.rotation = Quaternion.Lerp(transform.rotation, 
+            //         Quaternion.LookRotation(new Vector3(hit.point.x, transform.position.y, hit.point.z), Vector3.up), .25f);
+            // }
+        }
         if (isMoveDown) // Player Rotation Control
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation,
+            if(!shootingScript.isCharging)
+            {
+                transform.rotation = Quaternion.Lerp(transform.rotation,
                     Quaternion.LookRotation(right * horizontalInput + forward * verticalInput, Vector3.up), .25f);
+            }
 
             samuraiAnimator.SetBool("IsRunning", true);
         }
