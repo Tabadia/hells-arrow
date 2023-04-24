@@ -10,9 +10,9 @@ public class Shrines : MonoBehaviour {
     [SerializeField] private  int upgradeAmt = 3;
 
     public string[,] upgradeOptions;
-    public ShrineManager shrineManager;
+    private ShrineManager shrineManager;
     public string[,] upgrades = new string[3, 2];
-    public float distance = Mathf.Infinity;
+    public float distance = 200;
 
     private GameObject player;
 
@@ -20,21 +20,22 @@ public class Shrines : MonoBehaviour {
         shrineManager = GameObject.FindGameObjectWithTag("ShrineManager").GetComponent<ShrineManager>();
         upgradeOptions = shrineManager.upgrades;
         player = GameObject.FindGameObjectWithTag("Player");
+        
+        string[,] tempArr = new string[upgradeOptions.GetLength(0), 2];
+        for (int i = 0; i < upgradeOptions.GetLength(0); i++){
+            tempArr[i,0] = upgradeOptions[i,0];
+            tempArr[i,1] = upgradeOptions[i,1];
+        }
         for (int i = 0; i < upgradeAmt; i++){
-            upgrades[i,0] = upgradeOptions[Random.Range(0, upgradeOptions.GetLength(0)), 0];
-            bool unique = true;
-            while (true){
-                for (int j = 0; j < i; j++){
-                    if (upgrades[i,0] == upgrades[j,0]){
-                        unique = false;
-                    }
-                }
-                if (unique){
-                    break;
-                }
-                upgrades[i,0] = upgradeOptions[Random.Range(0, upgradeOptions.GetLength(0)), 0];
+            int r = Random.Range(0, tempArr.GetLength(0));
+            if (tempArr[r,0] != "a"){
+                upgrades[i,0] = tempArr[r,0];
+                upgrades[i,1] = "0";
+                tempArr[r,0] = "a";
             }
-            upgrades[i,1] = "0";
+            else{
+                i--;
+            }
         }
     }
 

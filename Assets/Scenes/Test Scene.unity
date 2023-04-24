@@ -14692,7 +14692,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1696286018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 292587e490a61404998178d787425a6d, type: 3}
+  m_Script: {fileID: 11500000, guid: 837e40e7efc6bc84fad773e41dcd8209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   upOptions:
@@ -24089,6 +24089,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Shrine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267426000070109518, guid: f6e0f79f0a5b3a9428ab27f8fe147a56,
+        type: 3}
+      propertyPath: distance
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3267426000070109519, guid: f6e0f79f0a5b3a9428ab27f8fe147a56,
         type: 3}
