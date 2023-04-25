@@ -36,6 +36,7 @@ public class CameraController : MonoBehaviour
             if (Physics.Raycast(secondaryCam.ScreenPointToRay(Input.mousePosition), out hit, 100))
             {
                 zoomPoint = hit.point;
+                Debug.Log(hit.collider.gameObject.name);
             }
         }
         // Getting the average between the focus point and the player position so that the player doesn't go out of view

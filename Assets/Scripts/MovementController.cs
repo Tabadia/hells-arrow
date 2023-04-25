@@ -41,6 +41,7 @@ public class MovementController : MonoBehaviour
     private ShrineManager shrineScript;
     private ShootingScript shootingScript;
     private Camera cameraMain;
+    private Hearts hearts;
 
     // Misc variables / Control related stuff
     private bool isDashing;
@@ -76,6 +77,9 @@ public class MovementController : MonoBehaviour
         shootingScript = GetComponent<ShootingScript>();
         shrineScript = shrinesObject.GetComponent<ShrineManager>();
         gcScript = GetComponent<GroundCheck>();
+
+        rb.freezeRotation = true;
+        hearts = GetComponent<Hearts>();
     }
 
     void Update()
@@ -99,34 +103,21 @@ public class MovementController : MonoBehaviour
         }
         
         isMoveDown = !horizontalInput.Equals(0) || !verticalInput.Equals(0);
-
-        // Debug.Log(shootingScript.isCharging);
-        if (shootingScript.isCharging)
+        
+        if (shootingScript.isCharging && !hearts.isDead) // Look at mouse when charging a shot
         {
             var mousePosition = Input.mousePosition;
             var screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0);
-            var mouseDelta = (mousePosition - screenCenter);
-            var mouseDeltaNormalized =
-                new Vector3(mouseDelta.x/(Screen.width / 2f), mouseDelta.y/(Screen.height / 2f), 0);
+            var mouseDelta = mousePosition - screenCenter;
             transform.rotation = Quaternion.Lerp(transform.rotation, 
             Quaternion.LookRotation(right * mouseDelta.x + forward * mouseDelta.y, Vector3.up), 0.25f);
-            // Quaternion.LookRotation(mouse.)
-
-            // RaycastHit hit;
-            // Ray castPoint = cameraMain.ScreenPointToRay(Input.mousePosition);
-            // Debug.Log(castPoint.GetPoint(10f));
-            // if (Physics.Raycast(castPoint, out hit, 1000))
-            // {
-            //     transform.rotation = Quaternion.Lerp(transform.rotation, 
-            //         Quaternion.LookRotation(new Vector3(hit.point.x, transform.position.y, hit.point.z), Vector3.up), .25f);
-            // }
         }
-        if (isMoveDown) // Player Rotation Control
+        if (isMoveDown && !isKnockedBack) // Player Rotation Control
         {
             if(!shootingScript.isCharging)
             {
                 transform.rotation = Quaternion.Lerp(transform.rotation,
-                    Quaternion.LookRotation(right * horizontalInput + forward * verticalInput, Vector3.up), .25f);
+                    Quaternion.LookRotation(right * horizontalInput + forward * verticalInput, Vector3.up), .30f);
             }
 
             samuraiAnimator.SetBool("IsRunning", true);
@@ -140,7 +131,7 @@ public class MovementController : MonoBehaviour
         Debug.DrawRay(rb.position, rb.velocity, Color.red);
         Debug.DrawRay(lastWallHit.point, Vector3.up, Color.green);
         Debug.DrawRay(lastWallHitPos, (lastWallHit.point - lastWallHitPos).normalized * (lastWallHit.distance - cc.radius*2), Color.blue);
-        if(rb.velocity.magnitude <= 0.01 || shootingScript.isCharging){
+        if(rb.velocity.magnitude <= 0.01 || shootingScript.isCharging || isKnockedBack){
             runSFX.Stop();
         }
         else {
@@ -202,8 +193,6 @@ public class MovementController : MonoBehaviour
         }
         else
         {
-            //Debug.Log(Time.time - knockbackTime);
-            //Debug.Log(knockbackTime);
             if (Time.time - knockbackTime > .5f)
             {
                 isKnockedBack = false;
