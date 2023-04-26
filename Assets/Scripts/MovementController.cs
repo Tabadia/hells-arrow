@@ -119,26 +119,22 @@ public class MovementController : MonoBehaviour
                 transform.rotation = Quaternion.Lerp(transform.rotation,
                     Quaternion.LookRotation(right * horizontalInput + forward * verticalInput, Vector3.up), .30f);
             }
-
             samuraiAnimator.SetBool("IsRunning", true);
+            if (!runSFX.isPlaying && !samuraiAnimator.GetBool("IsCharging")) { runSFX.Play(); }
+            if (samuraiAnimator.GetBool("IsCharging")){
+                runSFX.Stop();
+            }
         }
         else
         {
             samuraiAnimator.SetBool("IsRunning", false);
+            runSFX.Stop();
         }
         
         // Debug stuff for movement and wall checks, can be removed anytime but i like having it for now
         Debug.DrawRay(rb.position, rb.velocity, Color.red);
         Debug.DrawRay(lastWallHit.point, Vector3.up, Color.green);
         Debug.DrawRay(lastWallHitPos, (lastWallHit.point - lastWallHitPos).normalized * (lastWallHit.distance - cc.radius*2), Color.blue);
-        
-        
-        if(new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude <= 0.01 || shootingScript.isCharging || isKnockedBack){
-            runSFX.Stop();
-        }
-        else {
-            if (!runSFX.isPlaying) { runSFX.Play(); }
-        }
     }
 
     private void FixedUpdate()
