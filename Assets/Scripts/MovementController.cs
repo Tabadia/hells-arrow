@@ -131,7 +131,9 @@ public class MovementController : MonoBehaviour
         Debug.DrawRay(rb.position, rb.velocity, Color.red);
         Debug.DrawRay(lastWallHit.point, Vector3.up, Color.green);
         Debug.DrawRay(lastWallHitPos, (lastWallHit.point - lastWallHitPos).normalized * (lastWallHit.distance - cc.radius*2), Color.blue);
-        if(rb.velocity.magnitude <= 0.01 || shootingScript.isCharging || isKnockedBack){
+        
+        
+        if(new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude <= 0.01 || shootingScript.isCharging || isKnockedBack){
             runSFX.Stop();
         }
         else {
