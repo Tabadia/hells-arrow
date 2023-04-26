@@ -14986,7 +14986,7 @@ MonoBehaviour:
   maxDistance: 15
   shrineText: {fileID: 76002692}
   upMenu: {fileID: 1952717959}
-  upgradePoints: 10
+  upgradePoints: 0
   inMenu: 0
 --- !u!4 &1696286020
 Transform:

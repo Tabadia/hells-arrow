@@ -40,18 +40,15 @@ public class SettingsController : MonoBehaviour
     
     // public functions that are called by buttons in the settings menu
 
-    public void SetVolume (float volume)
-    {
+    public void SetVolume (float volume) {
         audioMixer.SetFloat("volume", volume);
     }
 
-    public void Open()
-    {
+    public void Open() {
         settingsMenu.SetActive(true);
     }
 
-    public void Exit()
-    {
+    public void Exit() {
         settingsMenu.SetActive(false);
     }
 
@@ -66,14 +63,13 @@ public class SettingsController : MonoBehaviour
         }
     }
 
-    public void SetResolution(int resIndex)
-    {
+    public void SetResolution(int resIndex) {
         Resolution resolution = resolutions[resIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
-    public void SetQuality(int qualityInt)
-    {
+    public void SetQuality(int qualityInt){
         QualitySettings.SetQualityLevel(qualityInt);
     }
+
 }

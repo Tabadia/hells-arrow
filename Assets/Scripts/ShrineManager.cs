@@ -48,22 +48,27 @@ public class ShrineManager : MonoBehaviour {
         }
         if (distance < maxDistance) {
             if (Input.GetKeyDown(KeyCode.E)) {
-                Time.timeScale = 0;
-                AudioListener.pause = true;
-                string str = "";
-                for (int i = 0; i < upgrades.GetLength(0); i++) {
-                    for (int j = 0; j < closest.GetComponent<Shrines>().upgrades.GetLength(0); j++) {
-                        if (upgrades[i, 0] == closest.GetComponent<Shrines>().upgrades[j, 0]) {
-                            closest.GetComponent<Shrines>().upgrades[j, 1] = upgrades[i, 1];
+                if (upgradePoints >= 1f){
+                    Time.timeScale = 0;
+                    AudioListener.pause = true;
+                    string str = "";
+                    for (int i = 0; i < upgrades.GetLength(0); i++) {
+                        for (int j = 0; j < closest.GetComponent<Shrines>().upgrades.GetLength(0); j++) {
+                            if (upgrades[i, 0] == closest.GetComponent<Shrines>().upgrades[j, 0]) {
+                                closest.GetComponent<Shrines>().upgrades[j, 1] = upgrades[i, 1];
+                            }
                         }
+                        str += upgrades[i, 0] + " " + upgrades[i, 1] + ", ";
                     }
-                    str += upgrades[i, 0] + " " + upgrades[i, 1] + ", ";
+                    for (int i = 0; i < upOptions.Length; i++) {
+                        optionText[i].text = closest.GetComponent<Shrines>().upgrades[i,0] + " " + (int.Parse(closest.GetComponent<Shrines>().upgrades[i,1]) + 1);
+                    }
+                    inMenu = true;
+                    upMenu.SetActive(true);
                 }
-                for (int i = 0; i < upOptions.Length; i++) {
-                    optionText[i].text = closest.GetComponent<Shrines>().upgrades[i,0] + " " + (int.Parse(closest.GetComponent<Shrines>().upgrades[i,1]) + 1);
-                }
-                inMenu = true;
-                upMenu.SetActive(true);
+                else {
+                    StartCoroutine(changeText());
+                } 
             }
             if (inMenu){
                 shrineText.SetActive(false);
@@ -97,6 +102,13 @@ public class ShrineManager : MonoBehaviour {
             AudioListener.pause = false;
             upMenu.SetActive(false);
             upgradePoints -= 1f;
-        }   
+        }
+    }
+
+    IEnumerator changeText(){
+        shrineText.GetComponent<TMP_Text>().text = "You need upgrade points!";
+        print("change text");
+        yield return new WaitForSeconds(2f);
+        shrineText.GetComponent<TMP_Text>().text = "Press E to interact with shrine";
     }
 }
