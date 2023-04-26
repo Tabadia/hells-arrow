@@ -21,7 +21,7 @@ public class ShrineManager : MonoBehaviour {
     private GameObject player;
     private MovementController movementScript;
     
-    public string[,] upgrades = {{"Exploding", "0"}, {"Multishot", "0"}, {"Piercing", "0"}, {"Flaming", "0"}, {"Arrow Speed", "0"}, {"Movement Speed", "0"}, {"Damage", "0"}}; 
+    public string[,] upgrades = {{"Exploding", "0"}, {"Multishot", "0"}, {"Piercing", "0"}, {"Flaming", "0"}, {"Arrow Speed", "0"}, {"Movement Speed", "0"}, {"Damage", "0"}, {"Decay Tolerance", "0"}}; 
     // {"Upgrade Name", "Upgrade Level"}
     public bool inMenu = false;
 
