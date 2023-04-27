@@ -127,6 +127,9 @@ public class ShootingScript : MonoBehaviour
             else if(upgrades[i,0] == "Arrow Speed" && int.Parse(upgrades[i, 1]) > 0){
                 speedMult = 1.5f * float.Parse(upgrades[i, 1]);
             }
+            else if(upgrades[i,0] == "Damage" && int.Parse(upgrades[i,1]) > 0){
+                bowStrength *= 1.25f * float.Parse(upgrades[i, 1]);
+            }
 
         }
 

@@ -17,9 +17,9 @@ public class Detection : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private Camera cameraMain;
 
-    [SerializeField] private float secondsBeforeDamage = 7.5f;
+    [SerializeField] private float secondsBeforeDamage = 15f;
     [SerializeField] private float damagePerTick = 0.15f;
-    [SerializeField] private float damageInterval = 2.5f;
+    [SerializeField] public float damageInterval = 2.5f;
     [SerializeField] private float detectionDistance = 120f;
 
     private bool detected;

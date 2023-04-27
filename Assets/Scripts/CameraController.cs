@@ -9,7 +9,6 @@ public class CameraController : MonoBehaviour
     [SerializeField] Camera mainCam;
     [SerializeField] Camera secondaryCam;
   
-
     public ShootingScript shootingScript;
 
     private float posDif;

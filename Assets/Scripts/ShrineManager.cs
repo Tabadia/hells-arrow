@@ -12,7 +12,7 @@ public class ShrineManager : MonoBehaviour {
     [SerializeField] private float maxDistance = 15f;
     [SerializeField] private GameObject shrineText;
     [SerializeField] private GameObject upMenu;
-
+    [SerializeField] private GameObject sphere;
     [SerializeField] public float upgradePoints = 0;
 
     private GameObject[] shrines;
@@ -20,6 +20,7 @@ public class ShrineManager : MonoBehaviour {
     private GameObject closest;
     private GameObject player;
     private MovementController movementScript;
+    private Detection detection;
     
     public string[,] upgrades = {{"Exploding", "0"}, {"Multishot", "0"}, {"Piercing", "0"}, {"Flaming", "0"}, {"Arrow Speed", "0"}, {"Movement Speed", "0"}, {"Damage", "0"}, {"Decay Tolerance", "0"}}; 
     // {"Upgrade Name", "Upgrade Level"}
@@ -34,6 +35,7 @@ public class ShrineManager : MonoBehaviour {
         shrineScript = GetComponent<Shrines>();
         player = GameObject.FindGameObjectWithTag("Player");
         movementScript = player.GetComponent<MovementController>();
+        detection = sphere.GetComponent<Detection>();
     }
 
     void Update() {
@@ -91,8 +93,11 @@ public class ShrineManager : MonoBehaviour {
                 if ((upgrades[i, 0] + " " + (int.Parse(upgrades[i, 1]) + 1)) == chosenUpgrade) {
                     upgrades[i, 1] = (int.Parse(upgrades[i, 1]) + 1).ToString(); 
                     if (upgrades[i, 0] == "Movement Speed"){
-                        movementScript.moveSpeed += 0.05f;
-                        movementScript.maxSpeed += 0.05f;
+                        movementScript.moveSpeed += 0.5f;
+                        movementScript.maxSpeed += 0.5f;
+                    }
+                    if (upgrades[i, 0] == "Decay Tolerance"){
+                        detection.damageInterval += 1f;
                     }
                 }
             }
