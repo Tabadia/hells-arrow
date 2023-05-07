@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour {
     [SerializeField] private GameObject enemyDrop;
     [SerializeField] private bool isGiantPanda;
     [SerializeField] private bool isRedPanda;
+    [SerializeField] private bool isOni;
 
     private Slider healthBar;
 
@@ -42,7 +43,9 @@ public class EnemyHealth : MonoBehaviour {
         if (isGiantPanda)
         {
             gameObject.transform.GetChild(1).GetComponent<Animator>().Play("GiantPandaHit", 0);
-            print("giant panda hurt!");
+        }
+        if(isOni){
+            gameObject.transform.GetChild(1).GetComponent<Animator>().SetTrigger("Hurt");
         }
     }
 
