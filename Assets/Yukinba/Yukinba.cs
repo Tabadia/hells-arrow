@@ -4,9 +4,9 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Oni : MonoBehaviour
+public class Yukinba : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+[SerializeField] private GameObject player;
     [SerializeField] private float atkCooldown = 1f;
     [SerializeField] private float atkRange = 50f;
     [SerializeField] private float sightRange = 500f;
@@ -41,7 +41,7 @@ public class Oni : MonoBehaviour
         else if ((distance < sightRange) && (distance > atkRange) && canMove) {
             agent.destination = player.transform.position;
             if (!(this.animator.GetCurrentAnimatorStateInfo(0).IsName("hurt"))){
-                animator.Play("Walk",0);
+                animator.Play("walk",0);
             }            
         }
 
@@ -55,7 +55,7 @@ public class Oni : MonoBehaviour
     IEnumerator Attack() {
         canAtk = false;
         //attackSFX.Play();
-        animator.Play("Attack",0);
+        animator.Play("attack",0);
         yield return new WaitForSeconds(.5f);
         playerHearts.takeDamage(1);
         yield return new WaitForSeconds(atkCooldown);
@@ -63,3 +63,4 @@ public class Oni : MonoBehaviour
         canMove = true;
     }
 }
+

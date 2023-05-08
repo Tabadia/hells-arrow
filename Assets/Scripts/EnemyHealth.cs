@@ -12,6 +12,7 @@ public class EnemyHealth : MonoBehaviour {
     [SerializeField] private bool isRedPanda;
     [SerializeField] private bool isOni;
     [SerializeField] private bool isTsurara;
+    [SerializeField] private bool isYukinba;
 
     private Slider healthBar;
 
@@ -40,16 +41,19 @@ public class EnemyHealth : MonoBehaviour {
     public void takeDamage(float bowStrength) {
         health -= bowStrength;
         if(isRedPanda)
-            gameObject.transform.GetChild(1).GetComponent<Animator>().SetTrigger("Hurt");
+            gameObject.transform.GetChild(1).GetComponent<Animator>().Play("hurt", 0);
         if (isGiantPanda)
         {
             gameObject.transform.GetChild(1).GetComponent<Animator>().Play("GiantPandaHit", 0);
         }
         if(isOni){
-            gameObject.transform.GetChild(1).GetComponent<Animator>().SetTrigger("Hurt");
+            gameObject.transform.GetChild(1).GetComponent<Animator>().Play("hurt", 0);
         }
         if(isTsurara){
-            gameObject.transform.GetChild(1).GetComponent<Animator>().SetTrigger("Hurt");
+            gameObject.transform.GetChild(1).GetComponent<Animator>().Play("hurt", 0);
+        }
+        if(isYukinba){
+            gameObject.transform.GetChild(1).GetComponent<Animator>().Play("hurt", 0);
         }
     }
 

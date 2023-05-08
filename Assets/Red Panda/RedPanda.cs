@@ -27,7 +27,7 @@ public class RedPanda : MonoBehaviour
     void Update() {
         distance = (transform.position - player.transform.position).sqrMagnitude;
         if (canShoot && distance < shootRange) {
-            animator.SetTrigger("Shoot");
+            animator.Play("shoot",0);
             healthBar.transform.position = new Vector3(transform.position.x, healthPos.y+1, transform.position.z);
             StartCoroutine(Shoot());
         }

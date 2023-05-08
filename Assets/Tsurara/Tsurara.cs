@@ -27,7 +27,6 @@ public class Tsurara : MonoBehaviour
     void Update() {
         distance = (transform.position - player.transform.position).sqrMagnitude;
         if (canShoot && distance < shootRange) {
-            animator.SetTrigger("Attack");
             StartCoroutine(Shoot());
         }
 
@@ -39,9 +38,10 @@ public class Tsurara : MonoBehaviour
     }
 
     IEnumerator Shoot() {
+        animator.Play("attack",0);
         print("Shoot");
         canShoot = false;
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.25f);
         shootSFX.Play();
         Quaternion rotation = Quaternion.LookRotation((player.transform.position - transform.position).normalized);
         Instantiate(icePrefab, transform.position, rotation);
