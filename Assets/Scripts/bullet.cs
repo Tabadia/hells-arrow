@@ -39,7 +39,9 @@ public class bullet : MonoBehaviour
                     print("Parried");
                 }
             }
-            Destroy(gameObject);
+            if (hits[i].collider.gameObject.tag != "Arrow"){
+                Destroy(gameObject);
+            }
         }
     }
 }

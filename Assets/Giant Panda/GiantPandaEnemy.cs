@@ -25,58 +25,49 @@ public class GiantPandaEnemy : MonoBehaviour
     [SerializeField] private float knockback = 5f;
     [SerializeField] private GameObject player;
     [SerializeField] private Animator animator;
+    [SerializeField] private GameObject billboard;
     [FormerlySerializedAs("collider")] [SerializeField] private CapsuleCollider Collider;
 
-    void Start()
-    {
+    void Start() {
         playerHearts = player.GetComponent<Hearts>();
         playerCollider = player.GetComponent<CapsuleCollider>();
         canCharge = true;
     }
 
-    void Update()
-    {
+    void Update() {
         distance = (transform.position - player.transform.position).sqrMagnitude;
 
-
-        if (distance < sightRange)
-        {
+        if (distance < sightRange) {
             inSightRange = true;
 
-            if (!isCharging)
-            {
+            if (!isCharging) {
                 targetPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
 
                 moveDirection = (targetPos - transform.position).normalized;
 
                 isLookingAtPlayer = false;
                 RaycastHit hit;
-                for (float i = -1; i <= 1; i += 0.25f)
-                {
+                for (float i = -1; i <= 1; i += 0.25f) {
                     Debug.DrawRay(new Vector3(transform.position.x, player.transform.position.y, transform.position.z), Quaternion.Euler(new Vector3(0, 5f * i, 0)) * transform.forward * sightRange / 2f, Color.black);
                     Physics.Raycast(
                         new Ray(new Vector3(transform.position.x, player.transform.position.y, transform.position.z),
                             Quaternion.Euler(new Vector3(0, 5f * i, 0)) * transform.forward), out hit, sightRange);
-                    if (hit.point != Vector3.zero && hit.collider.gameObject.CompareTag("Player"))
-                    {
+                    if (hit.point != Vector3.zero && hit.collider.gameObject.CompareTag("Player")) {
                         isLookingAtPlayer = true;
                         break;
                     }
                 }
-
 
                 float chargeDistance = Vector3.Distance(transform.position, targetPos);
                 totalTime = chargeDistance / speed;
                 startTime = Time.time;
             }
 
-            if (!isLookingAtPlayer)
-            {
+            if (!isLookingAtPlayer) {
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDirection, Vector3.up), .25f);
             }
 
-            if (canCharge && isLookingAtPlayer)
-            {
+            if (canCharge && isLookingAtPlayer) {
                 isCharging = true;
                 // Debug.Log(time);
                 //Animating roll
@@ -85,8 +76,7 @@ public class GiantPandaEnemy : MonoBehaviour
                 transform.position = Vector3.Slerp(transform.position, targetPos, time);
             }
 
-            if (Vector3.Distance(transform.position, targetPos) < 0.5f && isCharging)
-            {
+            if (Vector3.Distance(transform.position, targetPos) < 0.5f && isCharging) {
                 StartCoroutine(Cooldown());
 
             }
@@ -95,8 +85,14 @@ public class GiantPandaEnemy : MonoBehaviour
         {
             inSightRange = false;
         }
-
+        
+        if(transform.position.x > player.transform.position.x){
+            billboard.transform.localScale = new Vector3(1, 1, 1);
+        } else {
+            billboard.transform.localScale = new Vector3(-1, 1, 1);
+        }
     }
+
     void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.CompareTag("Player"))

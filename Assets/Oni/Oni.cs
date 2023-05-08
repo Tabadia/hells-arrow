@@ -58,6 +58,7 @@ public class Oni : MonoBehaviour
         //attackSFX.Play();
         animator.SetTrigger("Attack");
         slashAnimator.SetTrigger("Slash");
+        yield return new WaitForSeconds(.5f);
         playerHearts.takeDamage(1);
         yield return new WaitForSeconds(atkCooldown);
         canAtk = true;

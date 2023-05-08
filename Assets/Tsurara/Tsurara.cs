@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RedPanda : MonoBehaviour
+public class Tsurara : MonoBehaviour
 {
-    [SerializeField] private GameObject fireballPrefab;
+    [SerializeField] private GameObject icePrefab;
     [SerializeField] private GameObject player;
     [SerializeField] private float shootCooldown = 5f;
     [SerializeField] private float shootRange = 225f;
@@ -27,8 +27,7 @@ public class RedPanda : MonoBehaviour
     void Update() {
         distance = (transform.position - player.transform.position).sqrMagnitude;
         if (canShoot && distance < shootRange) {
-            animator.SetTrigger("Shoot");
-            healthBar.transform.position = new Vector3(transform.position.x, healthPos.y+1, transform.position.z);
+            animator.SetTrigger("Attack");
             StartCoroutine(Shoot());
         }
 
@@ -42,10 +41,10 @@ public class RedPanda : MonoBehaviour
     IEnumerator Shoot() {
         print("Shoot");
         canShoot = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
         shootSFX.Play();
         Quaternion rotation = Quaternion.LookRotation((player.transform.position - transform.position).normalized);
-        Instantiate(fireballPrefab, transform.position, rotation);
+        Instantiate(icePrefab, transform.position, rotation);
         healthBar.transform.position = new Vector3(transform.position.x, healthPos.y, transform.position.z);
         yield return new WaitForSeconds(shootCooldown);
         canShoot = true;

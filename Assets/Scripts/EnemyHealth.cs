@@ -48,6 +48,9 @@ public class EnemyHealth : MonoBehaviour {
         if(isOni){
             gameObject.transform.GetChild(1).GetComponent<Animator>().SetTrigger("Hurt");
         }
+        if(isTsurara){
+            gameObject.transform.GetChild(1).GetComponent<Animator>().SetTrigger("Hurt");
+        }
     }
 
     private float CalculateHealth() {
