@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2040629368248314888
 Transform:
   m_ObjectHideFlags: 0
@@ -145,16 +145,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040629368248314887}
-  m_LocalRotation: {x: -0, y: -0.51751846, z: -0, w: 0.85567206}
+  m_LocalRotation: {x: 0, y: -0.51751935, z: 0, w: 0.8556715}
   m_LocalPosition: {x: -84.4593, y: 28.9, z: 39.335}
-  m_LocalScale: {x: 1.6470418, y: 1.6470418, z: 1.6470418}
+  m_LocalScale: {x: 1.64, y: 1.64, z: 1.64}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 429658922240307056}
   - {fileID: 2040629367742374880}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -62.332, z: 0}
 --- !u!136 &2040629368248314890
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -207,6 +207,9 @@ MonoBehaviour:
   difficulty: 3
   enemyDrop: {fileID: 4094036990376496550, guid: a78cfafb30b220c93a55b0224cde3892,
     type: 3}
+  isGiantPanda: 0
+  isRedPanda: 0
+  isOni: 0
 --- !u!114 &2040629368248315891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,12 +238,12 @@ PrefabInstance:
     - target: {fileID: 1848640898761884735, guid: 130cd5831006d1c4abe90cf5ffe8735d,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1848640898761884735, guid: 130cd5831006d1c4abe90cf5ffe8735d,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1848640898890154896, guid: 130cd5831006d1c4abe90cf5ffe8735d,
         type: 3}

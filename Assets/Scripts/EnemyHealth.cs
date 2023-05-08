@@ -11,6 +11,7 @@ public class EnemyHealth : MonoBehaviour {
     [SerializeField] private bool isGiantPanda;
     [SerializeField] private bool isRedPanda;
     [SerializeField] private bool isOni;
+    [SerializeField] private bool isTsurara;
 
     private Slider healthBar;
 

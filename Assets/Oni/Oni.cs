@@ -30,7 +30,6 @@ public class Oni : MonoBehaviour
         playerCollider = player.GetComponent<CapsuleCollider>();
         playerHearts = player.GetComponent<Hearts>();
         canAtk = true;
-        healthPos = healthBar.transform.position;
     }
 
     void Update() {
@@ -38,10 +37,6 @@ public class Oni : MonoBehaviour
         if (distance < atkRange) {
             if (canAtk){
                 canMove = false;
-                animator.SetTrigger("Attack");
-                slash.SetActive(true);
-                //slashAnimator.SetTrigger("Attack");
-                healthBar.transform.position = new Vector3(transform.position.x, healthPos.y+1, transform.position.z);
                 StartCoroutine(Attack());
             }
         }
@@ -61,10 +56,11 @@ public class Oni : MonoBehaviour
     IEnumerator Attack() {
         canAtk = false;
         //attackSFX.Play();
+        animator.SetTrigger("Attack");
+        slashAnimator.SetTrigger("Slash");
         playerHearts.takeDamage(1);
         yield return new WaitForSeconds(atkCooldown);
         canAtk = true;
         canMove = true;
-        slash.SetActive(false);
     }
 }
