@@ -5,6 +5,7 @@ using UnityEngine;
 public class bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 50f;
+    [SerializeField] private float damage = .5f;
     
     private GameObject player;
     private Hearts playerHearts;
@@ -33,7 +34,7 @@ public class bullet : MonoBehaviour
             {
                 if (!playerParry.isParrying)
                 {
-                    playerHearts.takeDamage(0.5f);
+                    playerHearts.takeDamage(damage);
                 }
                 else {
                     print("Parried");

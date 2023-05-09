@@ -21,6 +21,7 @@ public class Hearts : MonoBehaviour
     private GameObject[] hearts;
     private float currentHearts;
     private AudioSource[] allAudioSources;
+    private Vector3 startPos;
     public bool isDead = false;
 
     void Start()
@@ -31,6 +32,7 @@ public class Hearts : MonoBehaviour
             GameObject heart = heartContainer.transform.GetChild(i).gameObject;
             hearts[i] = heart;
         }
+        startPos = gameObject.transform.position;
 
         respawnBtn.onClick.AddListener(() => {
             deathScreen.SetActive(false);
@@ -41,7 +43,7 @@ public class Hearts : MonoBehaviour
                 hearts[i].GetComponent<Image>().sprite = fullHeart;
             }
             currentHearts = maxHearts;
-            gameObject.transform.position = new Vector3(120.77f, 20.99f, 66.03f);
+            gameObject.transform.position = startPos;
         });
         //takeDamage(1.5f);
     }

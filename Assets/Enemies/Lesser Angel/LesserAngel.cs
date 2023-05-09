@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class LesserAngel : MonoBehaviour
 {
-[SerializeField] private GameObject icePrefab;
+[SerializeField] private GameObject beam;
     [SerializeField] private GameObject player;
     [SerializeField] private float shootCooldown = 5f;
     [SerializeField] private float shootRange = 300f;
@@ -31,6 +31,11 @@ public class LesserAngel : MonoBehaviour
 
     void Update() {
         distance = (transform.position - player.transform.position).sqrMagnitude;
+
+        if(canShoot){
+            beam.transform.rotation = Quaternion.LookRotation((player.transform.position - transform.position).normalized);
+        }
+
         if (canShoot && distance < shootRange) {
             StartCoroutine(Shoot());
         }
@@ -53,12 +58,14 @@ public class LesserAngel : MonoBehaviour
         animator.Play("attack",0);
         print("Shoot");
         canShoot = false;
-        yield return new WaitForSeconds(.25f);
+        beam.SetActive(true);
+        yield return new WaitForSeconds(1.9f);
         shootSFX.Play();
         Quaternion rotation = Quaternion.LookRotation((player.transform.position - transform.position).normalized);
-        Instantiate(icePrefab, transform.position, rotation);
         healthBar.transform.position = new Vector3(transform.position.x, healthPos.y, transform.position.z);
-        yield return new WaitForSeconds(shootCooldown);
+        yield return new WaitForSeconds(.5f);
+        beam.SetActive(false);
+        yield return new WaitForSeconds(shootCooldown-.5f);
         canShoot = true;
     }
 }
