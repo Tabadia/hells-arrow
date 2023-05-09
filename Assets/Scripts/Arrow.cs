@@ -45,7 +45,7 @@ public class Arrow : MonoBehaviour
         if (Physics.Raycast(castPoint, out hit))
         {
             endPos = hit.point;
-            if (endPos.y <= player.transform.position.y) endPos.y = player.transform.position.y;
+            if (endPos.y <= player.transform.position.y) endPos.y = player.transform.position.y+1;
         }
         // Orients arrow towards mouse position and gets direction for it to go
         moveDirection = (endPos - transform.position).normalized;

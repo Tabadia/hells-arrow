@@ -13,6 +13,7 @@ public class EnemyHealth : MonoBehaviour {
     [SerializeField] private bool isOni;
     [SerializeField] private bool isTsurara;
     [SerializeField] private bool isYukinba;
+    [SerializeField] private bool isLesserAngel;
 
     private Slider healthBar;
 
@@ -53,6 +54,9 @@ public class EnemyHealth : MonoBehaviour {
             gameObject.transform.GetChild(1).GetComponent<Animator>().Play("hurt", 0);
         }
         if(isYukinba){
+            gameObject.transform.GetChild(1).GetComponent<Animator>().Play("hurt", 0);
+        }
+        if(isLesserAngel){
             gameObject.transform.GetChild(1).GetComponent<Animator>().Play("hurt", 0);
         }
     }

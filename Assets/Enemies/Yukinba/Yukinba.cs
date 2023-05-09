@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class Yukinba : MonoBehaviour
 {
-[SerializeField] private GameObject player;
+    [SerializeField] private GameObject player;
     [SerializeField] private float atkCooldown = 1f;
     [SerializeField] private float atkRange = 50f;
     [SerializeField] private float sightRange = 500f;

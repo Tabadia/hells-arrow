@@ -134,6 +134,7 @@ public class ShootingScript : MonoBehaviour
         }
 
         // Spawns arrow
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y+1, transform.position.z);
         if (arrowAmount > 1)
         {
             bowStrength /= 1.5f;
@@ -153,7 +154,7 @@ public class ShootingScript : MonoBehaviour
                 prefab.GetComponent<Arrow>().exploding = exploding;
                 prefab.GetComponent<Arrow>().flame = flame;
                 prefab.GetComponent<Arrow>().flameLength = flameLength;
-                Instantiate(prefab, transform.position, transform.rotation);
+                Instantiate(prefab, pos, transform.rotation);
                 spacing += multishotAngle;
             }
         }
@@ -165,7 +166,7 @@ public class ShootingScript : MonoBehaviour
             prefab.GetComponent<Arrow>().exploding = exploding;
             prefab.GetComponent<Arrow>().flame = flame;
             prefab.GetComponent<Arrow>().flameLength = flameLength;
-            Instantiate(prefab, transform.position, transform.rotation);
+            Instantiate(prefab, pos, transform.rotation);
         }
 
         // Start cooldown

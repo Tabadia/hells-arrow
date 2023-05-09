@@ -72,6 +72,7 @@ MonoBehaviour:
   isOni: 1
   isTsurara: 0
   isYukinba: 0
+  isLesserAngel: 0
 --- !u!114 &8204777492975484062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,8 +91,6 @@ MonoBehaviour:
   sightRange: 600
   healthBar: {fileID: 7528480028286055987}
   animator: {fileID: 8204777493367221656}
-  slashAnimator: {fileID: 0}
-  slash: {fileID: 0}
   agent: {fileID: 484975759}
   oniBillboard: {fileID: 8204777493367221653}
   relativePoint: {x: 0, y: 0}

@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5079492371726129105
 Transform:
   m_ObjectHideFlags: 0
@@ -147,7 +147,7 @@ Transform:
   m_GameObject: {fileID: 5079492371726129110}
   m_LocalRotation: {x: 0, y: 0.42261827, z: 0, w: 0.9063079}
   m_LocalPosition: {x: -22.21177, y: 28.41, z: 29.496258}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.64, y: 1.64, z: 1.64}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6906914876624762832}
@@ -268,10 +268,11 @@ MonoBehaviour:
     type: 3}
   player: {fileID: 0}
   shootCooldown: 4
-  shootRange: 300
+  shootRange: 400
   shootSFX: {fileID: 5079492371726129104}
   healthBar: {fileID: 6906914876624762847}
   animator: {fileID: 477299759}
+  billboard: {fileID: 477299757}
 --- !u!65 &5079492371726129113
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -303,8 +304,11 @@ MonoBehaviour:
   enemyDrop: {fileID: 4094036990376496550, guid: a78cfafb30b220c93a55b0224cde3892,
     type: 3}
   isGiantPanda: 0
-  isRedPanda: 0
+  isRedPanda: 1
   isOni: 0
+  isTsurara: 0
+  isYukinba: 0
+  isLesserAngel: 0
 --- !u!1001 &5079492371265041487
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -315,12 +319,12 @@ PrefabInstance:
     - target: {fileID: 1848640898761884735, guid: 130cd5831006d1c4abe90cf5ffe8735d,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1848640898761884735, guid: 130cd5831006d1c4abe90cf5ffe8735d,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1848640898890154896, guid: 130cd5831006d1c4abe90cf5ffe8735d,
         type: 3}
