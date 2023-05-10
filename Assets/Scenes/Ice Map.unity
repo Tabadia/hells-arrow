@@ -3697,7 +3697,7 @@ PrefabInstance:
     - target: {fileID: 1337309871883113753, guid: e65707565d0830440ac302333e9a8266,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1337309871883113753, guid: e65707565d0830440ac302333e9a8266,
         type: 3}
@@ -6027,7 +6027,7 @@ PrefabInstance:
     - target: {fileID: 1337309871883113753, guid: e65707565d0830440ac302333e9a8266,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 60
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 1337309871883113753, guid: e65707565d0830440ac302333e9a8266,
         type: 3}
@@ -7964,6 +7964,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6259941982972521459, guid: c143ea848f1bb8443b58c466aec10d96,
         type: 3}
+      propertyPath: fullHeart
+      value: 
+      objectReference: {fileID: -1794017569, guid: a77a52155ebc9c14ebd6a262ee8a3017,
+        type: 3}
+    - target: {fileID: 6259941982972521459, guid: c143ea848f1bb8443b58c466aec10d96,
+        type: 3}
+      propertyPath: halfHeart
+      value: 
+      objectReference: {fileID: 1138364976, guid: a77a52155ebc9c14ebd6a262ee8a3017,
+        type: 3}
+    - target: {fileID: 6259941982972521459, guid: c143ea848f1bb8443b58c466aec10d96,
+        type: 3}
+      propertyPath: emptyHeart
+      value: 
+      objectReference: {fileID: -1822190348, guid: a77a52155ebc9c14ebd6a262ee8a3017,
+        type: 3}
+    - target: {fileID: 6259941982972521459, guid: c143ea848f1bb8443b58c466aec10d96,
+        type: 3}
       propertyPath: respawnBtn
       value: 
       objectReference: {fileID: 677738310}
@@ -9410,7 +9428,7 @@ PrefabInstance:
     - target: {fileID: 1337309871883113753, guid: e65707565d0830440ac302333e9a8266,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1337309871883113753, guid: e65707565d0830440ac302333e9a8266,
         type: 3}
