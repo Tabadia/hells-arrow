@@ -6,7 +6,8 @@ using UnityEngine.AI;
 
 public class LesserAngel : MonoBehaviour
 {
-[SerializeField] private GameObject beam;
+    [SerializeField] private GameObject beam;
+    [SerializeField] private Collider beamCollider;
     [SerializeField] private GameObject player;
     [SerializeField] private float shootCooldown = 5f;
     [SerializeField] private float shootRange = 300f;
@@ -27,14 +28,12 @@ public class LesserAngel : MonoBehaviour
         playerCollider = player.GetComponent<CapsuleCollider>();
         canShoot = true;
         healthPos = healthBar.transform.position;
+        beam.SetActive(false);
+        beam.transform.position = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
     }
 
     void Update() {
         distance = (transform.position - player.transform.position).sqrMagnitude;
-
-        if(canShoot){
-            beam.transform.rotation = Quaternion.LookRotation((player.transform.position - transform.position).normalized);
-        }
 
         if (canShoot && distance < shootRange) {
             StartCoroutine(Shoot());
@@ -58,11 +57,22 @@ public class LesserAngel : MonoBehaviour
         animator.Play("attack",0);
         print("Shoot");
         canShoot = false;
+        yield return new WaitForSeconds(1f);
+        
+        beam.transform.rotation = Quaternion.LookRotation((player.transform.position - transform.position).normalized);
+        beam.transform.rotation = Quaternion.Euler(0, beam.transform.rotation.eulerAngles.y, 0);
         beam.SetActive(true);
-        yield return new WaitForSeconds(1.9f);
+
+        yield return new WaitForSeconds(.9f);
+
         shootSFX.Play();
         Quaternion rotation = Quaternion.LookRotation((player.transform.position - transform.position).normalized);
         healthBar.transform.position = new Vector3(transform.position.x, healthPos.y, transform.position.z);
+
+        if (beamCollider.bounds.Intersects(playerCollider.bounds)) {
+            player.GetComponent<Hearts>().takeDamage(2);
+        }
+
         yield return new WaitForSeconds(.5f);
         beam.SetActive(false);
         yield return new WaitForSeconds(shootCooldown-.5f);
