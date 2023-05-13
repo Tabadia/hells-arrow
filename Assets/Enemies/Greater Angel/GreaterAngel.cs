@@ -4,10 +4,16 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class LesserAngel : MonoBehaviour
+/*
+Marks large circle on ground, charges for a few seconds, then does massive damage to player if they are within it
+Cannot be parried
+Orbits around player slowly enough to shoot with some lag
+High health & large
+*/
+
+public class GreaterAngel : MonoBehaviour
 {
-    [SerializeField] private GameObject beam;
-    [SerializeField] private Collider beamCollider;
+    [SerializeField] private GameObject circle;
     [SerializeField] private GameObject player;
     [SerializeField] private float shootCooldown = 5f;
     [SerializeField] private float shootRange = 300f;
@@ -23,13 +29,14 @@ public class LesserAngel : MonoBehaviour
     private bool canMove = true;
     private float distance;
     private Vector3 healthPos;
+    private Collider circleCollider;
 
     void Start() {
+        circleCollider = circle.GetComponent<Collider>();
         playerCollider = player.GetComponent<CapsuleCollider>();
         canShoot = true;
         healthPos = healthBar.transform.position;
-        beam.SetActive(false);
-        beam.transform.position = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
+        circle.SetActive(false);
     }
 
     void Update() {
@@ -59,21 +66,21 @@ public class LesserAngel : MonoBehaviour
         canShoot = false;
         yield return new WaitForSeconds(1f);
         
-        beam.transform.rotation = Quaternion.LookRotation((player.transform.position - transform.position).normalized);
-        beam.transform.rotation = Quaternion.Euler(0, beam.transform.rotation.eulerAngles.y, 0);
-        beam.SetActive(true);
+        circle.transform.position = player.transform.position;
+        circle.SetActive(true);
 
         yield return new WaitForSeconds(.9f);
-
+        Collider[] hitColliders = Physics.OverlapSphere(circle.transform.position, 4.3f);
+        foreach (var hitCollider in hitColliders) {
+            if (hitCollider == playerCollider) {
+                player.GetComponent<Hearts>().takeDamage(1);
+            }
+        }
         shootSFX.Play();
         Quaternion rotation = Quaternion.LookRotation((player.transform.position - transform.position).normalized);
 
-        if (beamCollider.bounds.Intersects(playerCollider.bounds)) {
-            player.GetComponent<Hearts>().takeDamage(2);
-        }
-
         yield return new WaitForSeconds(.5f);
-        beam.SetActive(false);
+        circle.SetActive(false);
         yield return new WaitForSeconds(shootCooldown-.5f);
         canShoot = true;
     }

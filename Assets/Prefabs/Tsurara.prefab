@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6834104961619121839}
   m_LocalRotation: {x: 0, y: 0.42261827, z: 0, w: 0.9063079}
   m_LocalPosition: {x: -294.8, y: -15.5, z: -93.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5147666442395120532}
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea76dfc288d30994e935e8ee42d462cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icePrefab: {fileID: 7986881482323518706, guid: 0192b26661962fb4da5d93451081f97a,
+  icePrefab: {fileID: 7106260326789358621, guid: cb791a9ac805ed8498492e1a3dd161b0,
     type: 3}
   player: {fileID: 0}
   shootCooldown: 2

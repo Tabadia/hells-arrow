@@ -264,11 +264,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcf47e6afed42a84d867fb37ef23508d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireballPrefab: {fileID: 2463847973713546271, guid: 876bdc36bf9938c489c3b8b28b4251f4,
+  fireballPrefab: {fileID: 2463847973713546271, guid: 49deb63351ccac64380e575666ba1821,
     type: 3}
   player: {fileID: 0}
   shootCooldown: 4
-  shootRange: 400
+  shootRange: 550
   shootSFX: {fileID: 5079492371726129104}
   healthBar: {fileID: 6906914876624762847}
   animator: {fileID: 477299759}
