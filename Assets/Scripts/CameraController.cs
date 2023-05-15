@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -11,19 +9,25 @@ public class CameraController : MonoBehaviour
   
     public ShootingScript shootingScript;
 
-    private float posDif;
+    private float xPosDif;
+    private float yPosDif;
+    private float zPosDif;
     private Quaternion rotation;
     private bool movingCamera;
 
     void Start() {
         shootingScript = player.GetComponent<ShootingScript>();
-        rotation = transform.rotation;
-        posDif = 10f;
+        rotation = mainCam.transform.rotation;
+        // Multiply by the difference between the actual FOV and the FOV these numbers were based off (36)
+        xPosDif = 11.3f * (36f/mainCam.fieldOfView);
+        yPosDif = 35.0f;
+        zPosDif = 16.3f * (36f/mainCam.fieldOfView);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        float yPos = player.transform.position.y + yPosDif;
         // Keep camera rotation static
         mainCam.transform.rotation = rotation; 
         
@@ -43,9 +47,9 @@ public class CameraController : MonoBehaviour
 
         // Check if camera is already in default position
         bool homedCam =
-            Vector3.Distance(new Vector3(mainCam.transform.position.x - 10, player.transform.position.y, mainCam.transform.position.z - 10),
+            Vector3.Distance(new Vector3(mainCam.transform.position.x - xPosDif, player.transform.position.y, mainCam.transform.position.z - zPosDif),
             player.transform.position) < 0.1f;
-        //Debug.Log(homedCam);
+        // Debug.Log(homedCam);
 
         // Setting the camera's position
         // Move to the focus point when beginning charge - this if-else tree could probably be structured better, but fuk u
@@ -53,17 +57,17 @@ public class CameraController : MonoBehaviour
         {
             movingCamera = true;
             mainCam.transform.position = Vector3.Lerp(transform.position,
-                new Vector3(avgPosition.x + posDif, transform.position.y, avgPosition.z + posDif),
+                new Vector3(avgPosition.x + xPosDif, yPos, avgPosition.z + zPosDif),
                 Time.deltaTime * speed);
         }
         // Move back to the player when releasing
         else if (zoomPoint == player.transform.position && movingCamera && !homedCam)
         {
-            var speedModifier = Mathf.Max(Vector3.Distance(new Vector3(mainCam.transform.position.x - 10, player.transform.position.y, mainCam.transform.position.z - 10)
+            var speedModifier = Mathf.Max(Vector3.Distance(new Vector3(mainCam.transform.position.x - xPosDif, player.transform.position.y, mainCam.transform.position.z - zPosDif)
                 , player.transform.position)*2f, 1.5f); // Basically, in order to catch the moving player when returning, camera moves faster the further it is
             
             mainCam.transform.position = Vector3.Lerp(transform.position,
-                new Vector3(avgPosition.x + posDif, transform.position.y, avgPosition.z + posDif),
+                new Vector3(avgPosition.x + xPosDif, yPos, avgPosition.z + zPosDif),
                 Time.deltaTime * speed * speedModifier); 
         }
         else switch (homedCam) // Different behavior when the camera is homed on player
@@ -73,13 +77,13 @@ public class CameraController : MonoBehaviour
                 // Debug.Log("checkMC");
                 break;
             case false when !movingCamera: // Check here is needed to make sure camera can leave the player the first time
-                mainCam.transform.position = new Vector3(player.transform.position.x + 10, transform.position.y,
-                    player.transform.position.z + 10);
+                mainCam.transform.position = new Vector3(player.transform.position.x + xPosDif, yPos,
+                    player.transform.position.z + zPosDif);
                 //Debug.Log("check");
                 break;
         }
-        
-        secondaryCam.transform.position = new Vector3(player.transform.position.x + 10, transform.position.y,
-            player.transform.position.z + 10);
+
+        secondaryCam.transform.position = new Vector3(player.transform.position.x + xPosDif, yPos,
+            player.transform.position.z + zPosDif);
     }
 }
