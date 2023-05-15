@@ -10764,6 +10764,7 @@ GameObject:
   - component: {fileID: 899379486611751704}
   - component: {fileID: 899379486611751705}
   - component: {fileID: 1151319155}
+  - component: {fileID: 899379486611751708}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -10771,6 +10772,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< Updated upstream
 --- !u!4 &960324834170778164 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4535224831802576363, guid: e3b422a50a921c145a4bb6b940090495,
@@ -11124,3 +11126,19 @@ PrefabInstance:
       objectReference: {fileID: 1568856657}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54b0e064edb1cf44494ba1a37976aec6, type: 3}
+=======
+--- !u!114 &899379486611751708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899379486611751707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27fa740d9ce0fc0478a496f71a67554e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replacementShader: {fileID: 2100000, guid: 7c93a8eb7ed9cfa4fb4d0added02442f, type: 2}
+  cam: {fileID: 899379486611751655}
+>>>>>>> Stashed changes
