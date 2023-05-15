@@ -1,11 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class Detection : MonoBehaviour
 {
@@ -45,6 +39,7 @@ public class Detection : MonoBehaviour
     
     void FixedUpdate()
     {
+        // convert the World Position of the player head to UI position on screen
         var position = playerHeadObject.transform.position;
         var yDif = playerObjectCollider.height * .75f;
         var viewportPosition = cameraMain.WorldToViewportPoint(new Vector3(
@@ -62,12 +57,11 @@ public class Detection : MonoBehaviour
         undetRect.anchoredPosition = spritePosition;
         damRect.anchoredPosition = spritePosition;
 
+        // Figure out "player is detected" by casting a sphere around the player
         Collider[] overlappingColliders = Physics.OverlapSphere(playerObject.transform.position, detectionDistance);
-        // Debug.Log(sc.radius);
         bool enemyInTrigger = false;
         foreach (var overlappingCollider in overlappingColliders)
         {
-            // Debug.Log(overlappingCollider.gameObject.name);
             if (overlappingCollider.gameObject.CompareTag("Enemy"))
             {
                 enemyInTrigger = true;
@@ -86,19 +80,23 @@ public class Detection : MonoBehaviour
         else
         {
             callsSinceDetection += 1;
+            /* FixedUpdate is called 50 times a second, thus 50f * timeInSeconds
+               After a set time of not being near enemies, reset the timer and start counting for damage */
             if (callsSinceDetection > 50f * secondsBeforeDamage)
             {
                 damagePhase = true;
                 callsSinceDetection = 0;
             }
 
+            // Enable no detection warning
             if (!damagePhase)
             {
                 unDetectedObject.SetActive(true);
             }
-
+            
             if (damagePhase && callsSinceDetection > 50f * damageInterval)
             {
+                // 
                 callsSinceDetection = 0;
                 unDetectedObject.SetActive(false);
                 damageObject.SetActive(true);

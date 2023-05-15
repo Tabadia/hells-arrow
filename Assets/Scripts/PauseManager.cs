@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 
 public class PauseManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject scoreText;
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private AudioSource[] audioSourcesToIgnore;
+    public float playerScore = 0f;
 
     void Start() {
         foreach(AudioSource audioSource in audioSourcesToIgnore) {
@@ -24,7 +25,7 @@ public class PauseManager : MonoBehaviour
             else {
                 Pause();
             }
-        }    
+        }
     }
 
     public void Unpause() {
@@ -33,8 +34,10 @@ public class PauseManager : MonoBehaviour
         AudioListener.pause = false;
     }
 
-    public void Pause() {
+    public void Pause()
+    {
         pauseMenu.SetActive(true);
+        scoreText.GetComponent<TextMeshProUGUI>().text = playerScore.ToString("g2");
         Time.timeScale = 0;
         AudioListener.pause = true;
     }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,8 +24,8 @@ public class EnemyHealth : MonoBehaviour {
     void Update() {
         healthBar.value = CalculateHealth();
         if (health <= 0){
-            enemyDrop.GetComponent<ExperienceScript>().parentDifficulty = difficulty;
-            Instantiate(enemyDrop, transform.position+(new Vector3(0,0.5f,0)), transform.rotation);
+            GameObject instantiatedDrop = Instantiate(enemyDrop, transform.position+(new Vector3(0,0.5f,0)), transform.rotation);
+            instantiatedDrop.GetComponentInChildren<ExperienceScript>().parentDifficulty = difficulty;
             Destroy(gameObject);
         }
         if (health > maxHealth){
