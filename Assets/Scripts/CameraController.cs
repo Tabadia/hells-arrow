@@ -1,3 +1,4 @@
+/*
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,9 +39,10 @@ public class CameraController : MonoBehaviour
         mainCam.transform.position = Vector3.Lerp(transform.position, new Vector3(avgPosition.x + 10, transform.position.y, avgPosition.z + 10), Time.deltaTime * speed);
     }
 }
+*/
 
 
-/*
+
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -130,4 +132,3 @@ public class CameraController : MonoBehaviour
             player.transform.position.z + zPosDif);
     }
 }
-*/

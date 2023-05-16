@@ -7053,7 +7053,6 @@ MonoBehaviour:
   speed: 3
   mainCam: {fileID: 899379486611751655}
   secondaryCam: {fileID: 1672156365}
-  shootingScript: {fileID: 1469965362}
 --- !u!1 &1169362574
 GameObject:
   m_ObjectHideFlags: 0
@@ -9543,18 +9542,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1469965349}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1469965362 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2020115726669770414, guid: c143ea848f1bb8443b58c466aec10d96,
-    type: 3}
-  m_PrefabInstance: {fileID: 1469965349}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1568856657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9de4bb74cb899e241bd368a611e26964, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1480015575 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -657506925616232153, guid: bc833f7c33ab16e42901cf8283159504,
@@ -10577,7 +10564,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 36
+  field of view: 20
   orthographic: 0
   orthographic size: 12.9
   m_Depth: 0
@@ -13246,14 +13233,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 899379486611751707}
-  m_LocalRotation: {x: -0.15981598, y: 0.82512, z: -0.45974565, w: -0.28682706}
-  m_LocalPosition: {x: -132.49, y: 63.629997, z: 37.99001}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.16247445, y: -0.8234458, z: 0.45881358, w: 0.29159755}
+  m_LocalPosition: {x: -132, y: 63, z: 38}
+  m_LocalScale: {x: 0.99999976, y: 1, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 58.252, y: -141.663, z: 0}
+  m_LocalEulerAnglesHint: {x: 58.252, y: -141, z: 0}
 --- !u!20 &899379486611751655
 Camera:
   m_ObjectHideFlags: 0
@@ -13279,7 +13266,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 35.9
+  field of view: 40
   orthographic: 0
   orthographic size: 12.9
   m_Depth: 0
