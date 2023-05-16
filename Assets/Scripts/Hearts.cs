@@ -1,7 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class Hearts : MonoBehaviour
 {
     [SerializeField] private int maxHearts = 3;
@@ -64,6 +64,11 @@ public class Hearts : MonoBehaviour
             AudioListener.pause = true;
             isDead = true;
             Time.timeScale = 0;
+            GameObject[] doors = GameObject.FindGameObjectsWithTag("BossDoor");
+            foreach (var door in doors)
+            {
+                door.GetComponent<BossDoor>().EnableMovement();
+            }
         }
         else {
             for (int i = 0; i < maxHearts; i++) {

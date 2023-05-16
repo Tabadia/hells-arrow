@@ -1,14 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using Unity.VisualScripting.FullSerializer.Internal;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
-using Quaternion = UnityEngine.Quaternion;
-using Vector3 = UnityEngine.Vector3;
 
 public class MovementController : MonoBehaviour
 {
@@ -50,6 +42,7 @@ public class MovementController : MonoBehaviour
     private float maxDashCooldown;
     private float verticalInput;
     private float horizontalInput;
+    public bool initMove;
     private Quaternion cameraLook;
     [NonSerialized] public bool isKnockedBack = false;
     [NonSerialized] public float preKnockbackMaxSpeed;
@@ -103,7 +96,12 @@ public class MovementController : MonoBehaviour
         }
         
         isMoveDown = !horizontalInput.Equals(0) || !verticalInput.Equals(0);
-        
+
+        if (!initMove)
+        {
+            initMove = isMoveDown;
+        }
+
         if (shootingScript.isCharging && !hearts.isDead) // Look at mouse when charging a shot
         {
             var mousePosition = Input.mousePosition;
@@ -274,7 +272,7 @@ public class MovementController : MonoBehaviour
     {
         Vector3 velocDirection = new Vector3(rb.velocity.x, 0f, rb.velocity.z).normalized;
         RaycastHit hit;
-        if (Physics.Raycast(new Ray(transform.position, velocDirection), out hit, rb.velocity.magnitude*Time.deltaTime*1.2f))
+        if (Physics.Raycast(new Ray(new Vector3(transform.position.x, transform.position.y - cc.height/2, transform.position.z), velocDirection), out hit, rb.velocity.magnitude*Time.deltaTime*1.2f))
         { // Check for walls within the movement change next frame, times 1.2 basically to account for player size
             return hit;
         }

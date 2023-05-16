@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +26,7 @@ public class Detection : MonoBehaviour
     private RectTransform damRect;
     private CapsuleCollider playerObjectCollider;
     private Hearts hearts;
+    private MovementController movementController;
 
     void Start()
     {
@@ -35,24 +37,25 @@ public class Detection : MonoBehaviour
         playerObjectCollider = playerObject.GetComponent<CapsuleCollider>();
         hearts = playerObject.GetComponent<Hearts>();
         transform.localScale = new Vector3(detectionDistance, detectionDistance, detectionDistance);
+        movementController = playerObject.GetComponent<MovementController>();
     }
-    
+
     void FixedUpdate()
     {
         // convert the World Position of the player head to UI position on screen
         var position = playerHeadObject.transform.position;
         var yDif = playerObjectCollider.height * .75f;
         var viewportPosition = cameraMain.WorldToViewportPoint(new Vector3(
-            position.x, 
-            position.y + yDif, 
+            position.x,
+            position.y + yDif,
             position.z));
         var sizeDelta = canvasRect.sizeDelta;
 
         var scaleFactor = canvasScaler.scaleFactor;
-        
+
         var spritePosition = new Vector2(
-            (viewportPosition.x * sizeDelta.x)*scaleFactor,
-            (viewportPosition.y * sizeDelta.y)*scaleFactor);
+            (viewportPosition.x * sizeDelta.x) * scaleFactor,
+            (viewportPosition.y * sizeDelta.y) * scaleFactor);
 
         undetRect.anchoredPosition = spritePosition;
         damRect.anchoredPosition = spritePosition;
@@ -67,10 +70,27 @@ public class Detection : MonoBehaviour
                 enemyInTrigger = true;
             }
         }
+
         detected = enemyInTrigger;
 
-        
-        if (detected)
+        // Allow player to hang out close to shrines
+        Collider[] secondaryOverlappingColliders =
+            Physics.OverlapSphere(playerObject.transform.position, detectionDistance * 0.75f);
+        bool shrineInTrigger = false;
+        foreach (var overlappingCollider in secondaryOverlappingColliders)
+        {
+            if (overlappingCollider.gameObject.CompareTag("Shrine") ||
+                (!overlappingCollider.transform.parent.IsUnityNull() &&
+                 overlappingCollider.transform.parent.CompareTag("Shrine")))
+            {
+                shrineInTrigger = true;
+            }
+        }
+
+        detected = detected || shrineInTrigger;
+
+
+        if (detected || !movementController.initMove)
         {
             callsSinceDetection = 0;
             damagePhase = false;
@@ -93,33 +113,16 @@ public class Detection : MonoBehaviour
             {
                 unDetectedObject.SetActive(true);
             }
-            
+
             if (damagePhase && callsSinceDetection > 50f * damageInterval)
             {
                 // 
                 callsSinceDetection = 0;
                 unDetectedObject.SetActive(false);
                 damageObject.SetActive(true);
-                
+
                 hearts.takeDamage(damagePerTick);
             }
         }
     }
-    
-    // private void OnTriggerStay(Collider other)
-    // {
-    //     if (other.gameObject.CompareTag("Enemy"))
-    //     {
-    //         detected = true;
-    //     }
-    // }
-    //
-    // private void OnTriggerExit(Collider other)
-    // {
-    //     if (other.gameObject.CompareTag("Enemy"))
-    //     {
-    //         detected = false;
-    //     }
-    // }
-    
 }

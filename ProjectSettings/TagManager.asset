@@ -11,6 +11,7 @@ TagManager:
   - Portal
   - HealthSlider
   - ShrineManager
+  - BossDoor
   layers:
   - Default
   - TransparentFX
