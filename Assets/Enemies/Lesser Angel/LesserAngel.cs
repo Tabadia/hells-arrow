@@ -7,8 +7,8 @@ using UnityEngine.AI;
 public class LesserAngel : MonoBehaviour
 {
     [SerializeField] private GameObject beam;
-    [SerializeField] private Collider beamCollider;
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject cube;
     [SerializeField] private float shootCooldown = 5f;
     [SerializeField] private float shootRange = 300f;
     [SerializeField] private float moveRange = 750f;
@@ -59,17 +59,28 @@ public class LesserAngel : MonoBehaviour
         canShoot = false;
         yield return new WaitForSeconds(1f);
         
-        beam.transform.rotation = Quaternion.LookRotation((player.transform.position - transform.position).normalized);
-        beam.transform.rotation = Quaternion.Euler(0, beam.transform.rotation.eulerAngles.y, 0);
         beam.SetActive(true);
 
-        yield return new WaitForSeconds(.9f);
+        beam.transform.localScale = new Vector3(1, 1, 0);
+        for (int i = 1; i <= 10; i++){
+            beam.transform.localScale = new Vector3(1, 1, .1f * i);
+            beam.transform.rotation = Quaternion.LookRotation((player.transform.position - transform.position).normalized);
+            yield return new WaitForSeconds(.025f);
+        }
+
+        beam.transform.rotation = Quaternion.LookRotation((player.transform.position - transform.position).normalized);
+        beam.transform.rotation = Quaternion.Euler(0, beam.transform.rotation.eulerAngles.y, 0);
+
+        yield return new WaitForSeconds(.4f);
 
         shootSFX.Play();
         Quaternion rotation = Quaternion.LookRotation((player.transform.position - transform.position).normalized);
 
-        if (beamCollider.bounds.Intersects(playerCollider.bounds)) {
-            player.GetComponent<Hearts>().takeDamage(2);
+        Collider[] hitColliders = Physics.OverlapBox(cube.transform.position, new Vector3(cube.transform.localScale.x/2,cube.transform.localScale.y/2, cube.transform.localScale.z/2), cube.transform.rotation);
+        foreach (var hitCollider in hitColliders) {
+            if (hitCollider == playerCollider) {
+                player.GetComponent<Hearts>().takeDamage(1);
+            }
         }
 
         yield return new WaitForSeconds(.5f);
