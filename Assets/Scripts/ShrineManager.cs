@@ -16,6 +16,8 @@ public class ShrineManager : MonoBehaviour {
     [SerializeField] public float upgradePoints = 0;
     [SerializeField] private GameObject upgrade;
     [SerializeField] private Animator upgradeAnimator;
+    // [SerializeField] private TMP_Text soulText;
+    // [SerializeField] private Animator soulAnim;
 
     private GameObject[] shrines;
     private string chosenUpgrade = "";
@@ -23,6 +25,7 @@ public class ShrineManager : MonoBehaviour {
     private GameObject player;
     private MovementController movementScript;
     private Detection detection;
+    //private int pastPoints = 0;
     
     public string[,] upgrades = {{"Exploding", "0"}, {"Multishot", "0"}, {"Piercing", "0"}, {"Flaming", "0"}, {"Arrow Speed", "0"}, {"Movement Speed", "0"}, {"Damage", "0"}, {"Decay Tolerance", "0"}}; 
     // {"Upgrade Name", "Upgrade Level"}
@@ -41,6 +44,10 @@ public class ShrineManager : MonoBehaviour {
     }
 
     void Update() {
+        // if (upgradePoints != pastPoints){
+        //     soulAnim.Play("acquire");
+        // }
+        // soulText = upgradePoints;
         float distance = Mathf.Infinity;
         Vector3 position = transform.position;
         foreach (GameObject s in shrines) {
