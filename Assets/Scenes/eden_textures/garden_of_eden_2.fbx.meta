@@ -3,7 +3,52 @@ guid: 1a927fce346960f458dd7ef3ccbddfcd
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 0aa6d0a4d6778a347ba932007295e88c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: b3c37fc9cba412648ac463de1160d7c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: 52b35a1ef3f21a94fb09768a40a31385, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: 27685fb816f746d419f51f3606e50193, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: grass
+    second: {fileID: 2100000, guid: 535bae295b49d0e4ea136306f7fb030a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ground
+    second: {fileID: 2100000, guid: 535bae295b49d0e4ea136306f7fb030a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: large flowers
+    second: {fileID: 2100000, guid: a2c033420f5ea8f4c945683cdaa380ad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: leaves 3
+    second: {fileID: 2100000, guid: 0c8998965273db244ac36d2cd4c2a89f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tree 3
+    second: {fileID: 2100000, guid: 2d933319cd1de3244b137abac8c05595, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
