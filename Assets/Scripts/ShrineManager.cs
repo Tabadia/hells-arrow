@@ -14,6 +14,8 @@ public class ShrineManager : MonoBehaviour {
     [SerializeField] private GameObject upMenu;
     [SerializeField] private GameObject sphere;
     [SerializeField] public float upgradePoints = 0;
+    [SerializeField] private GameObject upgrade;
+    [SerializeField] private Animator upgradeAnimator;
 
     private GameObject[] shrines;
     private string chosenUpgrade = "";
@@ -85,6 +87,7 @@ public class ShrineManager : MonoBehaviour {
     }
 
     public void UpgradeClicked() {
+        upgradeAnimator.Play("upgrade");
         chosenUpgrade = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TextMeshProUGUI>().text;
         string str = "";
         if (upgradePoints >= 1f) {
