@@ -11,7 +11,7 @@ public class startGame : MonoBehaviour
     void Start()
     {
         btn.onClick.AddListener(() => {
-            SceneManager.LoadScene("Test Scene");
+            SceneManager.LoadScene("Ice Map");
         });
     }
 
