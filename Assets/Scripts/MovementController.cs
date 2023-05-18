@@ -74,9 +74,6 @@ public class MovementController : MonoBehaviour
 
         rb.freezeRotation = true;
         hearts = GetComponent<Hearts>();
-
-        SaveLoad.SaveData(transform.gameObject, shrinesObject, enemyManager);
-        print(SaveLoad.LoadData());
     }
 
     void Update()

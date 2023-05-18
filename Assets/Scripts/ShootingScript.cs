@@ -31,7 +31,7 @@ public class ShootingScript : MonoBehaviour
     private bool spawnedMaxParticle;
     private bool cooldownActive;
     private ShrineManager shrineScript;
-    private string[,] upgrades;
+    public string[,] upgrades;
 
     public bool isCharging = false;
 

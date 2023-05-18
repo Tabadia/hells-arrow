@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class SaveLoad
 {
-    public static void SaveData(GameObject samurai, GameObject shrine, GameObject enemyManager)
+    public static void SaveData(GameObject samurai, GameObject shrine, GameObject enemyManager, GameObject scoreText)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         Debug.Log(Application.persistentDataPath);
@@ -12,7 +12,7 @@ public static class SaveLoad
 
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        GameData charData = new GameData(samurai, shrine, enemyManager);
+        GameData charData = new GameData(samurai, shrine, enemyManager, scoreText);
 
         formatter.Serialize(stream, charData);
         stream.Close();

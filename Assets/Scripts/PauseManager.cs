@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject scoreText;
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private AudioSource[] audioSourcesToIgnore;
+    [SerializeField] private GameObject samurai;
+    [SerializeField] private GameObject shrineManager;
+    [SerializeField] private GameObject enemies;
     public float playerScore = 0f;
 
     void Start() {
@@ -32,6 +36,12 @@ public class PauseManager : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
         AudioListener.pause = false;
+    }
+
+    public void Save()
+    {
+        SaveLoad.SaveData(samurai, shrineManager, enemies, scoreText);
+        Unpause();
     }
 
     public void Pause()
