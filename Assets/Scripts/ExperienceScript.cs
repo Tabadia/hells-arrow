@@ -9,7 +9,7 @@ public class ExperienceScript : MonoBehaviour
     private GameObject UI;
     [SerializeField] private GameObject parentObject;
     [SerializeField] private float baseScorePoints = 15f;
-    [SerializeField] private float baseShrinePoints = 0.2f; // 5 easy kills to get an upgrade
+    [SerializeField] private float baseShrinePoints = 0.5f; // 5 easy kills to get an upgrade
 
     void Start()
     {

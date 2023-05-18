@@ -16,8 +16,8 @@ public class ShrineManager : MonoBehaviour {
     [SerializeField] public float upgradePoints = 0;
     [SerializeField] private GameObject upgrade;
     [SerializeField] private Animator upgradeAnimator;
-    // [SerializeField] private TMP_Text soulText;
-    // [SerializeField] private Animator soulAnim;
+    [SerializeField] private TMP_Text soulText;
+    [SerializeField] private Animator soulAnim;
 
     private GameObject[] shrines;
     private string chosenUpgrade = "";
@@ -25,7 +25,7 @@ public class ShrineManager : MonoBehaviour {
     private GameObject player;
     private MovementController movementScript;
     private Detection detection;
-    //private int pastPoints = 0;
+    private float pastPoints = 0f;
     
     public string[,] upgrades = {{"Exploding", "0"}, {"Multishot", "0"}, {"Piercing", "0"}, {"Flaming", "0"}, {"Arrow Speed", "0"}, {"Movement Speed", "0"}, {"Damage", "0"}, {"Decay Tolerance", "0"}}; 
     // {"Upgrade Name", "Upgrade Level"}
@@ -41,13 +41,15 @@ public class ShrineManager : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         movementScript = player.GetComponent<MovementController>();
         detection = sphere.GetComponent<Detection>();
+        pastPoints = upgradePoints;
     }
 
     void Update() {
-        // if (upgradePoints != pastPoints){
-        //     soulAnim.Play("acquire");
-        // }
-        // soulText = upgradePoints;
+        if (upgradePoints != pastPoints){
+            soulAnim.Play("acquire");
+        }
+        pastPoints = upgradePoints;
+        soulText.text = upgradePoints.ToString();
         float distance = Mathf.Infinity;
         Vector3 position = transform.position;
         foreach (GameObject s in shrines) {
@@ -103,8 +105,8 @@ public class ShrineManager : MonoBehaviour {
                 if ((upgrades[i, 0] + " " + (int.Parse(upgrades[i, 1]) + 1)) == chosenUpgrade) {
                     upgrades[i, 1] = (int.Parse(upgrades[i, 1]) + 1).ToString(); 
                     if (upgrades[i, 0] == "Movement Speed"){
-                        movementScript.moveSpeed += 0.5f;
-                        movementScript.maxSpeed += 0.5f;
+                        movementScript.moveSpeed += 1f;
+                        movementScript.maxSpeed += 1f;
                     }
                     if (upgrades[i, 0] == "Decay Tolerance"){
                         detection.damageInterval += 1f;
