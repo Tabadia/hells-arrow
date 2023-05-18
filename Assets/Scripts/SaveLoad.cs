@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class SaveLoad
 {
-    public static void SaveData(GameObject samurai)
+    public static void SaveData(GameObject samurai, GameObject shrine, GameObject enemyManager)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         Debug.Log(Application.persistentDataPath);
@@ -12,13 +12,13 @@ public static class SaveLoad
 
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        SamuraiData charData = new SamuraiData(samurai);
+        GameData charData = new GameData(samurai, shrine, enemyManager);
 
         formatter.Serialize(stream, charData);
         stream.Close();
     }
 
-    public static SamuraiData LoadData()
+    public static GameData LoadData()
     {
         string path = Application.persistentDataPath + "/blackicemachine.thequeenisdead";
 
@@ -27,7 +27,7 @@ public static class SaveLoad
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            SamuraiData data = formatter.Deserialize(stream) as SamuraiData;
+            GameData data = formatter.Deserialize(stream) as GameData;
 
             stream.Close();
 

@@ -6164,6 +6164,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 439834159}
     m_Modifications:
+    - target: {fileID: 1720081935, guid: e3b422a50a921c145a4bb6b940090495, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2834993900159789642, guid: e3b422a50a921c145a4bb6b940090495,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -6254,6 +6258,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1568856657}
+    - target: {fileID: 8686776908738092554, guid: e3b422a50a921c145a4bb6b940090495,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8686776908738092565, guid: e3b422a50a921c145a4bb6b940090495,
         type: 3}
       propertyPath: m_Enabled
@@ -9728,6 +9737,11 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2020115726669770387, guid: c143ea848f1bb8443b58c466aec10d96,
+        type: 3}
+      propertyPath: enemyManager
+      value: 
+      objectReference: {fileID: 439834158}
     - target: {fileID: 2020115726669770387, guid: c143ea848f1bb8443b58c466aec10d96,
         type: 3}
       propertyPath: shrinesObject

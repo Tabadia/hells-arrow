@@ -51,6 +51,7 @@ public class MovementController : MonoBehaviour
     [SerializeField] private AudioSource dashSFX;
     [SerializeField] private Animator samuraiAnimator;
     [SerializeField] private GameObject samuraiGameObject;
+    [SerializeField] private GameObject enemyManager;
 
     // these are technically only for debug - allow the Rays for wall collision checks to be drawn
     private RaycastHit lastWallHit;
@@ -74,7 +75,7 @@ public class MovementController : MonoBehaviour
         rb.freezeRotation = true;
         hearts = GetComponent<Hearts>();
 
-        SaveLoad.SaveData(transform.gameObject);
+        SaveLoad.SaveData(transform.gameObject, shrinesObject, enemyManager);
         print(SaveLoad.LoadData());
     }
 
