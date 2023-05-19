@@ -9,11 +9,16 @@ public class EnemyHealth : MonoBehaviour {
     [SerializeField] public float difficulty = 1f; // 1 for basic enemy, 3(?) for bosses
     [SerializeField] private GameObject enemyDrop;
     [SerializeField] private Animator hitEffect;
-
+    [SerializeField] private bool isBoss;
+    
+    private GameObject portal;
     private Slider healthBar;
     private Random rand;
 
     void Start() {
+        if (isBoss){
+            GameObject.FindGameObjectWithTag("Portal");
+        }
         rand = new Random();
         healthBar = GetComponentInChildren<Slider>();
         health = maxHealth;
@@ -25,6 +30,9 @@ public class EnemyHealth : MonoBehaviour {
         if (health <= 0){
             GameObject instantiatedDrop = Instantiate(enemyDrop, transform.position+(new Vector3(0,0.5f,0)), transform.rotation);
             instantiatedDrop.GetComponentInChildren<ExperienceScript>().parentDifficulty = difficulty;
+            if(isBoss){
+                portal.SetActive(true);
+            }
             Destroy(gameObject);
         }
         if (health > maxHealth){
@@ -40,6 +48,12 @@ public class EnemyHealth : MonoBehaviour {
         health -= bowStrength;
         gameObject.transform.GetChild(1).GetComponent<Animator>().Play("hurt", 0);
         hitEffect.Play("hit" + rand.Next(1,3), 0);
+    }
+
+    public void takeDamage(float dmg, bool isFlaming){
+        if(isFlaming){
+            health -= dmg;
+        }
     }
 
     private float CalculateHealth() {

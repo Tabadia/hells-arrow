@@ -4775,7 +4775,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1384903750
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4846,14 +4846,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1384903749}
-  m_LocalRotation: {x: -0, y: 0.75474465, z: -0, w: 0.6560188}
-  m_LocalPosition: {x: 163.08, y: 18.7, z: 77.82}
-  m_LocalScale: {x: 1, y: 5.2126703, z: 6.0940623}
+  m_LocalRotation: {x: -0, y: 0.71014994, z: -0, w: 0.70405054}
+  m_LocalPosition: {x: 243.76, y: 27.39, z: 118.19}
+  m_LocalScale: {x: 1, y: 8, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
-  m_LocalEulerAnglesHint: {x: 0, y: 98.006, z: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 90.494, z: 0}
 --- !u!114 &1384903754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5151,6 +5151,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6259941982972521227, guid: c143ea848f1bb8443b58c466aec10d96,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d222503840c06814ea400e67342f3984, type: 3}
     - target: {fileID: 6259941982972521459, guid: c143ea848f1bb8443b58c466aec10d96,
         type: 3}
       propertyPath: respawnBtn

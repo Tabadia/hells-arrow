@@ -135,7 +135,7 @@ public class Arrow : MonoBehaviour
     {
         for (int i = 0; i < flameLength; i++)
         {
-            enemyHealth.takeDamage(1);
+            enemyHealth.takeDamage(1, true);
             yield return new WaitForSeconds(1f);
         }
         

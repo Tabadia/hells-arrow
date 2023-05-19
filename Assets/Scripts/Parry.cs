@@ -7,6 +7,7 @@ public class Parry : MonoBehaviour
     [SerializeField] private float parryDuration = 1f;
     [SerializeField] private float parryCooldown = 5f;
     [SerializeField] private AudioSource parrySFX;
+    //[SerializeField] private AudioSource blockSFX;
     [SerializeField] private GameObject parry;
     [SerializeField] private Animator parryAnimator;
 

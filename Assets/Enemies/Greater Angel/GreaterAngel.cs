@@ -86,7 +86,7 @@ public class GreaterAngel : MonoBehaviour
             yield return new WaitForSeconds(.1f);
         }
         if (hit){
-            player.GetComponent<Hearts>().takeDamage(1.5f);
+            player.GetComponent<Hearts>().takeDamage(1f);
         }
 
         yield return new WaitForSeconds(.5f);
