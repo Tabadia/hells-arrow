@@ -87,22 +87,7 @@ public class Detection : MonoBehaviour
                 shrineInTrigger = true;
             }
         }
-
-        // Allow player to hang out close to shrines
-        // Collider[] secondaryOverlappingColliders = new Collider[100];
-        // var colNum = Physics.OverlapSphereNonAlloc(playerObject.transform.position, detectionDistance * 0.65f, secondaryOverlappingColliders);
-        // bool shrineInTrigger = false;
-        // for (var i = 0; i < colNum; i++)
-        // {
-            // if (secondaryOverlappingColliders[i].gameObject.CompareTag("Shrine") ||
-                // (!secondaryOverlappingColliders[i].transform.parent.IsUnityNull() &&
-                 // secondaryOverlappingColliders[i].transform.parent.CompareTag("Shrine")))
-            // {
-                // shrineInTrigger = true;
-            // }
-        // }
-
-        // detected = detected || shrineInTrigger;
+        detected = detected || shrineInTrigger;
 
 
         if (detected || !movementController.initMove) {
