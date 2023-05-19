@@ -5012,9 +5012,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 6122300699768233975, guid: bbe504bd714641e4baef10a577efd0de,
     type: 3}
   hitSFX: {fileID: 2654166349925226766}
-  shootSFX: {fileID: 0}
   arrowSpeed: 75
-  multiShotArrow: 1
   multishotAngle: 0
   pierceAmount: 0
   bowStrength: 5

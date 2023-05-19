@@ -8,8 +8,6 @@ public class Arrow : MonoBehaviour
     [SerializeField] private int despawnTime = 20;
     [SerializeField] private float explosionRadius = 5f;
     [SerializeField] private GameObject explosionPrefab;
-    // [SerializeField] private GameObject hitPrefab;
-    // [SerializeField] private GameObject piercePrefab;
     [SerializeField] private AudioSource hitSFX;
     // [SerializeField] private AudioSource shootSFX;
 
@@ -105,18 +103,24 @@ public class Arrow : MonoBehaviour
     }
 
     void Explode() {
+        print("explode");
         Vector3 center = transform.position + transform.forward * explosionRadius/2;
         // Explosion stuff
         var hitColliders = new Collider[1000];
         Physics.OverlapBoxNonAlloc(center, new Vector3(explosionRadius / 2, explosionRadius / 2, explosionRadius / 2), hitColliders, Quaternion.Euler(transform.forward));
         foreach(var hitCollider in hitColliders)
         {
-            if (!hitCollider.CompareTag("Enemy"))
-            {
-                continue;
+            if (hitCollider == null) continue;
+            print(hitCollider);
+            print(hitCollider.gameObject.name);
+            if (hitCollider.CompareTag("Enemy")){
+                enemyHealth = hitCollider.gameObject.GetComponent<EnemyHealth>();
+                enemyHealth.TakeDamage(bowStrength);
+                print("hit enemy");
             }
-            enemyHealth = hitCollider.gameObject.GetComponent<EnemyHealth>();
-            enemyHealth.TakeDamage(bowStrength);
+            else {
+                print("hit something else");
+            }
         }
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
     }

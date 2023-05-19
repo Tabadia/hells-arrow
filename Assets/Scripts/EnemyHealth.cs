@@ -10,14 +10,22 @@ public class EnemyHealth : MonoBehaviour {
     [SerializeField] private Animator hitEffect;
     [SerializeField] private bool isBoss;
     
-    private GameObject portal;
+    private GameObject[] portals;
     private Slider healthBar;
     private Random rand;
     private Camera mainCamera;
 
     void Start() {
         if (isBoss){
-            portal = GameObject.FindGameObjectWithTag("Portal");
+            portals = GameObject.FindGameObjectsWithTag("Portal");
+            print(portals[0]);
+            if(portals[0] != null){
+                print("portal found");
+            }
+            else{
+                print("portal not found");
+            }
+            portals[0].SetActive(false);
         }
         rand = new Random();
         healthBar = GetComponentInChildren<Slider>();
@@ -32,7 +40,8 @@ public class EnemyHealth : MonoBehaviour {
             GameObject instantiatedDrop = Instantiate(enemyDrop, transform.position+(new Vector3(0,0.5f,0)), transform.rotation);
             instantiatedDrop.GetComponentInChildren<ExperienceScript>().parentDifficulty = difficulty;
             if(isBoss){
-                portal.SetActive(true);
+                print("is boss");
+                portals[0].SetActive(true);
             }
             Destroy(gameObject);
         }
