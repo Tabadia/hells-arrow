@@ -184,7 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!95 &2079406279
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -201,7 +201,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &8204777492975484056
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,12 +266,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859173729cfd6104fb67329e3b6045e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  health: 40
+  maxHealth: 25
+  health: 25
   difficulty: 1
   enemyDrop: {fileID: 4094036990376496550, guid: a78cfafb30b220c93a55b0224cde3892,
     type: 3}
   hitEffect: {fileID: 2079406279}
+  isBoss: 0
 --- !u!114 &8204777492975484062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,7 +403,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &8204777493367221656
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -419,7 +420,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &8204777493367221655
 MonoBehaviour:
   m_ObjectHideFlags: 0
