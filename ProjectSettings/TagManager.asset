@@ -12,6 +12,7 @@ TagManager:
   - HealthSlider
   - ShrineManager
   - BossDoor
+  - checkpoint
   layers:
   - Default
   - TransparentFX

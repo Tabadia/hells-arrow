@@ -23,9 +23,12 @@ public class Hearts : MonoBehaviour
     private AudioSource[] allAudioSources;
     private Vector3 startPos;
     public bool isDead = false;
+    private GameObject[] checkpoint;
+    private CapsuleCollider playerCollider;
 
     void Start()
     {
+        playerCollider = gameObject.GetComponent<CapsuleCollider>();
         currentHearts = maxHearts;
         hearts = new GameObject[maxHearts];
         for (int i = 0; i < maxHearts; i++){
@@ -46,6 +49,21 @@ public class Hearts : MonoBehaviour
             gameObject.transform.position = startPos;
         });
         //takeDamage(1.5f);
+    }
+
+    void Update() {
+        //get all game objects with tag checkpoint
+        checkpoint = GameObject.FindGameObjectsWithTag("checkpoint");
+        //loop through objects, check if player is in bounds
+        for (int i = 0; i < checkpoint.GetLength(0); i++) {
+            Collider[] hitColliders = Physics.OverlapSphere(checkpoint[i].transform.position, 4.3f);
+            foreach (var hitCollider in hitColliders) {
+                if (hitCollider == playerCollider) {
+                    startPos = transform.position;
+                }
+            }
+        }
+        //if player in bounds, set start position to player position
     }
 
     public void takeDamage(float dmg)
