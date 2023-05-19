@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class Detection : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class Detection : MonoBehaviour
     [SerializeField] private float damagePerTick = 0.15f;
     [SerializeField] public float damageInterval = 2.5f;
     [SerializeField] private float detectionDistance = 120f;
+    [SerializeField] private AudioSource fightSFX;
+    [SerializeField] private AudioSource ambienceSFX;
 
     private bool detected;
     private int callsSinceDetection;
@@ -28,8 +31,7 @@ public class Detection : MonoBehaviour
     private Hearts hearts;
     private MovementController movementController;
 
-    void Start()
-    {
+    void Start() {
         canvasRect = canvas.GetComponent<RectTransform>();
         canvasScaler = canvas.GetComponent<CanvasScaler>();
         undetRect = unDetectedObject.GetComponent<RectTransform>();
@@ -40,8 +42,7 @@ public class Detection : MonoBehaviour
         movementController = playerObject.GetComponent<MovementController>();
     }
 
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
         // convert the World Position of the player head to UI position on screen
         var position = playerHeadObject.transform.position;
         var yDif = playerObjectCollider.height * .75f;
@@ -63,10 +64,8 @@ public class Detection : MonoBehaviour
         // Figure out "player is detected" by casting a sphere around the player
         Collider[] overlappingColliders = Physics.OverlapSphere(playerObject.transform.position, detectionDistance);
         bool enemyInTrigger = false;
-        foreach (var overlappingCollider in overlappingColliders)
-        {
-            if (overlappingCollider.gameObject.CompareTag("Enemy"))
-            {
+        foreach (var overlappingCollider in overlappingColliders) {
+            if (overlappingCollider.gameObject.CompareTag("Enemy")) {
                 enemyInTrigger = true;
             }
         }
@@ -77,12 +76,10 @@ public class Detection : MonoBehaviour
         Collider[] secondaryOverlappingColliders =
             Physics.OverlapSphere(playerObject.transform.position, detectionDistance * 0.75f);
         bool shrineInTrigger = false;
-        foreach (var overlappingCollider in secondaryOverlappingColliders)
-        {
+        foreach (var overlappingCollider in secondaryOverlappingColliders) {
             if (overlappingCollider.gameObject.CompareTag("Shrine") ||
                 (!overlappingCollider.transform.parent.IsUnityNull() &&
-                 overlappingCollider.transform.parent.CompareTag("Shrine")))
-            {
+                 overlappingCollider.transform.parent.CompareTag("Shrine"))) {
                 shrineInTrigger = true;
             }
         }
@@ -90,32 +87,38 @@ public class Detection : MonoBehaviour
         detected = detected || shrineInTrigger;
 
 
-        if (detected || !movementController.initMove)
-        {
+        if (detected || !movementController.initMove) {
             callsSinceDetection = 0;
             damagePhase = false;
             unDetectedObject.SetActive(false);
             damageObject.SetActive(false);
+            //print(fightSFX.isPlaying);
+            if (!fightSFX.isPlaying && !shrineInTrigger) {
+                ambienceSFX.Stop();
+                fightSFX.Play();
+            }
+            if(!fightSFX.isPlaying && shrineInTrigger && !ambienceSFX.isPlaying) {
+                ambienceSFX.Play();
+            }
         }
-        else
-        {
+        else {
+            if (!fightSFX.isPlaying && !ambienceSFX.isPlaying) {
+                ambienceSFX.Play();
+            }
             callsSinceDetection += 1;
             /* FixedUpdate is called 50 times a second, thus 50f * timeInSeconds
                After a set time of not being near enemies, reset the timer and start counting for damage */
-            if (callsSinceDetection > 50f * secondsBeforeDamage)
-            {
+            if (callsSinceDetection > 50f * secondsBeforeDamage) {
                 damagePhase = true;
                 callsSinceDetection = 0;
             }
 
             // Enable no detection warning
-            if (!damagePhase)
-            {
+            if (!damagePhase) {
                 unDetectedObject.SetActive(true);
             }
 
-            if (damagePhase && callsSinceDetection > 50f * damageInterval)
-            {
+            if (damagePhase && callsSinceDetection > 50f * damageInterval) {
                 // 
                 callsSinceDetection = 0;
                 unDetectedObject.SetActive(false);
@@ -124,5 +127,15 @@ public class Detection : MonoBehaviour
                 hearts.takeDamage(damagePerTick);
             }
         }
+    }
+
+    IEnumerator FadeOut (AudioSource audioSource, float FadeTime) {
+        float startVolume = audioSource.volume;
+        while (audioSource.volume > 0) {
+            audioSource.volume -= startVolume * Time.deltaTime / FadeTime;
+            yield return null;
+        }
+        audioSource.Stop();
+        audioSource.volume = startVolume;
     }
 }

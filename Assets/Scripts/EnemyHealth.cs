@@ -1,21 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Random = System.Random;
 
 public class EnemyHealth : MonoBehaviour {
+
     [SerializeField] private float maxHealth = 20f;
     [SerializeField] private float health = 20f;
     [SerializeField] public float difficulty = 1f; // 1 for basic enemy, 3(?) for bosses
     [SerializeField] private GameObject enemyDrop;
-    [SerializeField] private bool isGiantPanda;
-    [SerializeField] private bool isRedPanda;
-    [SerializeField] private bool isOni;
-    [SerializeField] private bool isTsurara;
-    [SerializeField] private bool isYukinba;
-    [SerializeField] private bool isLesserAngel;
+    [SerializeField] private Animator hitEffect;
 
     private Slider healthBar;
+    private Random rand;
 
     void Start() {
+        rand = new Random();
         healthBar = GetComponentInChildren<Slider>();
         health = maxHealth;
         healthBar.value = CalculateHealth();
@@ -39,24 +38,8 @@ public class EnemyHealth : MonoBehaviour {
     
     public void takeDamage(float bowStrength) {
         health -= bowStrength;
-        if(isRedPanda)
-            gameObject.transform.GetChild(1).GetComponent<Animator>().Play("hurt", 0);
-        if (isGiantPanda)
-        {
-            gameObject.transform.GetChild(1).GetComponent<Animator>().Play("GiantPandaHit", 0);
-        }
-        if(isOni){
-            gameObject.transform.GetChild(1).GetComponent<Animator>().Play("hurt", 0);
-        }
-        if(isTsurara){
-            gameObject.transform.GetChild(1).GetComponent<Animator>().Play("hurt", 0);
-        }
-        if(isYukinba){
-            gameObject.transform.GetChild(1).GetComponent<Animator>().Play("hurt", 0);
-        }
-        if(isLesserAngel){
-            gameObject.transform.GetChild(1).GetComponent<Animator>().Play("hurt", 0);
-        }
+        gameObject.transform.GetChild(1).GetComponent<Animator>().Play("hurt", 0);
+        hitEffect.Play("hit" + rand.Next(1,3), 0);
     }
 
     private float CalculateHealth() {

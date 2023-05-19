@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class Oni : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    private GameObject player;
     [SerializeField] private float atkCooldown = 1f;
     [SerializeField] private float atkRange = 50f;
     [SerializeField] private float sightRange = 500f;
@@ -25,6 +25,7 @@ public class Oni : MonoBehaviour
     public Vector2 relativePoint;
 
     void Start() {
+        player = GameObject.FindGameObjectWithTag("Player");
         playerCollider = player.GetComponent<CapsuleCollider>();
         playerHearts = player.GetComponent<Hearts>();
         canAtk = true;

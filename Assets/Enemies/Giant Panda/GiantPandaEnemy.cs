@@ -23,12 +23,13 @@ public class GiantPandaEnemy : MonoBehaviour
     [SerializeField] private float dashCooldown = 1f;
     [SerializeField] private float speed = 0.3f;
     [SerializeField] private float knockback = 5f;
-    [SerializeField] private GameObject player;
+    private GameObject player;
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject billboard;
     [FormerlySerializedAs("collider")] [SerializeField] private CapsuleCollider Collider;
 
     void Start() {
+        player = GameObject.FindGameObjectWithTag("Player");
         playerHearts = player.GetComponent<Hearts>();
         playerCollider = player.GetComponent<CapsuleCollider>();
         canCharge = true;
@@ -69,7 +70,7 @@ public class GiantPandaEnemy : MonoBehaviour
 
             if (canCharge && isLookingAtPlayer) {
                 isCharging = true;
-                Debug.Log("set charging");
+                //Debug.Log("set charging");
                 //Animating roll
                 animator.SetBool("IsCharging", true);
                 float time = (Time.time - startTime) / totalTime;

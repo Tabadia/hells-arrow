@@ -70,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ece1eaa1f9299a147868ca6be52465fe,
         type: 3}
       propertyPath: m_Name
-      value: Arrow Variant
+      value: Final Arrow
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ece1eaa1f9299a147868ca6be52465fe,
         type: 3}
@@ -117,8 +117,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 4.82}
-  m_Center: {x: 0, y: 0, z: 0.1}
+  m_Size: {x: 0.8412358, y: 0.5, z: 4.82}
+  m_Center: {x: -0.016278148, y: -1.7033776e-15, z: 0.099999905}
 --- !u!198 &6907232500538656866
 ParticleSystem:
   m_ObjectHideFlags: 0

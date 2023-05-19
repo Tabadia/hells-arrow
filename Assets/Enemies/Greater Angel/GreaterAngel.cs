@@ -14,7 +14,7 @@ High health & large
 public class GreaterAngel : MonoBehaviour
 {
     [SerializeField] private GameObject circle;
-    [SerializeField] private GameObject player;
+    private GameObject player;
     [SerializeField] private float shootCooldown = 5f;
     [SerializeField] private float shootRange = 300f;
     [SerializeField] private float moveRange = 750f;
@@ -32,6 +32,7 @@ public class GreaterAngel : MonoBehaviour
     private Collider circleCollider;
 
     void Start() {
+        player = GameObject.FindGameObjectWithTag("Player");
         circleCollider = circle.GetComponent<Collider>();
         playerCollider = player.GetComponent<CapsuleCollider>();
         canShoot = true;

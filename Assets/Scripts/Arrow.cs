@@ -8,6 +8,8 @@ public class Arrow : MonoBehaviour
     [SerializeField] private int despawnTime = 20;
     [SerializeField] private float explosionRadius = 5f;
     [SerializeField] private GameObject explosionPrefab;
+    // [SerializeField] private GameObject hitPrefab;
+    // [SerializeField] private GameObject piercePrefab;
     [SerializeField] private AudioSource hitSFX;
     [SerializeField] private AudioSource shootSFX;
 

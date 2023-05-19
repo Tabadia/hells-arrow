@@ -5,7 +5,7 @@ using UnityEngine;
 public class RedPanda : MonoBehaviour
 {
     [SerializeField] private GameObject fireballPrefab;
-    [SerializeField] private GameObject player;
+    private GameObject player;
     [SerializeField] private float shootCooldown = 5f;
     [SerializeField] private float shootRange = 225f;
     [SerializeField] private AudioSource shootSFX;
@@ -19,6 +19,7 @@ public class RedPanda : MonoBehaviour
     private Vector3 healthPos;
 
     void Start() {
+        player = GameObject.FindGameObjectWithTag("Player");
         playerCollider = player.GetComponent<CapsuleCollider>();
         canShoot = true;
         healthPos = healthBar.transform.position;

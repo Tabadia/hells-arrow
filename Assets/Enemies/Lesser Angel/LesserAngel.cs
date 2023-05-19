@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class LesserAngel : MonoBehaviour
 {
     [SerializeField] private GameObject beam;
-    [SerializeField] private GameObject player;
+    private GameObject player;
     [SerializeField] private GameObject cube;
     [SerializeField] private float shootCooldown = 5f;
     [SerializeField] private float shootRange = 300f;
@@ -25,6 +25,7 @@ public class LesserAngel : MonoBehaviour
     private Vector3 healthPos;
 
     void Start() {
+        player = GameObject.FindGameObjectWithTag("Player");
         playerCollider = player.GetComponent<CapsuleCollider>();
         canShoot = true;
         healthPos = healthBar.transform.position;

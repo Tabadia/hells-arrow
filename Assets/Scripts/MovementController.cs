@@ -52,6 +52,7 @@ public class MovementController : MonoBehaviour
     [SerializeField] private Animator samuraiAnimator;
     [SerializeField] private GameObject samuraiGameObject;
     [SerializeField] private GameObject enemyManager;
+    [SerializeField] private Animator DashAnimator;
 
     // these are technically only for debug - allow the Rays for wall collision checks to be drawn
     private RaycastHit lastWallHit;
@@ -84,6 +85,12 @@ public class MovementController : MonoBehaviour
         {
             dashCooldown += Time.deltaTime;
             dashCooldown = Math.Min(maxDashCooldown, dashCooldown);
+            if (DashAnimator.GetCurrentAnimatorStateInfo(0).IsName("dashReady")){
+                DashAnimator.Play("dashUnready");
+            }
+        }
+        else if (DashAnimator.GetCurrentAnimatorStateInfo(0).IsName("dashUnready")){
+            DashAnimator.Play("dashReady");
         }
         
         if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing && dashCooldown.Equals(maxDashCooldown)) {
