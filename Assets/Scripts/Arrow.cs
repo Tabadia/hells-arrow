@@ -1,7 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
@@ -11,20 +11,20 @@ public class Arrow : MonoBehaviour
     // [SerializeField] private GameObject hitPrefab;
     // [SerializeField] private GameObject piercePrefab;
     [SerializeField] private AudioSource hitSFX;
-    [SerializeField] private AudioSource shootSFX;
+    // [SerializeField] private AudioSource shootSFX;
 
     public float arrowSpeed;
-    public int multiShotArrow;
+    // public int multiShotArrow;
     public float multishotAngle;
-    public int pierceAmount = 0;
+    public int pierceAmount;
     public float bowStrength;
     public bool exploding;
     public bool flame;
     public int flameLength;
     private EnemyHealth enemyHealth;
     private float timer;
-    private bool colliding = false;
-    private bool exploded = false;
+    private bool colliding;
+    private bool exploded;
     private Vector3 endPos;
     private Vector3 worldPosition;
     private Vector3 moveVector;
@@ -40,11 +40,10 @@ public class Arrow : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         // Converts mouse position to world position
         pastHits = new int[pierceAmount];
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 mouse = Input.mousePosition;
         Ray castPoint = Camera.main.ScreenPointToRay(mouse);
-        RaycastHit hit;
-        if (Physics.Raycast(castPoint, out hit))
+        if (Physics.Raycast(castPoint, out var hit))
         {
             endPos = hit.point;
             if (endPos.y <= player.transform.position.y) endPos.y = player.transform.position.y+1;
@@ -65,32 +64,35 @@ public class Arrow : MonoBehaviour
         // Move to direction
         if (!colliding)
         {
-            transform.position += moveDirection * arrowSpeed * Time.deltaTime;
-
+            transform.position +=  arrowSpeed * Time.deltaTime * moveDirection;
+            var curPos = transform.position;
+            
             // Raycast stuff
-            RaycastHit[] hits = Physics.RaycastAll(new Ray(prevPos, (transform.position - prevPos).normalized), (transform.position - prevPos).magnitude);
-
-            for (int i = 0; i < hits.Length; i++)
+            var hits = new RaycastHit[pierceAmount+1];
+            var hitNum = Physics.RaycastNonAlloc(new Ray(prevPos, (curPos - prevPos).normalized), hits, (curPos - prevPos).magnitude);
+            
+            for (int i = 0; i < hitNum; i++)
             {
-                if (hits[i].collider.gameObject.tag != "Player") {
-                    if (hits[i].collider.gameObject.tag == "Enemy") {
-                        if (pierceAmount > timesPierced){
-                            if(pastHits.Contains(hits[i].collider.gameObject.GetInstanceID())){
-                                print("duplicate");
-                            }
-                            else {
-                                print("pierced");
-                                OnHit(hits[i]);
+                if (!hits[i].IsUnityNull() && !hits[i].collider.gameObject.CompareTag("Player"))
+                {
+                    if (hits[i].collider.gameObject.CompareTag("Enemy"))
+                    {
+                        if (pierceAmount > timesPierced)
+                        {
+                            if (!pastHits.Contains(hits[i].collider.gameObject.GetInstanceID()))
+                            {
                                 colliding = false;
                                 pastHits[i] = hits[i].collider.gameObject.GetInstanceID();
                                 timesPierced++;
                             }
                         }
-                        else {
+                        else
+                        {
                             OnHit(hits[i]);
                         }
                     }
-                    else {
+                    else
+                    {
                         OnHit(hits[i]);
                     }
                 }
@@ -105,13 +107,16 @@ public class Arrow : MonoBehaviour
     void Explode() {
         Vector3 center = transform.position + transform.forward * explosionRadius/2;
         // Explosion stuff
-        Collider[] hitColliders = Physics.OverlapBox(center, new Vector3(explosionRadius / 2, explosionRadius / 2, explosionRadius / 2), Quaternion.Euler(transform.forward));
+        var hitColliders = new Collider[1000];
+        Physics.OverlapBoxNonAlloc(center, new Vector3(explosionRadius / 2, explosionRadius / 2, explosionRadius / 2), hitColliders, Quaternion.Euler(transform.forward));
         foreach(var hitCollider in hitColliders)
         {
-            if(hitCollider.CompareTag("Enemy")) {
-                enemyHealth = hitCollider.gameObject.GetComponent<EnemyHealth>();
-                enemyHealth.takeDamage(bowStrength);
+            if (!hitCollider.CompareTag("Enemy"))
+            {
+                continue;
             }
+            enemyHealth = hitCollider.gameObject.GetComponent<EnemyHealth>();
+            enemyHealth.TakeDamage(bowStrength);
         }
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
     }
@@ -124,18 +129,18 @@ public class Arrow : MonoBehaviour
             enemyHealth = hit.collider.gameObject.GetComponent<EnemyHealth>();
             
             /*if(!shootSFX.isPlaying)*/ hitSFX.Play();
-            enemyHealth.takeDamage(bowStrength);
+            enemyHealth.TakeDamage(bowStrength);
             if(flame) {
                 StartCoroutine(FireDmg(enemyHealth));
             }
         }
     }
 
-    IEnumerator FireDmg(EnemyHealth enemyHealth)
+    IEnumerator FireDmg(EnemyHealth health)
     {
         for (int i = 0; i < flameLength; i++)
         {
-            enemyHealth.takeDamage(1, true);
+            health.TakeDamage(1, true);
             yield return new WaitForSeconds(1f);
         }
         

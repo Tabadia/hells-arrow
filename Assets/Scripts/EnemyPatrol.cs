@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour
@@ -20,23 +18,18 @@ public class EnemyPatrol : MonoBehaviour
 
     void Update()
     {   
+        isPatrolling = !charging.inSightRange;
 
-        if (charging.inSightRange) {
-            isPatrolling = false;
-        } else {
-            isPatrolling = true;
+        if (!isPatrolling)
+        {
+            return;
         }
 
-        if (isPatrolling) {
-            
-            if (transform.position != points[current].position) {
-                transform.position = Vector3.MoveTowards(transform.position, points[current].position, speed * Time.deltaTime);
-            }
-            else {
-                current = (current + 1) % points.Length;
-            }
+        if (transform.position != points[current].position) {
+            transform.position = Vector3.MoveTowards(transform.position, points[current].position, speed * Time.deltaTime);
         }
-        
-
+        else {
+            current = (current + 1) % points.Length;
+        }
     }
 }

@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Charging : MonoBehaviour
 {
@@ -9,27 +8,27 @@ public class Charging : MonoBehaviour
     private Vector3 moveDirection;
     private float distance;
     private Vector3 targetPos;
-    private CapsuleCollider playerCollider;
+    // private CapsuleCollider playerCollider;
     private float startTime;
     private float totalTime;
-    private bool isCharging = false;
+    private bool isCharging;
     private bool canCharge = true;
     // for patrolling script
-    public bool inSightRange = false;
-    private bool isLookingAtPlayer = false;
+    public bool inSightRange;
+    private bool isLookingAtPlayer;
 
     [SerializeField] private float sightRange = 500f;
-    [SerializeField] private float damageDealt;
+    // [SerializeField] private float damageDealt;
     [SerializeField] private float dashCooldown = 1f;
     [SerializeField] private float speed = 0.3f;
     [SerializeField] private float knockback = 5f;
     [SerializeField] private GameObject player;
-    [FormerlySerializedAs("collider")] [SerializeField] private CapsuleCollider Collider;
+    // [FormerlySerializedAs("collider")] [SerializeField] private CapsuleCollider Collider;
     
     void Start()
     {
         playerHearts = player.GetComponent<Hearts>();
-        playerCollider = player.GetComponent<CapsuleCollider>();
+        // playerCollider = player.GetComponent<CapsuleCollider>();
         canCharge = true;
     }
 
@@ -48,13 +47,11 @@ public class Charging : MonoBehaviour
                 moveDirection = (targetPos - transform.position).normalized;
 
                 isLookingAtPlayer = false;
-                RaycastHit hit;
                 for (float i = -1; i <= 1; i+=0.25f)
                 {
-                    Debug.DrawRay(new Vector3(transform.position.x, player.transform.position.y, transform.position.z), Quaternion.Euler(new Vector3(0,5f*i,0))*transform.forward*sightRange/2f, Color.black);
                     Physics.Raycast(
                         new Ray(new Vector3(transform.position.x, player.transform.position.y, transform.position.z),
-                            Quaternion.Euler(new Vector3(0, 5f*i, 0)) * transform.forward), out hit, sightRange);
+                            Quaternion.Euler(new Vector3(0, 5f*i, 0)) * transform.forward), out var hit, sightRange);
                     if (hit.point != Vector3.zero && hit.collider.gameObject.CompareTag("Player"))
                     {
                         isLookingAtPlayer = true;
@@ -75,7 +72,6 @@ public class Charging : MonoBehaviour
 
             if (canCharge && isLookingAtPlayer) {
                 isCharging = true;
-                // Debug.Log(time);
                 float time = (Time.time - startTime) / totalTime;
                 transform.position = Vector3.Slerp(transform.position, targetPos, time);
             }
@@ -92,12 +88,12 @@ public class Charging : MonoBehaviour
     void OnCollisionEnter(Collision col) 
     {
         if (col.gameObject.CompareTag("Player"))
-        {    StartCoroutine(Knockback());
+        {    
+            StartCoroutine(Knockback());
         }
     }
 
     IEnumerator Cooldown() {
-        
         isCharging = false;
         canCharge = false;
         yield return new WaitForSeconds(dashCooldown);   
@@ -105,7 +101,7 @@ public class Charging : MonoBehaviour
     }
 
     IEnumerator Knockback() {
-        playerHearts.takeDamage(0.5f);
+        playerHearts.TakeDamage(0.5f);
         
         // Player knockback code here
         Vector3 playerPos = player.transform.position;

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyShooting : MonoBehaviour
@@ -10,13 +9,13 @@ public class EnemyShooting : MonoBehaviour
     [SerializeField] private float range = 100f;
     [SerializeField] private AudioSource shootSFX;
 
-    private CapsuleCollider playerCollider;
-    private bool canShoot = false;
+    // private CapsuleCollider playerCollider;
+    private bool canShoot;
     private float distance;
 
     void Start() {
         canShoot = true;
-        playerCollider = player.GetComponent<CapsuleCollider>();
+        // playerCollider = player.GetComponent<CapsuleCollider>();
     }
 
     void Update() {

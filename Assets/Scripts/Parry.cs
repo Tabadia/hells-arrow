@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Parry : MonoBehaviour
@@ -12,13 +11,7 @@ public class Parry : MonoBehaviour
     [SerializeField] private Animator parryAnimator;
 
     private bool canParry = true;
-    public bool isParrying = false;
-
-    void Start()
-    {
-        
-    }
-
+    public bool isParrying;
 
     void Update()
     {
@@ -37,13 +30,10 @@ public class Parry : MonoBehaviour
         parry.SetActive(true);
         parrySFX.Play();
         parryAnimator.Play("parry");
-        print("Parrying");
         yield return new WaitForSeconds(parryDuration);
-        print("Not parrying");
         parry.SetActive(false);
         isParrying = false;
-        yield return new WaitForSeconds(parryCooldown);
-        print("Can parry again"); 
+        yield return new WaitForSeconds(parryCooldown); 
         canParry = true;
     }
 }

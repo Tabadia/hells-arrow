@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using Random = System.Random;
 
 public class EnemyHealth : MonoBehaviour {
-
     [SerializeField] private float maxHealth = 20f;
     [SerializeField] private float health = 20f;
     [SerializeField] public float difficulty = 1f; // 1 for basic enemy, 3(?) for bosses
@@ -14,6 +13,7 @@ public class EnemyHealth : MonoBehaviour {
     private GameObject portal;
     private Slider healthBar;
     private Random rand;
+    private Camera mainCamera;
 
     void Start() {
         if (isBoss){
@@ -23,6 +23,7 @@ public class EnemyHealth : MonoBehaviour {
         healthBar = GetComponentInChildren<Slider>();
         health = maxHealth;
         healthBar.value = CalculateHealth();
+        mainCamera = Camera.main;
     }
 
     void Update() {
@@ -38,19 +39,17 @@ public class EnemyHealth : MonoBehaviour {
         if (health > maxHealth){
             health = maxHealth;
         }
-
-        Camera camera = Camera.main;
  
-        healthBar.transform.LookAt(healthBar.transform.position + camera.transform.rotation * Vector3.back, camera.transform.rotation * Vector3.up);
+        healthBar.transform.LookAt(healthBar.transform.position + mainCamera.transform.rotation * Vector3.back, mainCamera.transform.rotation * Vector3.up);
     }
     
-    public void takeDamage(float bowStrength) {
+    public void TakeDamage(float bowStrength) {
         health -= bowStrength;
         gameObject.transform.GetChild(1).GetComponent<Animator>().Play("hurt", 0);
         hitEffect.Play("hit" + rand.Next(1,3), 0);
     }
 
-    public void takeDamage(float dmg, bool isFlaming){
+    public void TakeDamage(float dmg, bool isFlaming){
         if(isFlaming){
             health -= dmg;
         }

@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShootingScript : MonoBehaviour
@@ -9,10 +7,10 @@ public class ShootingScript : MonoBehaviour
     [SerializeField] private float cooldown = .5f;
     [SerializeField] private float maxCharge = 1f;
     [SerializeField] public int arrowAmount = 1;
-    [SerializeField] public int pierceAmount = 0;
-    [SerializeField] public bool exploding = false;
-    [SerializeField] public bool flame = false;
-    [SerializeField] private int flameLength = 0;
+    [SerializeField] public int pierceAmount;
+    [SerializeField] public bool exploding;
+    [SerializeField] public bool flame;
+    [SerializeField] private int flameLength;
     [SerializeField] private float minBowStrength = 1f;
     [SerializeField] private float maxBowStrength = 10f;
     [SerializeField] private float minArrowSpeed = 50f;
@@ -28,16 +26,18 @@ public class ShootingScript : MonoBehaviour
 
     private float timer;
     private float fullParticleTimer;
-    private bool spawnedMaxParticle;
+    // private bool spawnedMaxParticle;
     private bool cooldownActive;
     private ShrineManager shrineScript;
     public string[,] upgrades;
 
-    public bool isCharging = false;
+    public bool isCharging;
+    private int chargingBoolID;
 
     void Start() {
         shrineScript = shrinesObject.GetComponent<ShrineManager>();
         upgrades = shrineScript.upgrades;
+        chargingBoolID = Animator.StringToHash("IsCharging");
     }
 
     void Update() {
@@ -65,20 +65,20 @@ public class ShootingScript : MonoBehaviour
                 else timer = 0;
                 isCharging = false;
 
-                spawnedMaxParticle = false;
+                // spawnedMaxParticle = false;
             }
         }
 
-        // Increment by time.deltatime when charging
+        // Increment by time.deltaTime when charging
         if (isCharging)
         {
             fullParticleTimer += Time.deltaTime;
-            samuraiAnimator.SetBool("IsCharging", true);
+            samuraiAnimator.SetBool(chargingBoolID, true);
         }
         else
         {
             fullParticleTimer = 0;
-            samuraiAnimator.SetBool("IsCharging", false);
+            samuraiAnimator.SetBool(chargingBoolID, false);
         }
 
         // Spawn a particle if the charge time is more than maxCharge
@@ -90,7 +90,7 @@ public class ShootingScript : MonoBehaviour
 
     private void Shoot(float chargeTime) {
 
-        // Sets values to minimum and max incase they get messed with, converts charge time to stats
+        // Sets values to minimum and max in case they get messed with, converts charge time to stats
         if (chargeTime > maxCharge) chargeTime = maxCharge;
 
         float bowStrength = maxBowStrength;
@@ -147,26 +147,28 @@ public class ShootingScript : MonoBehaviour
             float spacing = -(multishotAngle * arrowAmount / 4);
             for (int i = 0; i < arrowAmount; i++)
             {
-                prefab.GetComponent<Arrow>().multishotAngle = spacing;
-                prefab.GetComponent<Arrow>().pierceAmount = pierceAmount;
-                prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed * speedMult;
-                prefab.GetComponent<Arrow>().bowStrength = bowStrength;
-                prefab.GetComponent<Arrow>().exploding = exploding;
-                prefab.GetComponent<Arrow>().flame = flame;
-                prefab.GetComponent<Arrow>().flameLength = flameLength;
-                Instantiate(prefab, pos, transform.rotation);
+                var arrowObj = Instantiate(prefab, pos, transform.rotation);
+                var scriptArrow = arrowObj.GetComponent<Arrow>();
+                scriptArrow.multishotAngle = spacing;
+                scriptArrow.pierceAmount = pierceAmount;
+                scriptArrow.arrowSpeed = arrowSpeed * speedMult;
+                scriptArrow.bowStrength = bowStrength;
+                scriptArrow.exploding = exploding;
+                scriptArrow.flame = flame;
+                scriptArrow.flameLength = flameLength;
                 spacing += multishotAngle;
             }
         }
         else {
-            prefab.GetComponent<Arrow>().multishotAngle = 0;
-            prefab.GetComponent<Arrow>().pierceAmount = pierceAmount;
-            prefab.GetComponent<Arrow>().arrowSpeed = arrowSpeed * speedMult;
-            prefab.GetComponent<Arrow>().bowStrength = bowStrength;
-            prefab.GetComponent<Arrow>().exploding = exploding;
-            prefab.GetComponent<Arrow>().flame = flame;
-            prefab.GetComponent<Arrow>().flameLength = flameLength;
-            Instantiate(prefab, pos, transform.rotation);
+            var arrowObj = Instantiate(prefab, pos, transform.rotation);
+            var scriptArrow = arrowObj.GetComponent<Arrow>();
+            scriptArrow.multishotAngle = 0;
+            scriptArrow.pierceAmount = pierceAmount;
+            scriptArrow.arrowSpeed = arrowSpeed * speedMult;
+            scriptArrow.bowStrength = bowStrength;
+            scriptArrow.exploding = exploding;
+            scriptArrow.flame = flame;
+            scriptArrow.flameLength = flameLength;
         }
 
         // Start cooldown

@@ -113,7 +113,7 @@ public class GiantPandaEnemy : MonoBehaviour
 
     IEnumerator Knockback()
     {
-        playerHearts.takeDamage(0.5f);
+        playerHearts.TakeDamage(0.5f);
 
         // Player knockback code here
         Vector3 playerPos = player.transform.position;

@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MovementController : MonoBehaviour
 {
     // Majority of these are only public so that they can be tweaked on the fly via inspector - should be privatized when dialed in
     [SerializeField] public float moveSpeed = 4;
-    public float Gravity = -15f;
+    [FormerlySerializedAs("Gravity")] public float gravity = -15f;
     public float maxSpeed = 16; // This needs to remain public
     public float dashMult = 2.7f;
     public float dashTime = 0.15f;
@@ -43,20 +44,19 @@ public class MovementController : MonoBehaviour
     private float verticalInput;
     private float horizontalInput;
     public bool initMove;
-    private Quaternion cameraLook;
-    [NonSerialized] public bool isKnockedBack = false;
+    // private Quaternion cameraLook;
+    [NonSerialized] public bool isKnockedBack;
     [NonSerialized] public float preKnockbackMaxSpeed;
     [NonSerialized] public float knockbackTime;
     [SerializeField] private AudioSource runSFX;
     [SerializeField] private AudioSource dashSFX;
     [SerializeField] private Animator samuraiAnimator;
-    [SerializeField] private GameObject samuraiGameObject;
+    // [SerializeField] private GameObject samuraiGameObject;
     [SerializeField] private GameObject enemyManager;
     [SerializeField] private Animator DashAnimator;
 
-    // these are technically only for debug - allow the Rays for wall collision checks to be drawn
-    private RaycastHit lastWallHit;
-    private Vector3 lastWallHitPos;
+    private int runningBoolID;
+    private int chargingBoolID;
 
     void Start()
     {
@@ -65,7 +65,7 @@ public class MovementController : MonoBehaviour
         forward.y = 0;
         forward = Vector3.Normalize(forward);
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
-        cameraLook = Camera.main.transform.rotation;
+        // cameraLook = Camera.main.transform.rotation;
         
         maxDashCooldown = dashCooldown;
         
@@ -75,6 +75,9 @@ public class MovementController : MonoBehaviour
 
         rb.freezeRotation = true;
         hearts = GetComponent<Hearts>();
+
+        runningBoolID = Animator.StringToHash("IsRunning");
+        chargingBoolID = Animator.StringToHash("IsCharging");
     }
 
     void Update()
@@ -100,7 +103,6 @@ public class MovementController : MonoBehaviour
                 dashCooldown = 0f;
                 Dash();
             }
-            else print(shootingScript.isCharging);
         }
         
         isMoveDown = !horizontalInput.Equals(0) || !verticalInput.Equals(0);
@@ -125,22 +127,17 @@ public class MovementController : MonoBehaviour
                 transform.rotation = Quaternion.Lerp(transform.rotation,
                     Quaternion.LookRotation(right * horizontalInput + forward * verticalInput, Vector3.up), .30f);
             }
-            samuraiAnimator.SetBool("IsRunning", true);
-            if (!runSFX.isPlaying && !samuraiAnimator.GetBool("IsCharging")) { runSFX.Play(); }
-            if (samuraiAnimator.GetBool("IsCharging")){
+            samuraiAnimator.SetBool(runningBoolID, true);
+            if (!runSFX.isPlaying && !samuraiAnimator.GetBool(chargingBoolID)) { runSFX.Play(); }
+            if (samuraiAnimator.GetBool(chargingBoolID)){
                 runSFX.Stop();
             }
         }
         else
         {
-            samuraiAnimator.SetBool("IsRunning", false);
+            samuraiAnimator.SetBool(runningBoolID, false);
             runSFX.Stop();
         }
-        
-        // Debug stuff for movement and wall checks, can be removed anytime but i like having it for now
-        Debug.DrawRay(rb.position, rb.velocity, Color.red);
-        Debug.DrawRay(lastWallHit.point, Vector3.up, Color.green);
-        Debug.DrawRay(lastWallHitPos, (lastWallHit.point - lastWallHitPos).normalized * (lastWallHit.distance - cc.radius*2), Color.blue);
     }
 
     private void FixedUpdate()
@@ -150,8 +147,8 @@ public class MovementController : MonoBehaviour
             bool isIce = false;   
             foreach (Vector3 probePosition in gcScript.probePositions) // Look through each probe defined in the ground check script
             {
-                RaycastHit hit; // Raycast to see what type of terrain player is on
-                Physics.Raycast(new Ray(probePosition, Vector3.down), out hit, Mathf.Infinity, gcScript.collisionMask); // already known to be grounded so distance doesnt matter, hence infinite distance 
+                // Raycast to see what type of terrain player is on
+                Physics.Raycast(new Ray(probePosition, Vector3.down), out var hit, Mathf.Infinity, gcScript.collisionMask); // already known to be grounded so distance doesnt matter, hence infinite distance 
                 if (hit.point != Vector3.zero)
                 {
                     if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ice"))
@@ -160,15 +157,12 @@ public class MovementController : MonoBehaviour
                     }
                 }
             }
-        
-            if (isIce)
+
+            ppm.dynamicFriction = isIce switch
             {
-                ppm.dynamicFriction = iceFriction;
-            }
-            else
-            {
-                ppm.dynamicFriction = rockFriction;
-            }
+                true => iceFriction,
+                false => rockFriction,
+            };
         }
         else
         {
@@ -179,15 +173,17 @@ public class MovementController : MonoBehaviour
         rightMove = horizontalInput * moveSpeed * right;
         upMove = verticalInput * moveSpeed * forward;
         
+        var veloc = rb.velocity;
+        
         Vector3 tempHoriz = Vector3.zero;
         if (shootingScript.isCharging)
         {  // Movement when Charging
-            tempHoriz = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
+            tempHoriz = new Vector3(veloc.x, 0.0f, veloc.z);
             tempHoriz = Vector3.ClampMagnitude(tempHoriz + rightMove + upMove, maxSpeed / chargingSpeedMultiplier);
         }
         else if (!shrineScript.inMenu)
         {  // Regular Movement
-            tempHoriz = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
+            tempHoriz = new Vector3(veloc.x, 0.0f, veloc.z);
             tempHoriz = Vector3.ClampMagnitude(tempHoriz + rightMove + upMove, maxSpeed);
         }
 
@@ -206,17 +202,15 @@ public class MovementController : MonoBehaviour
 
         if (!gcScript.isGrounded) // Logic code to find nearest ground and stick to it
         {
-            List<RaycastHit> rayHits = new List<RaycastHit>();
-            rayHits.Add(new RaycastHit()); // Initialize a default raycast to (0,0,0) for when none hit
+            List<RaycastHit> rayHits = new List<RaycastHit>{new()};
             foreach (Vector3 probePosition in gcScript.probePositions) // Iterate through each probe
             {
-                RaycastHit hit;
-                Physics.Raycast(new Ray(probePosition, Vector3.down), out hit, Mathf.Infinity, gcScript.collisionMask); // Raycast to the nearest ground object below player
+                Physics.Raycast(new Ray(probePosition, Vector3.down), out var hit, Mathf.Infinity, gcScript.collisionMask); // Raycast to the nearest ground object below player
                 rayHits.Add(hit);
             }
         
             float highestDist = 0f; // Logic to make sure we don't clip into the ground on slopes
-            int indexHighest = 0; // Basically, if multiple probes hit someething, the one with the highest Y value is used
+            int indexHighest = 0; // Basically, if multiple probes hit something, the one with the highest Y value is used
             for (int i = 0; i < gcScript.probePositions.Length; i++)
             {
                 if (rayHits[i].distance > highestDist)
@@ -234,7 +228,7 @@ public class MovementController : MonoBehaviour
             }
             else
             {
-                rb.velocity = new Vector3(rb.velocity.x, Gravity, rb.velocity.z); // If no ground is below, just apply gravity and pray
+                rb.velocity = new Vector3(rb.velocity.x, gravity, rb.velocity.z); // If no ground is below, just apply gravity and pray
             }
         }
         
@@ -243,8 +237,6 @@ public class MovementController : MonoBehaviour
         {
             dashStartSpeed = Vector3.zero; // Make sure player doesn't keep going after dash ends
                 
-            lastWallHit = moveHit; // Debug
-            lastWallHitPos = rb.position; // Debug
             rb.velocity = Vector3.zero; // Stop player movement when colliding with wall
             var distance = moveHit.distance - cc.radius; // Account for Player Radius
             
@@ -279,8 +271,7 @@ public class MovementController : MonoBehaviour
     RaycastHit MoveCheck()
     {
         Vector3 velocDirection = new Vector3(rb.velocity.x, 0f, rb.velocity.z).normalized;
-        RaycastHit hit;
-        if (Physics.Raycast(new Ray(new Vector3(transform.position.x, transform.position.y - cc.height/2, transform.position.z), velocDirection), out hit, rb.velocity.magnitude*Time.deltaTime*1.2f))
+        if (Physics.Raycast(new Ray(new Vector3(transform.position.x, transform.position.y - cc.height/2, transform.position.z), velocDirection), out var hit, rb.velocity.magnitude*Time.deltaTime*1.2f))
         { // Check for walls within the movement change next frame, times 1.2 basically to account for player size
             return hit;
         }
