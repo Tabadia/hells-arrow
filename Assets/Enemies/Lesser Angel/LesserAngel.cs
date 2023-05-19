@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -80,7 +78,7 @@ public class LesserAngel : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapBox(cube.transform.position, new Vector3(cube.transform.localScale.x/2,cube.transform.localScale.y/2, cube.transform.localScale.z/2), cube.transform.rotation);
         foreach (var hitCollider in hitColliders) {
             if (hitCollider == playerCollider) {
-                player.GetComponent<Hearts>().takeDamage(1);
+                player.GetComponent<Hearts>().TakeDamage(1);
             }
         }
 

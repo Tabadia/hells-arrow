@@ -1,20 +1,18 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject scoreText;
-    [SerializeField] private AudioMixer audioMixer;
+    // [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private AudioSource[] audioSourcesToIgnore;
     [SerializeField] private GameObject samurai;
     [SerializeField] private GameObject shrineManager;
     [SerializeField] private GameObject enemies;
     [SerializeField] private AudioSource UImusic;
 
-    public float playerScore = 0f;
+    public float playerScore;
 
     void Start() {
         foreach(AudioSource audioSource in audioSourcesToIgnore) {

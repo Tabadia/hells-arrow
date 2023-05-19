@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class OcclusionTransparency : MonoBehaviour
 {
@@ -23,7 +21,6 @@ public class OcclusionTransparency : MonoBehaviour
         }
     
         pastHitObjects = currentHitObjects.ToArray();
-        //print(currentHitObjects.Count);
     }
     
     private void OnDrawGizmos()

@@ -6,8 +6,8 @@ public class Hearts : MonoBehaviour
 {
     [SerializeField] private int maxHearts = 3;
     [SerializeField] private GameObject heartContainer;
-    [SerializeField] private GameObject heartPrefab;
-    [SerializeField] private GameObject damageEffect;
+    // [SerializeField] private GameObject heartPrefab;
+    // [SerializeField] private GameObject damageEffect;
     [SerializeField] private Image effectRenderer;
     [SerializeField] private float effectFadeDuration = 0.2f;
     [SerializeField] private float effectOpacity = 0.54f;
@@ -22,7 +22,7 @@ public class Hearts : MonoBehaviour
     private float currentHearts;
     private AudioSource[] allAudioSources;
     private Vector3 startPos;
-    public bool isDead = false;
+    public bool isDead;
     private GameObject[] checkpoint;
     private CapsuleCollider playerCollider;
 
@@ -66,7 +66,7 @@ public class Hearts : MonoBehaviour
         //if player in bounds, set start position to player position
     }
 
-    public void takeDamage(float dmg)
+    public void TakeDamage(float dmg)
     {
         hurtSFX.Play();
         if (currentHearts <= 0) currentHearts = 0;
@@ -77,7 +77,6 @@ public class Hearts : MonoBehaviour
             {
                 hearts[i].GetComponent<Image>().sprite = emptyHeart;
             }
-            print("You died");
             deathScreen.SetActive(true);
             AudioListener.pause = true;
             isDead = true;
@@ -99,26 +98,26 @@ public class Hearts : MonoBehaviour
                 else { hearts[i].GetComponent<Image>().sprite = halfHeart; }
             }
         }
-        StartCoroutine(hitEffect());
+        StartCoroutine(HitEffect());
     }
 
-    IEnumerator hitEffect()
+    IEnumerator HitEffect()
     {
         effectRenderer.color = new Color(effectRenderer.color.r, effectRenderer.color.g, effectRenderer.color.b, effectOpacity);
         yield return new WaitForSeconds(0.2f);
-        StartCoroutine(fadeOut(effectRenderer, effectFadeDuration));
+        StartCoroutine(FadeOut(effectRenderer, effectFadeDuration));
     }
 
-    IEnumerator fadeOut(Image effectRenderer, float duration) {
+    IEnumerator FadeOut(Image effect, float duration) {
         float counter = 0;
-        Color spriteColor = effectRenderer.color;
+        Color spriteColor = effect.color;
 
         while (counter < duration)
         {
             counter += Time.deltaTime;
             float alpha = Mathf.Lerp(effectOpacity, 0, counter / duration);
 
-            effectRenderer.color = new Color(spriteColor.r, spriteColor.g, spriteColor.b, alpha);
+            effect.color = new Color(spriteColor.r, spriteColor.g, spriteColor.b, alpha);
             yield return null;
         }
     }

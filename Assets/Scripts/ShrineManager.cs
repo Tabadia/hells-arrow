@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using TMPro;
-using Random=UnityEngine.Random;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ShrineManager : MonoBehaviour {
     [SerializeField] private Button[] upOptions;
@@ -13,7 +11,7 @@ public class ShrineManager : MonoBehaviour {
     [SerializeField] private GameObject shrineText;
     [SerializeField] private GameObject upMenu;
     [SerializeField] private GameObject sphere;
-    [SerializeField] public float upgradePoints = 0;
+    [SerializeField] public float upgradePoints;
     [SerializeField] private GameObject upgrade;
     [SerializeField] private Animator upgradeAnimator;
     [SerializeField] private TMP_Text soulText;
@@ -29,15 +27,15 @@ public class ShrineManager : MonoBehaviour {
     
     public string[,] upgrades = {{"Exploding", "0"}, {"Multishot", "0"}, {"Piercing", "0"}, {"Flaming", "0"}, {"Arrow Speed", "0"}, {"Movement Speed", "0"}, {"Damage", "0"}, {"Decay Tolerance", "0"}}; 
     // {"Upgrade Name", "Upgrade Level"}
-    public bool inMenu = false;
+    public bool inMenu;
 
-    ShootingScript shootingScript;
-    Shrines shrineScript;
+    // ShootingScript shootingScript;
+    // Shrines shrineScript;
 
     void Start() {
         shrines = GameObject.FindGameObjectsWithTag("Shrine");
-        shootingScript = GetComponent<ShootingScript>();
-        shrineScript = GetComponent<Shrines>();
+        // shootingScript = GetComponent<ShootingScript>();
+        // shrineScript = GetComponent<Shrines>();
         player = GameObject.FindGameObjectWithTag("Player");
         movementScript = player.GetComponent<MovementController>();
         detection = sphere.GetComponent<Detection>();
@@ -49,9 +47,9 @@ public class ShrineManager : MonoBehaviour {
             soulAnim.Play("acquire");
         }
         pastPoints = upgradePoints;
-        soulText.text = upgradePoints.ToString();
+        soulText.text = upgradePoints.ToString("N");
         float distance = Mathf.Infinity;
-        Vector3 position = transform.position;
+        // Vector3 position = transform.position;
         foreach (GameObject s in shrines) {
             float curDistance = s.GetComponent<Shrines>().distance;
             if (curDistance < distance) {
@@ -59,36 +57,31 @@ public class ShrineManager : MonoBehaviour {
                 distance = curDistance;
             }
         }
-        if (distance < maxDistance) {
+        if (distance < maxDistance)
+        {
+            var closestScript = closest.GetComponent<Shrines>();
             if (Input.GetKeyDown(KeyCode.E)) {
                 if (upgradePoints >= 1f){
                     Time.timeScale = 0;
                     AudioListener.pause = true;
-                    string str = "";
                     for (int i = 0; i < upgrades.GetLength(0); i++) {
-                        for (int j = 0; j < closest.GetComponent<Shrines>().upgrades.GetLength(0); j++) {
-                            if (upgrades[i, 0] == closest.GetComponent<Shrines>().upgrades[j, 0]) {
-                                closest.GetComponent<Shrines>().upgrades[j, 1] = upgrades[i, 1];
+                        for (int j = 0; j < closestScript.upgrades.GetLength(0); j++) {
+                            if (upgrades[i, 0] == closestScript.upgrades[j, 0]) {
+                                closestScript.upgrades[j, 1] = upgrades[i, 1];
                             }
                         }
-                        str += upgrades[i, 0] + " " + upgrades[i, 1] + ", ";
                     }
                     for (int i = 0; i < upOptions.Length; i++) {
-                        optionText[i].text = closest.GetComponent<Shrines>().upgrades[i,0] + " " + (int.Parse(closest.GetComponent<Shrines>().upgrades[i,1]) + 1);
+                        optionText[i].text = closestScript.upgrades[i,0] + " " + (int.Parse(closestScript.upgrades[i,1]) + 1);
                     }
                     inMenu = true;
                     upMenu.SetActive(true);
                 }
                 else {
-                    StartCoroutine(changeText());
+                    StartCoroutine(ChangeText());
                 } 
             }
-            if (inMenu){
-                shrineText.SetActive(false);
-            }
-            else {
-                shrineText.SetActive(true);
-            }
+            shrineText.SetActive(!inMenu);
         }
         else {
             shrineText.SetActive(false);
@@ -98,10 +91,8 @@ public class ShrineManager : MonoBehaviour {
     public void UpgradeClicked() {
         upgradeAnimator.Play("upgrade");
         chosenUpgrade = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TextMeshProUGUI>().text;
-        string str = "";
         if (upgradePoints >= 1f) {
             for (int i = 0; i < upgrades.GetLength(0); i++) {
-                str += upgrades[i, 0] + " " + upgrades[i, 1] + ", ";
                 if ((upgrades[i, 0] + " " + (int.Parse(upgrades[i, 1]) + 1)) == chosenUpgrade) {
                     upgrades[i, 1] = (int.Parse(upgrades[i, 1]) + 1).ToString(); 
                     if (upgrades[i, 0] == "Movement Speed"){
@@ -122,9 +113,8 @@ public class ShrineManager : MonoBehaviour {
         }
     }
 
-    IEnumerator changeText(){
+    IEnumerator ChangeText(){
         shrineText.GetComponent<TMP_Text>().text = "You need upgrade points!";
-        print("change text");
         yield return new WaitForSeconds(2f);
         shrineText.GetComponent<TMP_Text>().text = "Press E to interact with shrine";
     }

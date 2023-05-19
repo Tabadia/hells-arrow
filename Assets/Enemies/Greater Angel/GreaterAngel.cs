@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -74,19 +72,25 @@ public class GreaterAngel : MonoBehaviour
         shootSFX.Play();
         Quaternion rotation = Quaternion.LookRotation((player.transform.position - transform.position).normalized);
         bool hit = false;
-        for (int i = 0; i < 5; i++){
-            Collider[] hitColliders = Physics.OverlapSphere(circle.transform.position, 4.3f);
-            foreach (var hitCollider in hitColliders) {
-                if (hitCollider == playerCollider) {
-                    if (!hit) {
+        for (int i = 0; i < 5; i++)
+        {
+            Collider[] hitColliders = new Collider[100];
+            var hitNum = Physics.OverlapSphereNonAlloc(circle.transform.position, 4.3f, hitColliders);
+            for (var j = 0; j < hitNum; j++)
+            {
+                if (hitColliders[i] == playerCollider)
+                {
+                    if (!hit)
+                    {
                         hit = true;
                     }
                 }
             }
+            
             yield return new WaitForSeconds(.1f);
         }
         if (hit){
-            player.GetComponent<Hearts>().takeDamage(1f);
+            player.GetComponent<Hearts>().TakeDamage(1f);
         }
 
         yield return new WaitForSeconds(.5f);

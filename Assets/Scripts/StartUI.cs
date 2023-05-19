@@ -1,22 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class StartUI : MonoBehaviour {
 
     [SerializeField] private TMP_Text creditText;
     [SerializeField] private GameObject creditScreen;
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 
     public void ToggleCredits(){
         if (creditText.text == "Credits")

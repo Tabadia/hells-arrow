@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -58,7 +56,7 @@ public class Oni : MonoBehaviour
         //attackSFX.Play();
         animator.Play("Attack",0);
         yield return new WaitForSeconds(.5f);
-        playerHearts.takeDamage(1);
+        playerHearts.TakeDamage(1);
         yield return new WaitForSeconds(atkCooldown);
         canAtk = true;
         canMove = true;

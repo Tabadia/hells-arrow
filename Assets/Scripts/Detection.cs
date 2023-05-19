@@ -1,12 +1,12 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class Detection : MonoBehaviour
 {
     [SerializeField] private GameObject playerObject;
-    [SerializeField] private GameObject playerMesh;
+    // [SerializeField] private GameObject playerMesh;
     [SerializeField] private GameObject playerHeadObject;
     [SerializeField] private GameObject unDetectedObject;
     [SerializeField] private GameObject damageObject;
@@ -31,7 +31,8 @@ public class Detection : MonoBehaviour
     private Hearts hearts;
     private MovementController movementController;
 
-    void Start() {
+    void Start() 
+    {
         canvasRect = canvas.GetComponent<RectTransform>();
         canvasScaler = canvas.GetComponent<CanvasScaler>();
         undetRect = unDetectedObject.GetComponent<RectTransform>();
@@ -42,7 +43,8 @@ public class Detection : MonoBehaviour
         movementController = playerObject.GetComponent<MovementController>();
     }
 
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         // convert the World Position of the player head to UI position on screen
         var position = playerHeadObject.transform.position;
         var yDif = playerObjectCollider.height * .75f;
@@ -62,29 +64,45 @@ public class Detection : MonoBehaviour
         damRect.anchoredPosition = spritePosition;
 
         // Figure out "player is detected" by casting a sphere around the player
-        Collider[] overlappingColliders = Physics.OverlapSphere(playerObject.transform.position, detectionDistance);
-        bool enemyInTrigger = false;
-        foreach (var overlappingCollider in overlappingColliders) {
-            if (overlappingCollider.gameObject.CompareTag("Enemy")) {
+        Collider[] overlappingColliders = new Collider[100];
+        var hitNum = Physics.OverlapSphereNonAlloc(playerObject.transform.position, detectionDistance, overlappingColliders);
+        var enemyInTrigger = false;
+        for (var i = 0; i < hitNum; i++)
+        {
+            if (overlappingColliders[i].gameObject.CompareTag("Enemy"))
+            {
                 enemyInTrigger = true;
             }
         }
-
         detected = enemyInTrigger;
 
-        // Allow player to hang out close to shrines
-        Collider[] secondaryOverlappingColliders =
-            Physics.OverlapSphere(playerObject.transform.position, detectionDistance * 0.75f);
-        bool shrineInTrigger = false;
-        foreach (var overlappingCollider in secondaryOverlappingColliders) {
-            if (overlappingCollider.gameObject.CompareTag("Shrine") ||
-                (!overlappingCollider.transform.parent.IsUnityNull() &&
-                 overlappingCollider.transform.parent.CompareTag("Shrine"))) {
+        var shrineInTrigger = false;
+        for (var i = 0; i < hitNum; i++)
+        {
+            if (Vector3.Distance(overlappingColliders[i].gameObject.transform.position,
+                    playerObject.transform.position) < detectionDistance * .65f && 
+                (overlappingColliders[i].gameObject.CompareTag("Enemy") ||
+                 (!overlappingColliders[i].transform.parent.IsUnityNull() && overlappingColliders[i].transform.parent.CompareTag("Shrine"))))
+            {
                 shrineInTrigger = true;
             }
         }
 
-        detected = detected || shrineInTrigger;
+        // Allow player to hang out close to shrines
+        // Collider[] secondaryOverlappingColliders = new Collider[100];
+        // var colNum = Physics.OverlapSphereNonAlloc(playerObject.transform.position, detectionDistance * 0.65f, secondaryOverlappingColliders);
+        // bool shrineInTrigger = false;
+        // for (var i = 0; i < colNum; i++)
+        // {
+            // if (secondaryOverlappingColliders[i].gameObject.CompareTag("Shrine") ||
+                // (!secondaryOverlappingColliders[i].transform.parent.IsUnityNull() &&
+                 // secondaryOverlappingColliders[i].transform.parent.CompareTag("Shrine")))
+            // {
+                // shrineInTrigger = true;
+            // }
+        // }
+
+        // detected = detected || shrineInTrigger;
 
 
         if (detected || !movementController.initMove) {
@@ -92,7 +110,7 @@ public class Detection : MonoBehaviour
             damagePhase = false;
             unDetectedObject.SetActive(false);
             damageObject.SetActive(false);
-            //print(fightSFX.isPlaying);
+            
             if (!fightSFX.isPlaying && !shrineInTrigger) {
                 ambienceSFX.Stop();
                 fightSFX.Play();
@@ -103,8 +121,7 @@ public class Detection : MonoBehaviour
         }
         else {
             if (!fightSFX.isPlaying && !ambienceSFX.isPlaying) {
-                ambienceSFX.Play();
-            }
+                ambienceSFX.Play(); }
             callsSinceDetection += 1;
             /* FixedUpdate is called 50 times a second, thus 50f * timeInSeconds
                After a set time of not being near enemies, reset the timer and start counting for damage */
@@ -124,7 +141,7 @@ public class Detection : MonoBehaviour
                 unDetectedObject.SetActive(false);
                 damageObject.SetActive(true);
 
-                hearts.takeDamage(damagePerTick);
+                hearts.TakeDamage(damagePerTick);
             }
         }
     }
