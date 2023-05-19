@@ -17,7 +17,7 @@ public class EnemyHealth : MonoBehaviour {
 
     void Start() {
         if (isBoss){
-            GameObject.FindGameObjectWithTag("Portal");
+            portal = GameObject.FindGameObjectWithTag("Portal");
         }
         rand = new Random();
         healthBar = GetComponentInChildren<Slider>();
