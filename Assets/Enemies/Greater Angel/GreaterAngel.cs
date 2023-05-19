@@ -69,15 +69,24 @@ public class GreaterAngel : MonoBehaviour
         circle.transform.position = player.transform.position;
         circle.SetActive(true);
 
-        yield return new WaitForSeconds(.9f);
-        Collider[] hitColliders = Physics.OverlapSphere(circle.transform.position, 4.3f);
-        foreach (var hitCollider in hitColliders) {
-            if (hitCollider == playerCollider) {
-                player.GetComponent<Hearts>().takeDamage(1);
-            }
-        }
+        yield return new WaitForSeconds(.4f);
         shootSFX.Play();
         Quaternion rotation = Quaternion.LookRotation((player.transform.position - transform.position).normalized);
+        bool hit = false;
+        for (int i = 0; i < 5; i++){
+            Collider[] hitColliders = Physics.OverlapSphere(circle.transform.position, 4.3f);
+            foreach (var hitCollider in hitColliders) {
+                if (hitCollider == playerCollider) {
+                    if (!hit) {
+                        hit = true;
+                    }
+                }
+            }
+            yield return new WaitForSeconds(.1f);
+        }
+        if (hit){
+            player.GetComponent<Hearts>().takeDamage(1.5f);
+        }
 
         yield return new WaitForSeconds(.5f);
         circle.SetActive(false);

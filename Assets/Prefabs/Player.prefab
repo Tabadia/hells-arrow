@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1289370900, guid: 0064ec93b043a4f43aa81775656fe931, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &15886339
@@ -5543,9 +5543,9 @@ MonoBehaviour:
   effectOpacity: 0.54
   deathScreen: {fileID: 0}
   respawnBtn: {fileID: 0}
-  fullHeart: {fileID: -1794017569, guid: a77a52155ebc9c14ebd6a262ee8a3017, type: 3}
-  halfHeart: {fileID: 1138364976, guid: a77a52155ebc9c14ebd6a262ee8a3017, type: 3}
-  emptyHeart: {fileID: -1822190348, guid: a77a52155ebc9c14ebd6a262ee8a3017, type: 3}
+  fullHeart: {fileID: 21300000, guid: c48ddabbdd2e8054d8666756954ce3ca, type: 3}
+  halfHeart: {fileID: 21300000, guid: 41bedc0ddbd5bff41adc976c359a0978, type: 3}
+  emptyHeart: {fileID: 21300000, guid: e00cc1abc951881468d1571286ec2c31, type: 3}
   hurtSFX: {fileID: 6259941982972521224}
   isDead: 0
 --- !u!114 &6259941982972521458

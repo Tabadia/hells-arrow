@@ -12,6 +12,8 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject samurai;
     [SerializeField] private GameObject shrineManager;
     [SerializeField] private GameObject enemies;
+    [SerializeField] private AudioSource UImusic;
+
     public float playerScore = 0f;
 
     void Start() {
@@ -32,12 +34,6 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    public void Unpause() {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1;
-        AudioListener.pause = false;
-    }
-
     public void Save()
     {
         SaveLoad.SaveData(samurai, shrineManager, enemies, scoreText);
@@ -50,5 +46,14 @@ public class PauseManager : MonoBehaviour
         scoreText.GetComponent<TextMeshProUGUI>().text = playerScore.ToString("g2");
         Time.timeScale = 0;
         AudioListener.pause = true;
+        UImusic.Play(0);
     }
+
+    public void Unpause() {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1;
+        AudioListener.pause = false;
+        UImusic.Stop();
+    }
+
 }

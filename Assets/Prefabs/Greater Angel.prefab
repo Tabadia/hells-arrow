@@ -552,7 +552,7 @@ Transform:
   m_GameObject: {fileID: 4535224831802576364}
   m_LocalRotation: {x: 0, y: 0.42261827, z: 0, w: 0.9063079}
   m_LocalPosition: {x: -213.896, y: -5.806, z: -173.281}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
+  m_LocalScale: {x: 1.2500001, y: 1.25, z: 1.2500001}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2834993900286979562}
@@ -683,8 +683,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859173729cfd6104fb67329e3b6045e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
-  health: 30
+  maxHealth: 50
+  health: 50
   difficulty: 1
   enemyDrop: {fileID: 4094036990376496550, guid: a78cfafb30b220c93a55b0224cde3892,
     type: 3}
@@ -730,7 +730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   circle: {fileID: 1720081933}
   player: {fileID: 0}
-  shootCooldown: 5
+  shootCooldown: 4
   shootRange: 300
   moveRange: 750
   shootSFX: {fileID: 4535224831802576362}
