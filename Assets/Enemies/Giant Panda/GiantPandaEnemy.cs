@@ -69,7 +69,7 @@ public class GiantPandaEnemy : MonoBehaviour
 
             if (canCharge && isLookingAtPlayer) {
                 isCharging = true;
-                // Debug.Log(time);
+                Debug.Log("set charging");
                 //Animating roll
                 animator.SetBool("IsCharging", true);
                 float time = (Time.time - startTime) / totalTime;
