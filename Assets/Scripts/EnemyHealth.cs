@@ -79,6 +79,6 @@ public class EnemyHealth : MonoBehaviour {
 
     IEnumerator EndGame() {
         yield return new WaitForSeconds(4f);
-        SceneManager.LoadScene("End");
+        SceneManager.LoadScene("End", LoadSceneMode.Single);
     }
 }

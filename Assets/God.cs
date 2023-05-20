@@ -30,12 +30,9 @@ public class God : MonoBehaviour
             if (Vector3.Distance(player.transform.position, transform.position) < 60)
             {
                 yield return new WaitForSeconds(Random.Range(3, 4));
-                if (Vector3.Distance(playerTransform.position, transform.position) < range)
-                {
-                    StartCoroutine(Strike());
-                    yield return new WaitForSeconds(.2f);
-                    StartCoroutine(Strike());
-                }
+                StartCoroutine(Strike());
+                yield return new WaitForSeconds(.2f);
+                StartCoroutine(Strike());
             }
 
             yield return new WaitForEndOfFrame();
