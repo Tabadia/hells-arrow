@@ -143,7 +143,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761469391}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.18, y: -6.38, z: 0.16}
+  m_LocalPosition: {x: -0.18, y: -10.31, z: 0.16}
   m_LocalScale: {x: 15, y: 25, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -781,13 +781,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859173729cfd6104fb67329e3b6045e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
-  health: 50
+  maxHealth: 75
+  health: 75
   difficulty: 1
   enemyDrop: {fileID: 4094036990376496550, guid: a78cfafb30b220c93a55b0224cde3892,
     type: 3}
   hitEffect: {fileID: 607142175}
-  isBoss: 0
+  isBoss: 1
 --- !u!195 &5441605144814074802
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -823,7 +823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circle: {fileID: 0}
-  shootCooldown: 4
+  shootCooldown: 2.5
   shootRange: 300
   moveRange: 750
   shootSFX: {fileID: 4535224831802576362}
