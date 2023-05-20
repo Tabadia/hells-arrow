@@ -8,6 +8,7 @@ public class God : MonoBehaviour
     [SerializeField] private GameObject reverseLightning;
     [SerializeField] private Transform player;
     [SerializeField] private GameObject[] enemies;
+    [SerializeField] private float range;
     private Hearts playerHearts;
 
     // Update is called once per frame
@@ -15,16 +16,29 @@ public class God : MonoBehaviour
     {
         StartCoroutine(LightningStrikes());
         playerHearts = player.GetComponent<Hearts>();
-        //StartCoroutine(EnemySpawner());
+        StartCoroutine(EnemySpawner());
+    }
+
+    void Update() {
+        if (Vector3.Distance(player.position, transform.position) < range)
+        {
+            transform.LookAt(player);
+        }
     }
 
     IEnumerator LightningStrikes()
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(2, 3));
-            StartCoroutine(Strike());
-            StartCoroutine(Strike());
+            
+                yield return new WaitForSeconds(Random.Range(2, 3));
+                if (Vector3.Distance(player.position, transform.position) < range) {
+                    StartCoroutine(Strike());
+                }
+                yield return new WaitForSeconds(0.2f);
+                if (Vector3.Distance(player.position, transform.position) < range) {
+                    StartCoroutine(Strike());
+                }
         }
     }
 
