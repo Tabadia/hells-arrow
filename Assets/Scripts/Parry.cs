@@ -7,6 +7,7 @@ public class Parry : MonoBehaviour
     [SerializeField] private float parryCooldown = 5f;
     [SerializeField] private AudioSource parrySFX;
     [SerializeField] private GameObject parry;
+    [SerializeField] private SphereCollider parryCollider;
     [SerializeField] private Animator parryAnimator;
 
     private bool canParry = true;
@@ -22,8 +23,7 @@ public class Parry : MonoBehaviour
         }
     }
 
-    IEnumerator ParryCooldown()
-    {
+    IEnumerator ParryCooldown(){
         canParry = false;
         isParrying = true;
         parry.SetActive(true);

@@ -34,6 +34,7 @@ public class bullet : MonoBehaviour
                 if (!playerParry.isParrying)
                 {
                     playerHearts.TakeDamage(damage);
+                    Destroy(gameObject);
                 }
                 else{
                     print("parried");

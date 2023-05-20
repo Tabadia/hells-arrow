@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 6807904574553485570}
   - component: {fileID: 8763580935503644104}
   - component: {fileID: 7953334729434339662}
-  - component: {fileID: 7953334729434339504}
   - component: {fileID: 7953334729434339663}
+  - component: {fileID: 103891920360171441}
   m_Layer: 2
   m_Name: Icicle Bullet
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,20 +102,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &7953334729434339504
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7106260326789358621}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3613567641014311022, guid: a5ec0541f4a2a7d40bf59e89c32ebab4, type: 3}
 --- !u!114 &7953334729434339663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,4 +116,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   damage: 0.5
-  blockSFX: {fileID: 0}
+--- !u!65 &103891920360171441
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7106260326789358621}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.011456664, y: 0.014638502, z: 0.038306598}
+  m_Center: {x: -0.00009133577, y: 0.00027179866, z: 0.0072092484}

@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 2463847973713546240}
   - component: {fileID: 5836665932964897726}
   - component: {fileID: 3731280208298183267}
+  - component: {fileID: 6464835084364755461}
   m_Layer: 2
   m_Name: Fireball
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,6 +65,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &6464835084364755461
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463847973713546271}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.3649378, y: 2.4577472, z: 5.9223857}
+  m_Center: {x: -0.19185138, y: -0.054872394, z: -1.5354474}
 --- !u!1001 &12714209221110993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -149,23 +163,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 12714209221110993}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &931192135937708416 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7ce5205cdaf532b4dbd3ab0062a3127e,
-    type: 3}
-  m_PrefabInstance: {fileID: 12714209221110993}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &7174130695551433069
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 931192135937708416}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 289301614986012343, guid: 7ce5205cdaf532b4dbd3ab0062a3127e, type: 3}
