@@ -61,7 +61,7 @@ public class GreaterAngel : MonoBehaviour
         circle.transform.position = player.transform.position;
         circle.SetActive(true);
 
-        yield return new WaitForSeconds(.4f);
+        yield return new WaitForSeconds(.2f);
         shootSFX.Play();
         Quaternion rotation = Quaternion.LookRotation((player.transform.position - transform.position).normalized);
         bool hit = false;
