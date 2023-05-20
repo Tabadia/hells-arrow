@@ -307,7 +307,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 2
+      minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
@@ -5019,4 +5019,5 @@ MonoBehaviour:
   exploding: 0
   flame: 0
   flameLength: 0
+  fireColor: {r: 1, g: 0.22044785, b: 0, a: 1}
   pastHits: 

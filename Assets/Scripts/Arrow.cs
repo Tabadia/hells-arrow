@@ -30,6 +30,7 @@ public class Arrow : MonoBehaviour
     private Vector3 prevPos;
     private int timesPierced;
     private GameObject player;
+    [SerializeField] private Color fireColor;
 
     public int[] pastHits;
 
@@ -51,6 +52,12 @@ public class Arrow : MonoBehaviour
         transform.LookAt(endPos);
         moveDirection = Quaternion.Euler(0, multishotAngle, 0) * moveDirection;
         timer = Time.time;
+
+        if (flame)
+        {
+            ParticleSystem.MainModule main = GetComponent<ParticleSystem>().main;
+            main.startColor = fireColor;
+        }
     }
 
     void Update()
@@ -127,6 +134,8 @@ public class Arrow : MonoBehaviour
 
     void OnHit(RaycastHit hit) {
         colliding = true;
+        var emission = transform.GetComponent<ParticleSystem>().emission;
+        emission.rateOverDistance = 0;
         transform.position = hit.point + transform.forward;
         transform.parent = hit.transform;
         if (hit.collider.gameObject.CompareTag("Enemy")) {
