@@ -925,7 +925,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 4 (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6415115541668129529, guid: 1a4eca48088b9fb48911e6e4ba17f4fe, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1a4eca48088b9fb48911e6e4ba17f4fe, type: 3}
 --- !u!4 &57173939 stripped
 Transform:
@@ -1075,7 +1076,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6442319154166553796, guid: 75107a11eac8d7f42adeb600ce239e30, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 75107a11eac8d7f42adeb600ce239e30, type: 3}
 --- !u!4 &62430049 stripped
 Transform:
@@ -1555,7 +1557,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 1 (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7642328887742719138, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
 --- !u!4 &98914820 stripped
 Transform:
@@ -1662,7 +1665,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 66897791615568048, guid: 90875d36b70e3164187ca59864b3c3c3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 90875d36b70e3164187ca59864b3c3c3, type: 3}
 --- !u!4 &116709346 stripped
 Transform:
@@ -1737,7 +1741,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7642328887742719138, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
 --- !u!4 &119926772 stripped
 Transform:
@@ -2185,7 +2190,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 3 (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5275536814061969366, guid: e3d8bdd7e1909ac41b8435a2f3426500, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e3d8bdd7e1909ac41b8435a2f3426500, type: 3}
 --- !u!4 &155434056 stripped
 Transform:
@@ -7190,7 +7196,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5275536814061969366, guid: e3d8bdd7e1909ac41b8435a2f3426500, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e3d8bdd7e1909ac41b8435a2f3426500, type: 3}
 --- !u!1001 &201140627
 PrefabInstance:
@@ -7447,7 +7454,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 3 (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5275536814061969366, guid: e3d8bdd7e1909ac41b8435a2f3426500, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e3d8bdd7e1909ac41b8435a2f3426500, type: 3}
 --- !u!4 &210000701 stripped
 Transform:
@@ -12381,7 +12389,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7642328887742719138, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
 --- !u!4 &219728783 stripped
 Transform:
@@ -13299,6 +13308,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 543450652439218917}
     m_Modifications:
+    - target: {fileID: 6259941982972521459, guid: c143ea848f1bb8443b58c466aec10d96,
+        type: 3}
+      propertyPath: scoreVar
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259941982972521459, guid: c143ea848f1bb8443b58c466aec10d96,
+        type: 3}
+      propertyPath: nameInput
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3271193008162931336, guid: 482d1443c0642164ba384d815d20c89d,
         type: 3}
       propertyPath: m_Name
@@ -13383,16 +13402,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6259941982972521459, guid: c143ea848f1bb8443b58c466aec10d96,
-        type: 3}
-      propertyPath: scoreVar
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6259941982972521459, guid: c143ea848f1bb8443b58c466aec10d96,
-        type: 3}
-      propertyPath: nameInput
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 482d1443c0642164ba384d815d20c89d, type: 3}
@@ -18606,7 +18615,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 1 (7)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7642328887742719138, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
 --- !u!4 &521251624 stripped
 Transform:
@@ -18855,7 +18865,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 1 (8)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7642328887742719138, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
 --- !u!4 &539766988 stripped
 Transform:
@@ -18930,7 +18941,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6415115541668129529, guid: 1a4eca48088b9fb48911e6e4ba17f4fe, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1a4eca48088b9fb48911e6e4ba17f4fe, type: 3}
 --- !u!4 &541868979 stripped
 Transform:
@@ -19364,7 +19376,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 1 (5)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7642328887742719138, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
 --- !u!4 &584755556 stripped
 Transform:
@@ -19784,7 +19797,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 4 (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6415115541668129529, guid: 1a4eca48088b9fb48911e6e4ba17f4fe, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1a4eca48088b9fb48911e6e4ba17f4fe, type: 3}
 --- !u!4 &638787924 stripped
 Transform:
@@ -25746,7 +25760,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 4 (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6415115541668129529, guid: 1a4eca48088b9fb48911e6e4ba17f4fe, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1a4eca48088b9fb48911e6e4ba17f4fe, type: 3}
 --- !u!4 &789520849 stripped
 Transform:
@@ -26354,7 +26369,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 3 (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5275536814061969366, guid: e3d8bdd7e1909ac41b8435a2f3426500, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e3d8bdd7e1909ac41b8435a2f3426500, type: 3}
 --- !u!4 &831441482 stripped
 Transform:
@@ -26946,7 +26962,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 6
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1965745849539595299, guid: f1ed94d7a33bc6f418e71900b75cf8ea, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f1ed94d7a33bc6f418e71900b75cf8ea, type: 3}
 --- !u!4 &899427435 stripped
 Transform:
@@ -27587,7 +27604,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 1 (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7642328887742719138, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
 --- !u!4 &1039786205 stripped
 Transform:
@@ -27677,7 +27695,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 1 (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7642328887742719138, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
 --- !u!4 &1040622803 stripped
 Transform:
@@ -28538,7 +28557,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7642328887742719138, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
 --- !u!1001 &1099091538
 PrefabInstance:
@@ -28607,7 +28627,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 1 (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7642328887742719138, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
 --- !u!4 &1099091539 stripped
 Transform:
@@ -28856,7 +28877,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 1 (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7642328887742719138, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
 --- !u!4 &1132343203 stripped
 Transform:
@@ -34277,7 +34299,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6442319154166553796, guid: 75107a11eac8d7f42adeb600ce239e30, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 75107a11eac8d7f42adeb600ce239e30, type: 3}
 --- !u!4 &1184113011 stripped
 Transform:
@@ -34542,7 +34565,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 66897791615568048, guid: 90875d36b70e3164187ca59864b3c3c3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 90875d36b70e3164187ca59864b3c3c3, type: 3}
 --- !u!4 &1227218758 stripped
 Transform:
@@ -34980,7 +35004,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 3 (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5275536814061969366, guid: e3d8bdd7e1909ac41b8435a2f3426500, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e3d8bdd7e1909ac41b8435a2f3426500, type: 3}
 --- !u!4 &1274380795 stripped
 Transform:
@@ -35668,7 +35693,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 3 (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5275536814061969366, guid: e3d8bdd7e1909ac41b8435a2f3426500, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e3d8bdd7e1909ac41b8435a2f3426500, type: 3}
 --- !u!4 &1306483742 stripped
 Transform:
@@ -35923,7 +35949,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6442319154166553796, guid: 75107a11eac8d7f42adeb600ce239e30, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 75107a11eac8d7f42adeb600ce239e30, type: 3}
 --- !u!4 &1349826085 stripped
 Transform:
@@ -36013,7 +36040,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5275536814061969366, guid: e3d8bdd7e1909ac41b8435a2f3426500, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e3d8bdd7e1909ac41b8435a2f3426500, type: 3}
 --- !u!4 &1349943568 stripped
 Transform:
@@ -36088,7 +36116,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 3 (5)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5275536814061969366, guid: e3d8bdd7e1909ac41b8435a2f3426500, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e3d8bdd7e1909ac41b8435a2f3426500, type: 3}
 --- !u!4 &1362888754 stripped
 Transform:
@@ -36785,7 +36814,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6442319154166553796, guid: 75107a11eac8d7f42adeb600ce239e30, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 75107a11eac8d7f42adeb600ce239e30, type: 3}
 --- !u!4 &1425370865 stripped
 Transform:
@@ -36875,7 +36905,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6415115541668129529, guid: 1a4eca48088b9fb48911e6e4ba17f4fe, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1a4eca48088b9fb48911e6e4ba17f4fe, type: 3}
 --- !u!4 &1427392286 stripped
 Transform:
@@ -37390,7 +37421,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6442319154166553796, guid: 75107a11eac8d7f42adeb600ce239e30, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 75107a11eac8d7f42adeb600ce239e30, type: 3}
 --- !u!4 &1485680846 stripped
 Transform:
@@ -37827,7 +37859,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 1 (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7642328887742719138, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
 --- !u!4 &1544609046 stripped
 Transform:
@@ -37917,7 +37950,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 2.661
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 66897791615568048, guid: 90875d36b70e3164187ca59864b3c3c3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 90875d36b70e3164187ca59864b3c3c3, type: 3}
 --- !u!4 &1559991220 stripped
 Transform:
@@ -41809,7 +41843,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 66897791615568048, guid: 90875d36b70e3164187ca59864b3c3c3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 90875d36b70e3164187ca59864b3c3c3, type: 3}
 --- !u!4 &1987450967 stripped
 Transform:
@@ -41989,7 +42024,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 4 (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6415115541668129529, guid: 1a4eca48088b9fb48911e6e4ba17f4fe, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1a4eca48088b9fb48911e6e4ba17f4fe, type: 3}
 --- !u!4 &1999563627 stripped
 Transform:
@@ -47412,7 +47448,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: torch 1 (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7642328887742719138, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0c57d203f5b0f4d4f90287f17ed0256a, type: 3}
 --- !u!4 &2080229190 stripped
 Transform:
