@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 public class Portal : MonoBehaviour
 {
     [SerializeField] private string nextScene;
-    [SerializeField] private string prevScene;
     [SerializeField] private GameObject UI;
 
     private GameObject player;
@@ -41,17 +40,15 @@ public class Portal : MonoBehaviour
 
     void OnFinishedLoadingScene() {
         //Activate the Scene
-        // sceneAsync.allowSceneActivation = true;
-
-        prevScene = SceneManager.GetActiveScene().name;
         Scene sceneToLoad = SceneManager.GetSceneByName(nextScene);
         if (sceneToLoad.IsValid())
         {
             var shrineManager = GameObject.FindGameObjectWithTag("ShrineManager").GetComponent<ShrineManager>();
             shrineManager.OnLoad(true);
-
-            spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
-            player.transform.position = spawnPoint.transform.position;
+            
+            // spawnPoint = shrineManager.spawnPoint;
+            // player.transform.position = spawnPoint.transform.position;
+            player.transform.position = new Vector3(312.64f, 2.05f, 29.44f);
             playerHealth.ResetHearts();
         }
     }

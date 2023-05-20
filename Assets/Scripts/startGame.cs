@@ -8,7 +8,9 @@ public class startGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        btn.onClick.AddListener(() => {
+        btn.onClick.AddListener(() =>
+        {
+
             SceneManager.LoadScene("Ice Map");
         });
     }

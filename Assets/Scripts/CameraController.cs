@@ -4,8 +4,8 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] Transform player;
     [SerializeField] float speed = 1f;
-    [SerializeField] Camera mainCam;
-    [SerializeField] Camera secondaryCam;
+    [SerializeField] public Camera mainCam;
+    [SerializeField] public Camera secondaryCam;
   
     public ShootingScript shootingScript;
 

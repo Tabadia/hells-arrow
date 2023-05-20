@@ -8881,6 +8881,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4969197940372660769, guid: 4b17dd2d48f88fd45b98e91e3a98c7a6,
         type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 554545459}
+    - target: {fileID: 4969197940372660769, guid: 4b17dd2d48f88fd45b98e91e3a98c7a6,
+        type: 3}
       propertyPath: playerPrefab
       value: 
       objectReference: {fileID: 2020115726669770385, guid: c143ea848f1bb8443b58c466aec10d96,

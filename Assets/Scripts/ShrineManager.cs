@@ -22,6 +22,7 @@ public class ShrineManager : MonoBehaviour
     [SerializeField] private Animator upgradeAnimator;
     [SerializeField] private TextMeshProUGUI soulText;
     [SerializeField] private Animator soulAnim;
+    [SerializeField] public GameObject spawnPoint;
 
     private GameObject[] shrines;
     private string chosenUpgrade = "";
@@ -29,7 +30,7 @@ public class ShrineManager : MonoBehaviour
     private GameObject player;
     private MovementController movementScript;
     private Detection detection;
-    private float pastPoints = 0f;
+    private float pastPoints;
     
     public string[,] upgrades = {{"Exploding", "0"}, {"Multishot", "0"}, {"Piercing", "0"}, {"Flaming", "0"}, {"Arrow Speed", "0"}, {"Movement Speed", "0"}, {"Damage", "0"}, {"Decay Tolerance", "0"}}; 
     // {"Upgrade Name", "Upgrade Level"}
@@ -54,15 +55,14 @@ public class ShrineManager : MonoBehaviour
 
         if (fromNewScene)
         {
-            Debug.Log("t");
             shrineText = uiPrefab.transform.GetChild(2).GetChild(3).gameObject;
             upMenu = uiPrefab.transform.GetChild(2).GetChild(4).gameObject;
             sphere = playerPrefab.transform.GetChild(4).gameObject;
             upgrade = playerPrefab.transform.GetChild(6).gameObject;
             upgradeAnimator = upgrade.GetComponent<Animator>();
             soulText = uiPrefab.transform.GetChild(2).GetChild(7).GetComponentInChildren<TextMeshProUGUI>();
-            Debug.Log(uiPrefab.transform.GetChild(2).GetChild(7).name);
             soulAnim = uiPrefab.transform.GetChild(2).GetChild(7).GetComponentInChildren<Animator>();
+            spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
         }
         shrines = GameObject.FindGameObjectsWithTag("Shrine");
         player = GameObject.FindGameObjectWithTag("Player");

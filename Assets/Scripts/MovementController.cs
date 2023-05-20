@@ -33,7 +33,7 @@ public class MovementController : MonoBehaviour
     private GroundCheck gcScript;
     private ShrineManager shrineScript;
     private ShootingScript shootingScript;
-    private Camera cameraMain;
+    [NonSerialized] public Camera cameraMain;
     private Hearts hearts;
 
     // Misc variables / Control related stuff
