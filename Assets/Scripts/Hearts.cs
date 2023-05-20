@@ -8,8 +8,8 @@ public class Hearts : MonoBehaviour
 {
     [SerializeField] private int maxHearts = 6;
     [SerializeField] private GameObject heartContainer;
-    [SerializeField] private GameObject heartPrefab;
-    [SerializeField] private GameObject damageEffect;
+    // [SerializeField] private GameObject heartPrefab;
+    // [SerializeField] private GameObject damageEffect;
     [SerializeField] private Image effectRenderer;
     [SerializeField] private float effectFadeDuration = 0.2f;
     [SerializeField] private float effectOpacity = 0.54f;
@@ -23,7 +23,7 @@ public class Hearts : MonoBehaviour
     [SerializeField] private TextMeshProUGUI displayScore;
     [SerializeField] private TextMeshProUGUI nameInput;
     [SerializeField] private PauseManager pauseManager;
-    
+
     private GameObject[] hearts;
     private float currentHearts;
     private AudioSource[] allAudioSources;
@@ -47,19 +47,15 @@ public class Hearts : MonoBehaviour
             isDead = false;
             Time.timeScale = 1;
             AudioListener.pause = false;
-            // for (int i = 0; i < maxHearts; i++) {
-            //     hearts[i].GetComponent<Image>().sprite = fullHeart;
-            // }
-            // currentHearts = maxHearts;
-            // gameObject.transform.position = startPos;
-
             LeaderboardData.SaveNewData(scoreVar.text, string.IsNullOrEmpty(nameInput.text)?"OOO":nameInput.text);
-            displayScore.text = "00";
+            displayScore.text = "0000";
             nameInput.text = "";
             pauseManager.playerScore = 0f;
             
             SceneManager.LoadScene("Ice Map");
         });
+        
+        
         //takeDamage(1.5f);
     }
 

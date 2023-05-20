@@ -62,7 +62,7 @@ public class LeaderboardData : MonoBehaviour
 
     private static string FormatData(string score, string playerName)
     {
-        var nScore = int.Parse(score);
+        // var nScore = int.Parse(score);
         var strBuilder = new StringBuilder();
         var now = DateTime.Now;
         
@@ -71,7 +71,7 @@ public class LeaderboardData : MonoBehaviour
         switch (playerName.Length)
         {
             case > 8:
-                nName.Append(playerName.ToList().GetRange(0, 8));
+                nName.Append(playerName.ToCharArray().ToList().GetRange(0, 8).ToArray());
                 break;
             case < 8:
                 nName.Append(playerName + new String(' ', 8-playerName.Length));
@@ -81,9 +81,9 @@ public class LeaderboardData : MonoBehaviour
                 break;
         }
         
-        strBuilder.Append(playerName + " - ");
-        strBuilder.Append(nScore + " - ");
-        strBuilder.Append(now.ToString("HH:mm") + "\n");
+        strBuilder.Append(nName + " - ");
+        strBuilder.Append(score + " - ");
+        strBuilder.Append(now.ToString("HH:mm") + "\r\n");
         return strBuilder.ToString();
     }
 }

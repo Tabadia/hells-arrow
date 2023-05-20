@@ -7,12 +7,16 @@ public class PauseManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     [FormerlySerializedAs("scoreText")] [SerializeField] private TextMeshProUGUI scoreVar;
+    [SerializeField] private TextMeshProUGUI deathScreenNameInput;
+
+    [SerializeField] private TextMeshProUGUI continueScreenNameInput;
     // [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private AudioSource[] audioSourcesToIgnore;
     [SerializeField] private GameObject samurai;
     [SerializeField] private GameObject shrineManager;
     [SerializeField] private GameObject enemies;
     [SerializeField] private AudioSource UImusic;
+    [SerializeField] private GameObject scoreMenu;
 
     public float playerScore;
 
@@ -40,8 +44,23 @@ public class PauseManager : MonoBehaviour
         Unpause();
     }
 
-    public void Exit()
+    public void ExitToMenu(bool hasNameField)
     {
+        pauseMenu.SetActive(false);
+        if (hasNameField)
+        {
+            LeaderboardData.SaveNewData(scoreVar.text, deathScreenNameInput.text);
+            SceneManager.LoadScene("Start");
+        }
+        else
+        {
+            scoreMenu.SetActive(true);
+        }
+    }
+
+    public void ContinueToMenu()
+    {
+        LeaderboardData.SaveNewData(scoreVar.text, continueScreenNameInput.text);
         Unpause();
         SceneManager.LoadScene("Start");
     }
