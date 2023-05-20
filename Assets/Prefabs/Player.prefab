@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 15886337}
   m_LocalRotation: {x: -0.579228, y: 0.40557975, z: 0.40557975, w: 0.579228}
   m_LocalPosition: {x: 0.0000020732673, y: 0.6870006, z: 0.030999854}
-  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2020115726669770415}
@@ -5253,7 +5253,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObject: {fileID: 2020115726669770385}
-  playerMesh: {fileID: 1209653407519085049}
   playerHeadObject: {fileID: 3335766540498683288}
   unDetectedObject: {fileID: 0}
   damageObject: {fileID: 0}
@@ -5277,10 +5276,10 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: 1cb04262c2a7dc1449dd05c0ea2beefa,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 6331b99998605e145bf6a3f7bd2cd8ff, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 0.324
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -5588,7 +5587,6 @@ GameObject:
   - component: {fileID: 2020115726669770384}
   - component: {fileID: 2020115726669770387}
   - component: {fileID: 2020115726669770414}
-  - component: {fileID: 6259941982972521440}
   - component: {fileID: 6259941982972521464}
   - component: {fileID: 6259941982972521467}
   - component: {fileID: 6259941982972521459}
@@ -5722,7 +5720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
-  Gravity: -50
+  gravity: -50
   maxSpeed: 16
   dashMult: 4.5
   dashTime: 0.1
@@ -5739,7 +5737,6 @@ MonoBehaviour:
   runSFX: {fileID: 6259941982972521230}
   dashSFX: {fileID: 6259941982972521225}
   samuraiAnimator: {fileID: 2020115725877720551}
-  samuraiGameObject: {fileID: 1209653407519085049}
   enemyManager: {fileID: 0}
   DashAnimator: {fileID: 848184164}
 --- !u!114 &2020115726669770414
@@ -5774,19 +5771,6 @@ MonoBehaviour:
   shrinesObject: {fileID: 0}
   samuraiAnimator: {fileID: 2020115725877720551}
   isCharging: 0
---- !u!114 &6259941982972521440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2020115726669770385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7bfe18e7d5bb224094e17d282092abc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextScene: 
 --- !u!114 &6259941982972521464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5837,11 +5821,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28bc4bd1cefc87243ba3fb3529467010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHearts: 4
+  maxHearts: 6
   heartContainer: {fileID: 0}
-  heartPrefab: {fileID: 4322689079855696241, guid: e65707565d0830440ac302333e9a8266,
-    type: 3}
-  damageEffect: {fileID: 0}
   effectRenderer: {fileID: 0}
   effectFadeDuration: 0.2
   effectOpacity: 0.54
@@ -5978,9 +5959,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 1cb04262c2a7dc1449dd05c0ea2beefa,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: b28f708696070f44498aed4e1639c35c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4be7882f53aa5324da0e953cb5f2c323, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.305
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6366,7 +6347,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 1cb04262c2a7dc1449dd05c0ea2beefa,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 72846e61bf30bf14e8d58ea67443bf52, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d222503840c06814ea400e67342f3984, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.105
   m_Pitch: 1

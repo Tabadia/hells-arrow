@@ -35,6 +35,11 @@ public class bullet : MonoBehaviour
                 {
                     playerHearts.TakeDamage(damage);
                 }
+                else{
+                    print("parried");
+                    blockSFX.Play();
+                    Destroy(gameObject);
+                }
             }
             if (hits[i].collider.gameObject.CompareTag("Arrow")){
                 Destroy(gameObject);
