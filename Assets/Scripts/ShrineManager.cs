@@ -74,10 +74,10 @@ public class ShrineManager : MonoBehaviour
         upOptions[1] = upMenu.transform.GetChild(1).GetComponent<Button>();
         upOptions[2] = upMenu.transform.GetChild(2).GetComponent<Button>();
 
-        foreach (var button in upOptions)
-        {
-            button.onClick.AddListener(() => UpgradeClicked());
-        }
+        UnityEditor.Events.UnityEventTools.AddPersistentListener(upOptions[0].onClick, UpgradeClicked);
+        UnityEditor.Events.UnityEventTools.AddPersistentListener(upOptions[1].onClick, UpgradeClicked);
+        UnityEditor.Events.UnityEventTools.AddPersistentListener(upOptions[2].onClick, UpgradeClicked);
+            
         
         optionText[0] = upOptions[0].transform.GetComponentInChildren<TextMeshProUGUI>();
         optionText[1] = upOptions[1].transform.GetComponentInChildren<TextMeshProUGUI>();

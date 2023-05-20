@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShootingScript : MonoBehaviour
@@ -40,7 +41,14 @@ public class ShootingScript : MonoBehaviour
         chargingBoolID = Animator.StringToHash("IsCharging");
     }
 
-    void Update() {
+    void Update()
+    {
+        Debug.Log(shrinesObject);
+        if (shrinesObject.IsUnityNull() || shrineScript.IsUnityNull())
+        {
+            shrinesObject = GameObject.FindGameObjectWithTag("ShrineManager");
+            shrineScript = shrinesObject.GetComponent<ShrineManager>();
+        }
         var emission = maxChargeParticleSystem.emission;
 
         // If it can shoot then check for how long it charged (time since charge - time at start of charge)
