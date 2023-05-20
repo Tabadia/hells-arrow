@@ -13,8 +13,8 @@ public class God : MonoBehaviour
 
     // Update is called once per frame
     void Start() {
-        StartCoroutine(LightningStrikes());
         playerTransform = player.transform;
+        StartCoroutine(LightningStrikes());
         playerHearts = playerTransform.GetComponent<Hearts>();
         StartCoroutine(EnemySpawner());
     }
