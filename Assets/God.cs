@@ -27,7 +27,7 @@ public class God : MonoBehaviour
 
     IEnumerator LightningStrikes() {
         while (true) {
-            if (Vector3.Distance(playerTransform.position, transform.position) < 60)
+            if (Vector3.Distance(player.transform.position, transform.position) < 60)
             {
                 yield return new WaitForSeconds(Random.Range(3, 4));
                 if (Vector3.Distance(playerTransform.position, transform.position) < range)
