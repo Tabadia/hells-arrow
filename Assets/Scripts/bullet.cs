@@ -44,6 +44,10 @@ public class bullet : MonoBehaviour
             if (hits[i].collider.gameObject.CompareTag("Arrow")){
                 Destroy(gameObject);
             }
+            if (hits[i].collider.gameObject.CompareTag("Parry")){
+                print("parried");
+                Destroy(gameObject);
+            }
         }
     }
 }

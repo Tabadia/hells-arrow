@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 15886338}
   - component: {fileID: 15886340}
   - component: {fileID: 15886339}
+  - component: {fileID: 1126252227}
+  - component: {fileID: 1126252226}
   m_Layer: 0
-  m_Name: parry the platapus
-  m_TagString: Untagged
+  m_Name: Parry
+  m_TagString: Parry
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 15886337}
   m_LocalRotation: {x: -0.579228, y: 0.40557975, z: 0.40557975, w: 0.579228}
   m_LocalPosition: {x: 0.0000020732673, y: 0.6870006, z: 0.030999854}
-  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2020115726669770415}
@@ -105,6 +107,35 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &1126252227
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15886337}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!135 &1126252226
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15886337}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.43
+  m_Center: {x: 0, y: -6.052089e-10, z: 0}
 --- !u!1 &848184161
 GameObject:
   m_ObjectHideFlags: 0
@@ -5719,7 +5750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8612cdf5c78aaf4aa94dc0f0ed6d28ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 5
   gravity: -50
   maxSpeed: 16
   dashMult: 4.5
@@ -5845,10 +5876,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e343ce2deb8d8b4891560e1a5e8340b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parryDuration: 1
-  parryCooldown: 3
+  parryDuration: 1.5
+  parryCooldown: 1
   parrySFX: {fileID: 6259941982972521227}
   parry: {fileID: 15886337}
+  parryCollider: {fileID: 0}
   parryAnimator: {fileID: 15886339}
   isParrying: 0
 --- !u!82 &6259941982972521229
@@ -5862,9 +5894,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 1cb04262c2a7dc1449dd05c0ea2beefa,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 778a400a89153af4eafffb6819bee41c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9d551d04d5ec6d1449d97a7e89220cb2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.674
+  m_Volume: 0.569
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5959,7 +5991,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 1cb04262c2a7dc1449dd05c0ea2beefa,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 4be7882f53aa5324da0e953cb5f2c323, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c5bab8a5c9625f544890a2e60458c8ea, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

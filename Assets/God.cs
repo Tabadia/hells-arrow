@@ -26,8 +26,7 @@ public class God : MonoBehaviour
         }
     }
 
-    IEnumerator LightningStrikes()
-    {
+    IEnumerator LightningStrikes() {
         while (true)
         {
             
@@ -42,8 +41,7 @@ public class God : MonoBehaviour
         }
     }
 
-    IEnumerator Strike()
-    {
+    IEnumerator Strike() {
         Vector3 position = player.position + new Vector3(Random.Range(-7.2f, 7.2f), 0, Random.Range(-7.2f, 7.2f));
         GameObject reverse = Instantiate(reverseLightning, position - new Vector3(0, 1f, 0), Quaternion.Euler(90, 0, 0));
         yield return new WaitForSeconds(.5f);
@@ -57,10 +55,8 @@ public class God : MonoBehaviour
         Destroy(g);
     }
 
-    IEnumerator EnemySpawner()
-    {
-        while (true)
-        {
+    IEnumerator EnemySpawner(){
+        while (true) {
             Instantiate(enemies[Random.Range(0, enemies.Length)], transform.position + new Vector3(0, -8, 0), Quaternion.identity);
             yield return new WaitForSeconds(1f);
         }
