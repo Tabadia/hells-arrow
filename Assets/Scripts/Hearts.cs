@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Hearts : MonoBehaviour
 {
-    [SerializeField] private int maxHearts = 6;
+    [SerializeField] private int maxHearts = 8;
     [SerializeField] private GameObject heartContainer;
     // [SerializeField] private GameObject heartPrefab;
     // [SerializeField] private GameObject damageEffect;
@@ -114,6 +114,9 @@ public class Hearts : MonoBehaviour
         }
         StartCoroutine(HitEffect());
     }
+
+
+
 
     public void ResetHearts() {
         for (int i = 0; i < maxHearts; i++) {
