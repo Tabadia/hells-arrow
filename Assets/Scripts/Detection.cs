@@ -86,6 +86,13 @@ public class Detection : MonoBehaviour
             {
                 shrineInTrigger = true;
             }
+            else if (Vector3.Distance(overlappingColliders[i].gameObject.transform.position,
+                    playerObject.transform.position) < detectionDistance * .65f && 
+                (overlappingColliders[i].gameObject.CompareTag("Enemy") ||
+                 (!overlappingColliders[i].transform.parent.IsUnityNull() && overlappingColliders[i].transform.parent.CompareTag("SafeZone"))))
+            {
+                shrineInTrigger = true;
+            }
         }
         detected = detected || shrineInTrigger;
 

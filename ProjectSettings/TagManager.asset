@@ -16,6 +16,7 @@ TagManager:
   - Projectile
   - Parry
   - SpawnPoint
+  - SafeZone
   layers:
   - Default
   - TransparentFX
