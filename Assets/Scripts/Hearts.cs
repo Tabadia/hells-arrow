@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Hearts : MonoBehaviour
 {
-    [SerializeField] private int maxHearts = 3;
+    [SerializeField] private int maxHearts = 6;
     [SerializeField] private GameObject heartContainer;
     [SerializeField] private GameObject heartPrefab;
     [SerializeField] private GameObject damageEffect;
@@ -32,8 +32,7 @@ public class Hearts : MonoBehaviour
     private GameObject[] checkpoint;
     private CapsuleCollider playerCollider;
 
-    void Start()
-    {
+    void Start() {
         playerCollider = gameObject.GetComponent<CapsuleCollider>();
         currentHearts = maxHearts;
         hearts = new GameObject[maxHearts];
@@ -118,6 +117,13 @@ public class Hearts : MonoBehaviour
             }
         }
         StartCoroutine(HitEffect());
+    }
+
+    public void ResetHearts() {
+        for (int i = 0; i < maxHearts; i++) {
+            hearts[i].GetComponent<Image>().sprite = fullHeart;
+        }
+        currentHearts = maxHearts;
     }
 
     IEnumerator HitEffect()

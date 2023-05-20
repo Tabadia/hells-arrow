@@ -5,12 +5,16 @@ using System.Collections;
 public class Portal : MonoBehaviour
 {
     [SerializeField] private string nextScene;
+    [SerializeField] private GameObject UI;
 
     private GameObject player;
     private AsyncOperation sceneAsync;
+    private GameObject spawnPoint;
+    private Hearts playerHealth;
 
     void Start(){
         player = GameObject.FindGameObjectWithTag("Player");
+        playerHealth = player.GetComponent<Hearts>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -42,6 +46,10 @@ public class Portal : MonoBehaviour
         {
             Debug.Log("Scene is Valid");
             SceneManager.MoveGameObjectToScene(player, sceneToLoad);
+            SceneManager.MoveGameObjectToScene(UI, sceneToLoad);
+            spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
+            player.transform.position = spawnPoint.transform.position;
+            playerHealth.ResetHearts();
             SceneManager.SetActiveScene(sceneToLoad);
         }
     }

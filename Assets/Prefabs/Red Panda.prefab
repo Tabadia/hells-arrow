@@ -372,7 +372,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 779db8e722774bd4db8107e4d82849c0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.182
+  m_Volume: 0.499
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -471,7 +471,7 @@ MonoBehaviour:
   fireballPrefab: {fileID: 2463847973713546271, guid: 49deb63351ccac64380e575666ba1821,
     type: 3}
   shootCooldown: 4
-  shootRange: 550
+  shootRange: 750
   shootSFX: {fileID: 5079492371726129104}
   healthBar: {fileID: 6906914876624762847}
   animator: {fileID: 477299759}

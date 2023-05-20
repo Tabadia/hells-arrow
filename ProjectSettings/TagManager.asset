@@ -15,6 +15,7 @@ TagManager:
   - checkpoint
   - Projectile
   - Parry
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
