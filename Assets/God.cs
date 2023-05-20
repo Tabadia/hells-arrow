@@ -26,12 +26,18 @@ public class God : MonoBehaviour
 
     IEnumerator LightningStrikes() {
         while (true) {
-            yield return new WaitForSeconds(Random.Range(3, 4));
-            if (Vector3.Distance(player.position, transform.position) < range) {
-                StartCoroutine(Strike());
-                yield return new WaitForSeconds(0.5f);
-                StartCoroutine(Strike());
+            if (Vector3.Distance(player.position, transform.position) < 60)
+            {
+                yield return new WaitForSeconds(Random.Range(3, 4));
+                if (Vector3.Distance(player.position, transform.position) < range)
+                {
+                    StartCoroutine(Strike());
+                    yield return new WaitForSeconds(.2f);
+                    StartCoroutine(Strike());
+                }
             }
+
+            yield return new WaitForEndOfFrame();
         }
     }
 
