@@ -1,10 +1,16 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ShrineManager : MonoBehaviour {
+public class ShrineManager : MonoBehaviour
+{
+    private GameObject playerPrefab;
+    private GameObject uiPrefab;
+    
     [SerializeField] private Button[] upOptions;
     [SerializeField] private TextMeshProUGUI[] optionText;
     [SerializeField] private float maxDistance = 15f;
@@ -14,7 +20,7 @@ public class ShrineManager : MonoBehaviour {
     [SerializeField] public float upgradePoints;
     [SerializeField] private GameObject upgrade;
     [SerializeField] private Animator upgradeAnimator;
-    [SerializeField] private TMP_Text soulText;
+    [SerializeField] private TextMeshProUGUI soulText;
     [SerializeField] private Animator soulAnim;
 
     private GameObject[] shrines;
@@ -33,9 +39,32 @@ public class ShrineManager : MonoBehaviour {
     // Shrines shrineScript;
 
     void Start() {
+        playerPrefab = GameObject.FindGameObjectWithTag("Player");
+        uiPrefab = GameObject.FindGameObjectWithTag("UIManager");
+        if (SceneManager.GetActiveScene().name == "Ice Map")
+        {
+            OnLoad(false);
+        }
+    }
+
+    public void OnLoad(bool fromNewScene)
+    {
+        playerPrefab = GameObject.FindGameObjectWithTag("Player");
+        uiPrefab = GameObject.FindGameObjectWithTag("UIManager");
+
+        if (fromNewScene)
+        {
+            Debug.Log("t");
+            shrineText = uiPrefab.transform.GetChild(2).GetChild(3).gameObject;
+            upMenu = uiPrefab.transform.GetChild(2).GetChild(4).gameObject;
+            sphere = playerPrefab.transform.GetChild(4).gameObject;
+            upgrade = playerPrefab.transform.GetChild(6).gameObject;
+            upgradeAnimator = upgrade.GetComponent<Animator>();
+            soulText = uiPrefab.transform.GetChild(2).GetChild(7).GetComponentInChildren<TextMeshProUGUI>();
+            Debug.Log(uiPrefab.transform.GetChild(2).GetChild(7).name);
+            soulAnim = uiPrefab.transform.GetChild(2).GetChild(7).GetComponentInChildren<Animator>();
+        }
         shrines = GameObject.FindGameObjectsWithTag("Shrine");
-        // shootingScript = GetComponent<ShootingScript>();
-        // shrineScript = GetComponent<Shrines>();
         player = GameObject.FindGameObjectWithTag("Player");
         movementScript = player.GetComponent<MovementController>();
         detection = sphere.GetComponent<Detection>();
@@ -47,6 +76,10 @@ public class ShrineManager : MonoBehaviour {
             soulAnim.Play("acquire");
         }
         pastPoints = upgradePoints;
+        if (soulText.IsUnityNull())
+        {
+            return;
+        }
         soulText.text = upgradePoints.ToString();
         float distance = Mathf.Infinity;
         // Vector3 position = transform.position;

@@ -16,6 +16,8 @@ public class CameraController : MonoBehaviour
     private bool movingCamera;
 
     void Start() {
+        DontDestroyOnLoad(mainCam.gameObject);
+        DontDestroyOnLoad(secondaryCam.gameObject);
         shootingScript = player.GetComponent<ShootingScript>();
         rotation = mainCam.transform.rotation;
         // Multiply by the difference between the actual FOV and the FOV these numbers were based off (36)

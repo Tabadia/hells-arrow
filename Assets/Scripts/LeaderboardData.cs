@@ -71,7 +71,7 @@ public class LeaderboardData : MonoBehaviour
         switch (playerName.Length)
         {
             case > 8:
-                nName.Append(playerName.ToCharArray().ToList().GetRange(0, 8).ToArray());
+                nName.Append(playerName.ToCharArray().ToList().GetRange(0, 7).ToArray());
                 break;
             case < 8:
                 nName.Append(playerName + new String(' ', 8-playerName.Length));

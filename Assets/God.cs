@@ -1,12 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class God : MonoBehaviour
 {
     [SerializeField] private GameObject lightning;
     [SerializeField] private GameObject reverseLightning;
-    [SerializeField] private Transform player;
+    private Transform playerTransform;
+    [SerializeField] private GameObject player;
     [SerializeField] private GameObject[] enemies;
     [SerializeField] private float range;
     private Hearts playerHearts;
@@ -15,14 +15,15 @@ public class God : MonoBehaviour
     void Start()
     {
         StartCoroutine(LightningStrikes());
-        playerHearts = player.GetComponent<Hearts>();
+        playerTransform = player.transform;
+        playerHearts = playerTransform.GetComponent<Hearts>();
         StartCoroutine(EnemySpawner());
     }
 
     void Update() {
-        if (Vector3.Distance(player.position, transform.position) < range)
+        if (Vector3.Distance(playerTransform.position, transform.position) < range)
         {
-            transform.LookAt(player);
+            transform.LookAt(playerTransform);
         }
     }
 
@@ -31,22 +32,22 @@ public class God : MonoBehaviour
         {
             
                 yield return new WaitForSeconds(Random.Range(3, 4));
-                if (Vector3.Distance(player.position, transform.position) < range) {
+                if (Vector3.Distance(playerTransform.position, transform.position) < range) {
                     StartCoroutine(Strike());
                 }
                 yield return new WaitForSeconds(0.5f);
-                if (Vector3.Distance(player.position, transform.position) < range) {
+                if (Vector3.Distance(playerTransform.position, transform.position) < range) {
                     StartCoroutine(Strike());
                 }
         }
     }
 
     IEnumerator Strike() {
-        Vector3 position = player.position + new Vector3(Random.Range(-7.2f, 7.2f), 0, Random.Range(-7.2f, 7.2f));
+        Vector3 position = playerTransform.position + new Vector3(Random.Range(-7.2f, 7.2f), 0, Random.Range(-7.2f, 7.2f));
         GameObject reverse = Instantiate(reverseLightning, position - new Vector3(0, 1f, 0), Quaternion.Euler(90, 0, 0));
         yield return new WaitForSeconds(.5f);
         GameObject g = Instantiate(lightning, position + new Vector3(0, 12.46f, 0), Quaternion.identity);
-        if (Vector3.Distance(player.position, position) < 3f)
+        if (Vector3.Distance(playerTransform.position, position) < 3f)
         {
             playerHearts.TakeDamage(.5f);
         }

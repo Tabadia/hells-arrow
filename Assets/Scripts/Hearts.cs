@@ -143,4 +143,9 @@ public class Hearts : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
 }

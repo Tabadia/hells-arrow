@@ -17,6 +17,7 @@ TagManager:
   - Parry
   - SpawnPoint
   - SafeZone
+  - UIManager
   layers:
   - Default
   - TransparentFX

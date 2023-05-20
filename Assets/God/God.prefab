@@ -59,9 +59,10 @@ MonoBehaviour:
     type: 3}
   reverseLightning: {fileID: 6469881971993555499, guid: 51f1ac5124be6b943b0d0489f42d9c7a,
     type: 3}
-  player: {fileID: 0}
+  player: {fileID: 2020115726669770385, guid: c143ea848f1bb8443b58c466aec10d96, type: 3}
   enemies:
   - {fileID: 6352036256184760607, guid: 89d62d71d1b1f894384115a314556151, type: 3}
+  range: 0
 --- !u!65 &1619913740
 BoxCollider:
   m_ObjectHideFlags: 0

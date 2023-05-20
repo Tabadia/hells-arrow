@@ -24,6 +24,7 @@ public class PauseManager : MonoBehaviour
         foreach(AudioSource audioSource in audioSourcesToIgnore) {
             audioSource.ignoreListenerPause = true;
         }
+        DontDestroyOnLoad(transform.parent.gameObject);
     }
 
     void Update() {
