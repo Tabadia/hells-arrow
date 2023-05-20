@@ -43,7 +43,7 @@ public class EnemyHealth : MonoBehaviour {
                 print("is boss");
                 portals[0].SetActive(true);
             }
-            Destroy(gameObject);
+            Destroy(transform.gameObject);
         }
         if (health > maxHealth){
             health = maxHealth;
@@ -53,6 +53,7 @@ public class EnemyHealth : MonoBehaviour {
     }
     
     public void TakeDamage(float bowStrength) {
+       
         health -= bowStrength;
         gameObject.transform.GetChild(1).GetComponent<Animator>().Play("hurt", 0);
         hitEffect.Play("hit" + rand.Next(1,3), 0);
