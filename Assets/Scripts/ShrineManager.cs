@@ -47,7 +47,7 @@ public class ShrineManager : MonoBehaviour {
             soulAnim.Play("acquire");
         }
         pastPoints = upgradePoints;
-        soulText.text = upgradePoints.ToString("N");
+        soulText.text = upgradePoints.ToString("N0");
         float distance = Mathf.Infinity;
         // Vector3 position = transform.position;
         foreach (GameObject s in shrines) {

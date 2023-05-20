@@ -88,6 +88,9 @@ public class Arrow : MonoBehaviour
                             {
                                 colliding = false;
                                 pastHits[i] = hits[i].collider.gameObject.GetInstanceID();
+                                enemyHealth = hits[i].collider.gameObject.GetComponent<EnemyHealth>();
+                                /*if(!shootSFX.isPlaying)*/ hitSFX.Play();
+                                enemyHealth.TakeDamage(bowStrength);
                                 timesPierced++;
                             }
                         }
