@@ -10,30 +10,45 @@ public class LeaderboardData : MonoBehaviour
 
     void Start()
     {
-        _dataDestination = Application.dataPath + "/Leaderboard/Leaderboard.txt";
+        _dataDestination = Application.persistentDataPath + "/Leaderboard.txt";
+        ClearData();
+        if (!File.Exists(_dataDestination))
+        {
+            File.Create(_dataDestination).Dispose();
+        }
+    }
+
+    private static void ClearData()
+    {
+        _dataDestination = Application.persistentDataPath + "/Leaderboard.txt";
+        File.Delete(_dataDestination);
+        File.Create(_dataDestination).Dispose();
     }
 
 
     public static void SaveNewData(string score, string playerName)
     {
-        _dataDestination = Application.dataPath + "/Leaderboard/Leaderboard.txt";
+        _dataDestination = Application.persistentDataPath + "/Leaderboard.txt";
         var data = FormatData(score, playerName);
         
         if (File.Exists(_dataDestination))
         {
             var fileStream = File.Open(_dataDestination, FileMode.Append);
             fileStream.Write(new UTF8Encoding(true).GetBytes(data), 0, data.Length);
+            fileStream.Dispose();
         }
         else
         {
             var fileStream = File.Create(_dataDestination);
             fileStream.Write(new UTF8Encoding(true).GetBytes(data), 0, data.Length);
+            fileStream.Dispose();
         }
+        
     }
 
     public static string[] RetrieveData()
     {
-        _dataDestination = Application.dataPath + "/Leaderboard/Leaderboard.txt";
+        _dataDestination = Application.persistentDataPath + "/Leaderboard.txt";
         if (!File.Exists(_dataDestination))
         {
             return new[] { "Empty Leaderboard" };
