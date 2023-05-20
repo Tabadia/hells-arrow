@@ -2873,8 +2873,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4535224831802576352, guid: e3b422a50a921c145a4bb6b940090495,
         type: 3}
+      propertyPath: health
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535224831802576352, guid: e3b422a50a921c145a4bb6b940090495,
+        type: 3}
       propertyPath: isBoss
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535224831802576352, guid: e3b422a50a921c145a4bb6b940090495,
+        type: 3}
+      propertyPath: maxHealth
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 4535224831802576363, guid: e3b422a50a921c145a4bb6b940090495,
         type: 3}
