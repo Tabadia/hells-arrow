@@ -33,7 +33,7 @@ MonoBehaviour:
     m_Value: 38.57
   aperture:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 2.2
   focalLength:
     m_OverrideState: 1
     m_Value: 272
@@ -438,7 +438,7 @@ MonoBehaviour:
   active: 1
   color:
     m_OverrideState: 1
-    m_Value: {r: 0.020469919, g: 0.18173742, b: 0.18867922, a: 1}
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
   center:
     m_OverrideState: 1
     m_Value: {x: 0.5, y: 0.5}
@@ -466,7 +466,7 @@ MonoBehaviour:
   active: 1
   temperature:
     m_OverrideState: 1
-    m_Value: -25.8
+    m_Value: -39.6
   tint:
     m_OverrideState: 1
     m_Value: -12
@@ -485,7 +485,7 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.8
+    m_Value: 1.28
   contrast:
     m_OverrideState: 0
     m_Value: 3
@@ -497,4 +497,4 @@ MonoBehaviour:
     m_Value: 0
   saturation:
     m_OverrideState: 1
-    m_Value: -2.3
+    m_Value: -9.2
