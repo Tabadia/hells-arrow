@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Collections;
 using Random = System.Random;
 
 public class EnemyHealth : MonoBehaviour {
@@ -9,6 +11,7 @@ public class EnemyHealth : MonoBehaviour {
     [SerializeField] private GameObject enemyDrop;
     [SerializeField] private Animator hitEffect;
     [SerializeField] private bool isBoss;
+    [SerializeField] private bool isGod;
     
     private GameObject[] portals;
     private Slider healthBar;
@@ -45,6 +48,9 @@ public class EnemyHealth : MonoBehaviour {
                 print("is boss");
                 portals[0].SetActive(true);
             }
+            if (isGod){
+                StartCoroutine(EndGame());
+            }
             Destroy(transform.gameObject);
         }
         if (health > maxHealth){
@@ -69,5 +75,10 @@ public class EnemyHealth : MonoBehaviour {
 
     private float CalculateHealth() {
         return health / maxHealth;
+    }
+
+    IEnumerator EndGame() {
+        yield return new WaitForSeconds(4f);
+        SceneManager.LoadScene("End");
     }
 }
