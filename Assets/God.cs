@@ -58,7 +58,7 @@ public class God : MonoBehaviour
     IEnumerator EnemySpawner(){
         while (true) {
             Instantiate(enemies[Random.Range(0, enemies.Length)], transform.position + new Vector3(0, -8, 0), Quaternion.identity);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(7f);
         }
     }
 }

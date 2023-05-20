@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inSightRange: 0
-  sightRange: 300
+  sightRange: 400
   damageDealt: 0
   dashCooldown: 2.5
   speed: 0.25
