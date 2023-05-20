@@ -36,8 +36,10 @@ public class EnemyHealth : MonoBehaviour {
 
     void Update() {
         healthBar.value = CalculateHealth();
-        if (health <= 0){
-            GameObject instantiatedDrop = Instantiate(enemyDrop, transform.position+(new Vector3(0,0.5f,0)), transform.rotation);
+        if (health <= 0)
+        {
+            Physics.Raycast(new Ray(transform.position, Vector3.down), out var hit, 10f, LayerMask.GetMask("Ground"));
+            GameObject instantiatedDrop = Instantiate(enemyDrop, hit.point+(new Vector3(0,0.3f,0)), transform.rotation);
             instantiatedDrop.GetComponentInChildren<ExperienceScript>().parentDifficulty = difficulty;
             if(isBoss){
                 print("is boss");

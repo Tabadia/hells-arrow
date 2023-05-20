@@ -1,14 +1,15 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Hearts : MonoBehaviour
 {
     [SerializeField] private int maxHearts = 3;
     [SerializeField] private GameObject heartContainer;
-    // [SerializeField] private GameObject heartPrefab;
-    // [SerializeField] private GameObject damageEffect;
+    [SerializeField] private GameObject heartPrefab;
+    [SerializeField] private GameObject damageEffect;
     [SerializeField] private Image effectRenderer;
     [SerializeField] private float effectFadeDuration = 0.2f;
     [SerializeField] private float effectOpacity = 0.54f;
@@ -18,7 +19,11 @@ public class Hearts : MonoBehaviour
     [SerializeField] private Sprite halfHeart;
     [SerializeField] private Sprite emptyHeart;
     [SerializeField] private AudioSource hurtSFX;
-
+    [SerializeField] private TextMeshProUGUI scoreVar;
+    [SerializeField] private TextMeshProUGUI displayScore;
+    [SerializeField] private TextMeshProUGUI nameInput;
+    [SerializeField] private PauseManager pauseManager;
+    
     private GameObject[] hearts;
     private float currentHearts;
     private AudioSource[] allAudioSources;
@@ -37,7 +42,7 @@ public class Hearts : MonoBehaviour
             hearts[i] = heart;
         }
         startPos = gameObject.transform.position;
-
+        
         respawnBtn.onClick.AddListener(() => {
             deathScreen.SetActive(false);
             isDead = false;
@@ -48,12 +53,24 @@ public class Hearts : MonoBehaviour
             // }
             // currentHearts = maxHearts;
             // gameObject.transform.position = startPos;
+
+            LeaderboardData.SaveNewData(scoreVar.text, string.IsNullOrEmpty(nameInput.text)?"OOO":nameInput.text);
+            displayScore.text = "00";
+            nameInput.text = "";
+            pauseManager.playerScore = 0f;
+            
             SceneManager.LoadScene("Ice Map");
         });
         //takeDamage(1.5f);
     }
 
     void Update() {
+        scoreVar.text = pauseManager.playerScore.ToString("0000");
+        if (!displayScore.text.Equals(scoreVar.text))
+        {
+            displayScore.text = scoreVar.text;
+        }
+
         //get all game objects with tag checkpoint
         checkpoint = GameObject.FindGameObjectsWithTag("checkpoint");
         //loop through objects, check if player is in bounds

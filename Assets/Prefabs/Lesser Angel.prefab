@@ -1294,6 +1294,7 @@ MonoBehaviour:
   enemyDrop: {fileID: 4094036990376496550, guid: a78cfafb30b220c93a55b0224cde3892,
     type: 3}
   hitEffect: {fileID: 813523397}
+  isBoss: 0
 --- !u!114 &8904930290322407679
 MonoBehaviour:
   m_ObjectHideFlags: 0
