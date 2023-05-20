@@ -37,7 +37,6 @@ public class bullet : MonoBehaviour
                 }
                 else{
                     print("parried");
-                    blockSFX.Play();
                     Destroy(gameObject);
                 }
             }

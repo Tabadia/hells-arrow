@@ -110,7 +110,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7106260326789358621}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
@@ -130,3 +130,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   damage: 0.5
+  blockSFX: {fileID: 0}
