@@ -2,13 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-/*
-Marks large circle on ground, charges for a few seconds, then does massive damage to player if they are within it
-Cannot be parried
-Orbits around player slowly enough to shoot with some lag
-High health & large
-*/
-
 public class GreaterAngel : MonoBehaviour
 {
     [SerializeField] private GameObject circle;
@@ -40,7 +33,9 @@ public class GreaterAngel : MonoBehaviour
 
     void Update() {
         distance = (transform.position - player.transform.position).sqrMagnitude;
-
+        if (distance <shootRange){
+            circle.transform.position = player.transform.position;
+        }
         if (canShoot && distance < shootRange) {
             StartCoroutine(Shoot());
         }
@@ -65,7 +60,7 @@ public class GreaterAngel : MonoBehaviour
         canShoot = false;
         yield return new WaitForSeconds(1f);
         
-        circle.transform.position = player.transform.position;
+        //circle.transform.position = player.transform.position;
         circle.SetActive(true);
 
         yield return new WaitForSeconds(.4f);
