@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Hearts : MonoBehaviour
 {
@@ -42,11 +43,12 @@ public class Hearts : MonoBehaviour
             isDead = false;
             Time.timeScale = 1;
             AudioListener.pause = false;
-            for (int i = 0; i < maxHearts; i++) {
-                hearts[i].GetComponent<Image>().sprite = fullHeart;
-            }
-            currentHearts = maxHearts;
-            gameObject.transform.position = startPos;
+            // for (int i = 0; i < maxHearts; i++) {
+            //     hearts[i].GetComponent<Image>().sprite = fullHeart;
+            // }
+            // currentHearts = maxHearts;
+            // gameObject.transform.position = startPos;
+            SceneManager.LoadScene("Ice Map");
         });
         //takeDamage(1.5f);
     }

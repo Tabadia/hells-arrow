@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Ice Map.unity
     guid: 8b8d7388aee8f444a8754364a0b57220
+  - enabled: 1
+    path: Assets/Scenes/Heaven.unity
+    guid: 0d9fe7047549346438073bdd6d8cc256
+  - enabled: 1
+    path: Assets/Scenes/Start.unity
+    guid: c37742ad3eafd3c4b88cd83f1e113390
   m_configObjects: {}

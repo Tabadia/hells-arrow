@@ -33,9 +33,7 @@ public class GreaterAngel : MonoBehaviour
 
     void Update() {
         distance = (transform.position - player.transform.position).sqrMagnitude;
-        if (distance <shootRange){
-            circle.transform.position = player.transform.position;
-        }
+        
         if (canShoot && distance < shootRange) {
             StartCoroutine(Shoot());
         }
@@ -60,7 +58,7 @@ public class GreaterAngel : MonoBehaviour
         canShoot = false;
         yield return new WaitForSeconds(1f);
         
-        //circle.transform.position = player.transform.position;
+        circle.transform.position = player.transform.position;
         circle.SetActive(true);
 
         yield return new WaitForSeconds(.4f);

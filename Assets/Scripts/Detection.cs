@@ -95,18 +95,8 @@ public class Detection : MonoBehaviour
             damagePhase = false;
             unDetectedObject.SetActive(false);
             damageObject.SetActive(false);
-            
-            if (!fightSFX.isPlaying && !shrineInTrigger) {
-                ambienceSFX.Stop();
-                fightSFX.Play();
-            }
-            if(!fightSFX.isPlaying && shrineInTrigger && !ambienceSFX.isPlaying) {
-                ambienceSFX.Play();
-            }
         }
         else {
-            if (!fightSFX.isPlaying && !ambienceSFX.isPlaying) {
-                ambienceSFX.Play(); }
             callsSinceDetection += 1;
             /* FixedUpdate is called 50 times a second, thus 50f * timeInSeconds
                After a set time of not being near enemies, reset the timer and start counting for damage */
