@@ -11,8 +11,8 @@ public class ShrineManager : MonoBehaviour
     private GameObject playerPrefab;
     private GameObject uiPrefab;
     
-    [SerializeField] private Button[] upOptions;
-    [SerializeField] private TextMeshProUGUI[] optionText;
+    [SerializeField] private Button[] upOptions = new Button[3];
+    [SerializeField] private TextMeshProUGUI[] optionText = new TextMeshProUGUI[3];
     [SerializeField] private float maxDistance = 15f;
     [SerializeField] private GameObject shrineText;
     [SerializeField] private GameObject upMenu;
@@ -53,8 +53,8 @@ public class ShrineManager : MonoBehaviour
         playerPrefab = GameObject.FindGameObjectWithTag("Player");
         uiPrefab = GameObject.FindGameObjectWithTag("UIManager");
 
-        if (fromNewScene)
-        {
+        // if (fromNewScene)
+        // {
             shrineText = uiPrefab.transform.GetChild(2).GetChild(3).gameObject;
             upMenu = uiPrefab.transform.GetChild(2).GetChild(4).gameObject;
             sphere = playerPrefab.transform.GetChild(4).gameObject;
@@ -63,12 +63,25 @@ public class ShrineManager : MonoBehaviour
             soulText = uiPrefab.transform.GetChild(2).GetChild(7).GetComponentInChildren<TextMeshProUGUI>();
             soulAnim = uiPrefab.transform.GetChild(2).GetChild(7).GetComponentInChildren<Animator>();
             spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
-        }
+        // }
         shrines = GameObject.FindGameObjectsWithTag("Shrine");
         player = GameObject.FindGameObjectWithTag("Player");
         movementScript = player.GetComponent<MovementController>();
         detection = sphere.GetComponent<Detection>();
         pastPoints = upgradePoints;
+
+        upOptions[0] = upMenu.transform.GetChild(0).GetComponent<Button>();
+        upOptions[1] = upMenu.transform.GetChild(1).GetComponent<Button>();
+        upOptions[2] = upMenu.transform.GetChild(2).GetComponent<Button>();
+
+        foreach (var button in upOptions)
+        {
+            button.onClick.AddListener(() => UpgradeClicked());
+        }
+        
+        optionText[0] = upOptions[0].transform.GetComponentInChildren<TextMeshProUGUI>();
+        optionText[1] = upOptions[1].transform.GetComponentInChildren<TextMeshProUGUI>();
+        optionText[2] = upOptions[2].transform.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     void Update() {
@@ -78,7 +91,7 @@ public class ShrineManager : MonoBehaviour
         pastPoints = upgradePoints;
         if (soulText.IsUnityNull())
         {
-            return;
+            OnLoad(false);
         }
         soulText.text = upgradePoints.ToString();
         float distance = Mathf.Infinity;
