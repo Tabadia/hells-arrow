@@ -43,7 +43,6 @@ public class ShootingScript : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(shrinesObject);
         if (shrinesObject.IsUnityNull() || shrineScript.IsUnityNull())
         {
             shrinesObject = GameObject.FindGameObjectWithTag("ShrineManager");
