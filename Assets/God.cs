@@ -20,24 +20,19 @@ public class God : MonoBehaviour
     }
 
     void Update() {
-        if (Vector3.Distance(player.position, transform.position) < range)
-        {
+        if (Vector3.Distance(player.position, transform.position) < range) {
             transform.LookAt(player);
         }
     }
 
     IEnumerator LightningStrikes() {
-        while (true)
-        {
-            
-                yield return new WaitForSeconds(Random.Range(3, 4));
-                if (Vector3.Distance(player.position, transform.position) < range) {
-                    StartCoroutine(Strike());
-                }
+        while (true) {
+            yield return new WaitForSeconds(Random.Range(3, 4));
+            if (Vector3.Distance(player.position, transform.position) < range) {
+                StartCoroutine(Strike());
                 yield return new WaitForSeconds(0.5f);
-                if (Vector3.Distance(player.position, transform.position) < range) {
-                    StartCoroutine(Strike());
-                }
+                StartCoroutine(Strike());
+            }
         }
     }
 
@@ -57,8 +52,11 @@ public class God : MonoBehaviour
 
     IEnumerator EnemySpawner(){
         while (true) {
-            Instantiate(enemies[Random.Range(0, enemies.Length)], transform.position + new Vector3(0, -8, 0), Quaternion.identity);
-            yield return new WaitForSeconds(15f);
+            if (Vector3.Distance(player.position, transform.position) < range){
+                Instantiate(enemies[Random.Range(0, enemies.Length)], transform.position + new Vector3(0, -8, 0), Quaternion.identity);
+                yield return new WaitForSeconds(15f);
+            }
+            
         }
     }
 }
