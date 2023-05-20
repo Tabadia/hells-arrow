@@ -1,10 +1,12 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class PauseManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private GameObject scoreText;
+    [FormerlySerializedAs("scoreText")] [SerializeField] private TextMeshProUGUI scoreVar;
     // [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private AudioSource[] audioSourcesToIgnore;
     [SerializeField] private GameObject samurai;
@@ -34,14 +36,19 @@ public class PauseManager : MonoBehaviour
 
     public void Save()
     {
-        SaveLoad.SaveData(samurai, shrineManager, enemies, scoreText);
+        SaveLoad.SaveData(samurai, shrineManager, enemies, scoreVar.gameObject);
         Unpause();
+    }
+
+    public void Exit()
+    {
+        Unpause();
+        SceneManager.LoadScene("Start");
     }
 
     public void Pause()
     {
         pauseMenu.SetActive(true);
-        scoreText.GetComponent<TextMeshProUGUI>().text = playerScore.ToString("g2");
         Time.timeScale = 0;
         AudioListener.pause = true;
         UImusic.Play(0);

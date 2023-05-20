@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Tsurara : MonoBehaviour
@@ -40,7 +39,6 @@ public class Tsurara : MonoBehaviour
 
     IEnumerator Shoot() {
         animator.Play("attack",0);
-        print("Shoot");
         canShoot = false;
         yield return new WaitForSeconds(.25f);
         shootSFX.Play();

@@ -113,24 +113,18 @@ public class Arrow : MonoBehaviour
     }
 
     void Explode() {
-        print("explode");
         Vector3 center = transform.position + transform.forward * explosionRadius/2;
         // Explosion stuff
         var hitColliders = new Collider[1000];
         Physics.OverlapBoxNonAlloc(center, new Vector3(explosionRadius / 2, explosionRadius / 2, explosionRadius / 2), hitColliders, Quaternion.Euler(transform.forward));
         foreach(var hitCollider in hitColliders)
         {
-            if (hitCollider == null) continue;
-            print(hitCollider);
-            print(hitCollider.gameObject.name);
-            if (hitCollider.CompareTag("Enemy")){
-                enemyHealth = hitCollider.gameObject.GetComponent<EnemyHealth>();
-                enemyHealth.TakeDamage(bowStrength);
-                print("hit enemy");
+            if (hitCollider.IsUnityNull() || !hitCollider.gameObject.CompareTag("Enemy"))
+            {
+                continue;
             }
-            else {
-                print("hit something else");
-            }
+            enemyHealth = hitCollider.gameObject.GetComponent<EnemyHealth>();
+            enemyHealth.TakeDamage(bowStrength);
         }
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
     }
