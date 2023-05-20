@@ -12,8 +12,7 @@ public class God : MonoBehaviour
     private Hearts playerHearts;
 
     // Update is called once per frame
-    void Start()
-    {
+    void Start() {
         StartCoroutine(LightningStrikes());
         playerHearts = player.GetComponent<Hearts>();
         StartCoroutine(EnemySpawner());

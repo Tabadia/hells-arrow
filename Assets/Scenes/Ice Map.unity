@@ -51077,6 +51077,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 808100964652474814, guid: 47c81e71738199241817bf41a5767240,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5346054868324613449, guid: 47c81e71738199241817bf41a5767240,
         type: 3}
       propertyPath: m_StaticEditorFlags
