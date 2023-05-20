@@ -7943,7 +7943,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1619913737, guid: 582f435cd32879e4d89a7c3f1950a391, type: 3}
       propertyPath: range
-      value: 700
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 1619913737, guid: 582f435cd32879e4d89a7c3f1950a391, type: 3}
       propertyPath: player
