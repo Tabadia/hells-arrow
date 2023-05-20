@@ -11,10 +11,12 @@ public class Portal : MonoBehaviour
     private AsyncOperation sceneAsync;
     private GameObject spawnPoint;
     private Hearts playerHealth;
+    private Scene oldScene;
 
     void Start(){
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<Hearts>();
+        oldScene = SceneManager.GetActiveScene();
     }
 
     void OnTriggerEnter(Collider other)
@@ -37,7 +39,7 @@ public class Portal : MonoBehaviour
         OnFinishedLoadingScene();
     }
 
-    void enableScene(int index) {
+    void enableScene() {
         //Activate the Scene
         sceneAsync.allowSceneActivation = true;
 
@@ -45,6 +47,7 @@ public class Portal : MonoBehaviour
         if (sceneToLoad.IsValid())
         {
             Debug.Log("Scene is Valid");
+            SceneManager.UnloadScene(oldScene);
             SceneManager.MoveGameObjectToScene(player, sceneToLoad);
             SceneManager.MoveGameObjectToScene(UI, sceneToLoad);
             spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
@@ -56,7 +59,7 @@ public class Portal : MonoBehaviour
 
     void OnFinishedLoadingScene() {
         Debug.Log("Done Loading Scene");
-        enableScene(2);
+        enableScene();
         Debug.Log("Scene Activated!");
     }
 }
