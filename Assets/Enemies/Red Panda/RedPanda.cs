@@ -41,7 +41,6 @@ public class RedPanda : MonoBehaviour
     }
 
     IEnumerator Shoot() {
-        print("Shoot");
         canShoot = false;
         yield return new WaitForSeconds(.75f);
         shootSFX.Play();

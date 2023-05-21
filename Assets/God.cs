@@ -14,12 +14,14 @@ public class God : MonoBehaviour
     // Update is called once per frame
     void Start() {
         playerTransform = player.transform;
+        print("start");
         StartCoroutine(LightningStrikes());
         playerHearts = playerTransform.GetComponent<Hearts>();
         StartCoroutine(EnemySpawner());
     }
 
     void Update() {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         if (Vector3.Distance(playerTransform.position, transform.position) < range) {
             transform.LookAt(playerTransform);
         }
@@ -27,15 +29,13 @@ public class God : MonoBehaviour
 
     IEnumerator LightningStrikes() {
         while (true) {
-            if (Vector3.Distance(player.transform.position, transform.position) < 60)
-            {
+            if ((transform.position - playerTransform.position).sqrMagnitude < range){
                 yield return new WaitForSeconds(Random.Range(3, 4));
                 StartCoroutine(Strike());
                 yield return new WaitForSeconds(.2f);
                 StartCoroutine(Strike());
             }
-
-            yield return new WaitForEndOfFrame();
+             yield return new WaitForEndOfFrame();
         }
     }
 
@@ -55,7 +55,7 @@ public class God : MonoBehaviour
 
     IEnumerator EnemySpawner(){
         while (true) {
-            if (Vector3.Distance(player.transform.position, transform.position) < range){
+            if (Vector3.Distance(playerTransform.position, transform.position) < range){
                 Instantiate(enemies[Random.Range(0, enemies.Length)], transform.position + new Vector3(0, -8, 0), Quaternion.identity);
                 yield return new WaitForSeconds(15f);
             }

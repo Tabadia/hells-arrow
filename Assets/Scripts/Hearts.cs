@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Hearts : MonoBehaviour
 {
-    [SerializeField] private int maxHearts = 8;
+    [SerializeField] private int maxHearts = 9;
     [SerializeField] private GameObject heartContainer;
     // [SerializeField] private GameObject heartPrefab;
     // [SerializeField] private GameObject damageEffect;
