@@ -13351,7 +13351,7 @@ GameObject:
   - component: {fileID: 456723834}
   - component: {fileID: 456723833}
   m_Layer: 0
-  m_Name: Portal (1)
+  m_Name: Test Portal
   m_TagString: Portal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49412,7 +49412,7 @@ GameObject:
   - component: {fileID: 882994780}
   m_Layer: 0
   m_Name: rock.008
-  m_TagString: Untagged
+  m_TagString: SafeZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8

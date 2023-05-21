@@ -34,6 +34,7 @@ public class SettingsController : MonoBehaviour
         resolutionDropdown.AddOptions(resOptions);
         resolutionDropdown.value = currentRes;
         resolutionDropdown.RefreshShownValue();
+        Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, Screen.fullScreen);
     }
     
     // public functions that are called by buttons in the settings menu

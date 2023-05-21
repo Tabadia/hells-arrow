@@ -35,6 +35,9 @@ public class EnemyHealth : MonoBehaviour {
         health = maxHealth;
         healthBar.value = CalculateHealth();
         mainCamera = Camera.main;
+        if (isGod){
+            print("is god");
+        }
     }
 
     void Update() {
@@ -49,6 +52,7 @@ public class EnemyHealth : MonoBehaviour {
                 portals[0].SetActive(true);
             }
             if (isGod){
+                print("end game coroutine started");
                 StartCoroutine(EndGame());
             }
             Destroy(transform.gameObject);
@@ -78,7 +82,10 @@ public class EnemyHealth : MonoBehaviour {
     }
 
     IEnumerator EndGame() {
+        print("end game function ran");
         yield return new WaitForSeconds(4f);
-        SceneManager.LoadScene("End", LoadSceneMode.Single);
+        //SceneManager.LoadScene("End", LoadSceneMode.Single);
+        //SceneManager.LoadScene("End");
+        print("loaded end scene");
     }
 }

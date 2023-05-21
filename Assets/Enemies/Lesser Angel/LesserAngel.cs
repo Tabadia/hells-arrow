@@ -54,7 +54,6 @@ public class LesserAngel : MonoBehaviour
 
     IEnumerator Shoot() {
         animator.Play("attack",0);
-        print("Shoot");
         canShoot = false;
         yield return new WaitForSeconds(1f);
         

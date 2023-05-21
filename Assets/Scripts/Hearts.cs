@@ -87,8 +87,7 @@ public class Hearts : MonoBehaviour
         currentHearts -= dmg;
 
         if (currentHearts <= 0) {
-            for (int i = 0; i < maxHearts; i++)
-            {
+            for (int i = 0; i < maxHearts; i++){
                 hearts[i].GetComponent<Image>().sprite = emptyHeart;
             }
             deathScreen.SetActive(true);

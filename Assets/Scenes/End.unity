@@ -4404,19 +4404,24 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Aila Mengden-Koon: Programmer
+  m_text: 'Credits:
 
-    Charlie Slayton: 3d Artist, Writer
+    Aila Mengden-Koon - Programmer
 
-    Declan
-    Chamberlain: Programmer, Writer
+    Bella Barnett - Audio
 
-    Parker Hall: Programmer
+    Charlie
+    Slayton - 3d Artist, Writer
 
-    Matthew Lei:
-    2d Artist
+    Declan Chamberlain - Programmer, Writer
 
-    Thalen Abadia: Programmer, Writer'
+    Parker
+    Hall - Programmer
+
+    Matthew Lei - 2d Artist
+
+    Thalen Abadia - Programmer,
+    Writer'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5478097d66e250e43bd703fc3d7ba407, type: 2}
   m_sharedMaterial: {fileID: 210442064331760302, guid: 5478097d66e250e43bd703fc3d7ba407,
@@ -4444,8 +4449,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

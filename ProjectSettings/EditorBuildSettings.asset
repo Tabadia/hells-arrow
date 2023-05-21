@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Heaven.unity
     guid: 0d9fe7047549346438073bdd6d8cc256
+  - enabled: 1
+    path: Assets/Scenes/End.unity
+    guid: bd6a90aa5ade1514fb0141e49bac5f3a
   m_configObjects: {}
