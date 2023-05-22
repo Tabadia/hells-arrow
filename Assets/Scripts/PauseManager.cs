@@ -47,6 +47,7 @@ public class PauseManager : MonoBehaviour
 
     public void ExitToMenu(bool hasNameField)
     {
+        Unpause();
         pauseMenu.SetActive(false);
         if (hasNameField)
         {
