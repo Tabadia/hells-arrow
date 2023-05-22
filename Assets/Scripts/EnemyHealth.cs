@@ -17,6 +17,7 @@ public class EnemyHealth : MonoBehaviour {
     private Slider healthBar;
     private Random rand;
     private Camera mainCamera;
+    private Hearts playerHearts;
 
     void Start() {
         if (isBoss){
@@ -41,6 +42,7 @@ public class EnemyHealth : MonoBehaviour {
     }
 
     void Update() {
+        playerHearts = GameObject.FindWithTag("Player").GetComponent<Hearts>();
         healthBar.value = CalculateHealth();
         if (health <= 0)
         {
@@ -52,8 +54,8 @@ public class EnemyHealth : MonoBehaviour {
                 portals[0].SetActive(true);
             }
             if (isGod){
-                print("end game coroutine started");
-                StartCoroutine(EndGame());
+                print("running gamended function");
+                playerHearts.GameEnded();
             }
             Destroy(transform.gameObject);
         }
@@ -81,11 +83,4 @@ public class EnemyHealth : MonoBehaviour {
         return health / maxHealth;
     }
 
-    IEnumerator EndGame() {
-        print("end game function ran");
-        yield return new WaitForSeconds(4f);
-        //SceneManager.LoadScene("End", LoadSceneMode.Single);
-        //SceneManager.LoadScene("End");
-        print("loaded end scene");
-    }
 }

@@ -21,7 +21,9 @@ public class God : MonoBehaviour
     }
 
     void Update() {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerTransform = player.transform;
+        playerHearts = playerTransform.GetComponent<Hearts>();
         if (Vector3.Distance(playerTransform.position, transform.position) < range) {
             transform.LookAt(playerTransform);
         }
