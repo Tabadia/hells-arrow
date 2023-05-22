@@ -36,9 +36,6 @@ public class EnemyHealth : MonoBehaviour {
         health = maxHealth;
         healthBar.value = CalculateHealth();
         mainCamera = Camera.main;
-        if (isGod){
-            print("is god");
-        }
     }
 
     void Update() {
