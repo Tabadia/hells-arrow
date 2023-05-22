@@ -133,6 +133,18 @@ public class Hearts : MonoBehaviour
         currentHearts = maxHearts;
     }
 
+    public void GameEnded(){
+        print("end game");
+        StartCoroutine(EndGame());
+    }
+
+    IEnumerator EndGame() {
+        print("end game coroutine");
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("End", LoadSceneMode.Single);
+        print("loaded end screen");
+    }
+
     IEnumerator HitEffect()
     {
         effectRenderer.color = new Color(effectRenderer.color.r, effectRenderer.color.g, effectRenderer.color.b, effectOpacity);
