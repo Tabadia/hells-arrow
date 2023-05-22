@@ -11,7 +11,7 @@ public class LeaderboardData : MonoBehaviour
     void Start()
     {
         _dataDestination = Application.persistentDataPath + "/Leaderboard.txt";
-        ClearData();
+        // ClearData();
         if (!File.Exists(_dataDestination))
         {
             File.Create(_dataDestination).Dispose();
@@ -76,11 +76,6 @@ public class LeaderboardData : MonoBehaviour
                     lines[j + 1] = nextLine;
                 }
             }
-        }
-
-        if (lines[^1].Equals("Empty Leaderboard") || string.IsNullOrEmpty(lines[^1]))
-        {
-            lines = lines.ToList().GetRange(0, lines.Length - 1).ToArray();
         }
 
         return lines;

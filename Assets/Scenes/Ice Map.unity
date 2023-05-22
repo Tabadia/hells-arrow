@@ -13233,16 +13233,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 543450652439218917}
     m_Modifications:
-    - target: {fileID: 6259941982972521459, guid: c143ea848f1bb8443b58c466aec10d96,
-        type: 3}
-      propertyPath: scoreVar
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6259941982972521459, guid: c143ea848f1bb8443b58c466aec10d96,
-        type: 3}
-      propertyPath: nameInput
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3271193008162931336, guid: 482d1443c0642164ba384d815d20c89d,
         type: 3}
       propertyPath: m_Name
@@ -13327,6 +13317,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259941982972521459, guid: c143ea848f1bb8443b58c466aec10d96,
+        type: 3}
+      propertyPath: scoreVar
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259941982972521459, guid: c143ea848f1bb8443b58c466aec10d96,
+        type: 3}
+      propertyPath: nameInput
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 482d1443c0642164ba384d815d20c89d, type: 3}
@@ -25576,18 +25576,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8892367932362222593, guid: bc833f7c33ab16e42901cf8283159504, type: 3}
---- !u!114 &780938186 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 861934563270839210, guid: 47c81e71738199241817bf41a5767240,
-    type: 3}
-  m_PrefabInstance: {fileID: 5346054869782866304}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &787638100 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3271193008162931336, guid: 482d1443c0642164ba384d815d20c89d,
@@ -36829,7 +36817,7 @@ PrefabInstance:
         type: 3}
       propertyPath: nameInput
       value: 
-      objectReference: {fileID: 780938186}
+      objectReference: {fileID: 5346054869782866305}
     - target: {fileID: 6259941982972521459, guid: c143ea848f1bb8443b58c466aec10d96,
         type: 3}
       propertyPath: respawnBtn
@@ -50810,6 +50798,18 @@ PrefabInstance:
       objectReference: {fileID: 994920692}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47c81e71738199241817bf41a5767240, type: 3}
+--- !u!114 &5346054869782866305 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8828361807844996519, guid: 47c81e71738199241817bf41a5767240,
+    type: 3}
+  m_PrefabInstance: {fileID: 5346054869782866304}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5365184096955396418
 Transform:
   m_ObjectHideFlags: 0
