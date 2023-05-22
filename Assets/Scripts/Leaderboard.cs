@@ -37,7 +37,7 @@ public class Leaderboard : MonoBehaviour
             lbLines.text = display.ToString();
         }
 
-        rightButton.SetActive(allDisplay.Length / 10 > pageNum);
+        rightButton.SetActive((allDisplay.Length-1) / 10 > pageNum);
         leftButton.SetActive(pageNum > 0);
     }
 

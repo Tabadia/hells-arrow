@@ -47,10 +47,19 @@ public class Hearts : MonoBehaviour
             isDead = false;
             Time.timeScale = 1;
             AudioListener.pause = false;
-            LeaderboardData.SaveNewData(scoreVar.text, string.IsNullOrEmpty(nameInput.text)?"OOO":nameInput.text);
+            LeaderboardData.SaveNewData(scoreVar.text, nameInput.text);
             displayScore.text = "0000";
             nameInput.text = "";
             pauseManager.playerScore = 0f;
+            
+            var player = GameObject.FindWithTag("Player");
+            var ui = GameObject.FindWithTag("UIManager");
+            var cameraController = player.GetComponent<MovementController>().cameraMain.gameObject
+                .GetComponent<CameraController>();
+            Destroy(cameraController.mainCam.gameObject);
+            Destroy(cameraController.secondaryCam.gameObject);
+            Destroy(player);
+            Destroy(ui);
             
             SceneManager.LoadScene("Ice Map");
         });

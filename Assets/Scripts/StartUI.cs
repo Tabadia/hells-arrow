@@ -24,10 +24,10 @@ public class StartUI : MonoBehaviour {
     {
         if (!GameObject.FindWithTag("Player").IsUnityNull())
         {
-                var player = GameObject.FindWithTag("Player");
-                var ui = GameObject.FindWithTag("UIManager");
-                var cameraController = player.GetComponent<MovementController>().cameraMain.gameObject
-                    .GetComponent<CameraController>();
+            var player = GameObject.FindWithTag("Player");
+            var ui = GameObject.FindWithTag("UIManager");
+            var cameraController = player.GetComponent<MovementController>().cameraMain.gameObject
+                .GetComponent<CameraController>();
             Destroy(cameraController.mainCam.gameObject);
             Destroy(cameraController.secondaryCam.gameObject);
             Destroy(player);

@@ -34,13 +34,19 @@ public class LeaderboardData : MonoBehaviour
         if (File.Exists(_dataDestination))
         {
             var fileStream = File.Open(_dataDestination, FileMode.Append);
-            fileStream.Write(new UTF8Encoding(true).GetBytes(data), 0, data.Length);
+            
+            var bytes = Encoding.UTF8.GetBytes(data);
+            fileStream.Write(bytes, 0, bytes.Length);
+            fileStream.Write(Encoding.UTF8.GetBytes(Environment.NewLine));
             fileStream.Dispose();
         }
         else
         {
             var fileStream = File.Create(_dataDestination);
-            fileStream.Write(new UTF8Encoding(true).GetBytes(data), 0, data.Length);
+            
+            var bytes = Encoding.UTF8.GetBytes(data);
+            fileStream.Write(bytes, 0, bytes.Length);
+            fileStream.Write(Encoding.UTF8.GetBytes(Environment.NewLine));
             fileStream.Dispose();
         }
         
@@ -72,33 +78,37 @@ public class LeaderboardData : MonoBehaviour
             }
         }
 
+        if (lines[^1].Equals("Empty Leaderboard") || string.IsNullOrEmpty(lines[^1]))
+        {
+            lines = lines.ToList().GetRange(0, lines.Length - 1).ToArray();
+        }
+
         return lines;
     }
 
     private static string FormatData(string score, string playerName)
     {
-        // var nScore = int.Parse(score);
         var strBuilder = new StringBuilder();
         var now = DateTime.Now;
-        
 
         var nName = new StringBuilder();
         switch (playerName.Length)
         {
+            case 8:
+                nName.Append(playerName);
+                break;
             case > 8:
-                nName.Append(playerName.ToCharArray().ToList().GetRange(0, 7).ToArray());
+                nName.Append(playerName.ToCharArray().ToList().GetRange(0, 8).ToArray());
                 break;
             case < 8:
-                nName.Append(playerName + new String(' ', 8-playerName.Length));
-                break;
-            default:
                 nName.Append(playerName);
+                nName.Append(new string(' ', 8-playerName.Length));
                 break;
         }
         
         strBuilder.Append(nName + " - ");
         strBuilder.Append(score + " - ");
-        strBuilder.Append(now.ToString("HH:mm") + "\r\n");
+        strBuilder.Append(now.ToString("HH:mm"));
         return strBuilder.ToString();
     }
 }

@@ -70,6 +70,12 @@ public class ShrineManager : MonoBehaviour
         detection = sphere.GetComponent<Detection>();
         pastPoints = upgradePoints;
 
+        var playerCurUpgrades = playerPrefab.GetComponent<ShootingScript>().upgrades;
+        if (!playerCurUpgrades.IsUnityNull())
+        {
+            upgrades = playerCurUpgrades;
+        }
+
         upOptions[0] = upMenu.transform.GetChild(0).GetComponent<Button>();
         upOptions[1] = upMenu.transform.GetChild(1).GetComponent<Button>();
         upOptions[2] = upMenu.transform.GetChild(2).GetComponent<Button>();

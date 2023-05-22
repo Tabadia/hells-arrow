@@ -28,7 +28,8 @@ public class CameraController : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate()
-    { float yPos = player.transform.position.y + yPosDif;
+    { 
+        float yPos = player.transform.position.y + yPosDif;
         // Keep camera rotation static
         mainCam.transform.rotation = rotation; 
         
